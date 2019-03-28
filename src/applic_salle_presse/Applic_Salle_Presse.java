@@ -15,10 +15,10 @@ public class Applic_Salle_Presse {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Eliott van der Straten-Waillet");
         mainWindow myWindow = new mainWindow();
         myWindow.setVisible(true);
-                
+
+
     }
     
 }
