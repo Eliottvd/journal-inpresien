@@ -15,7 +15,7 @@ public class Applic_Salle_Presse {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        System.out.println("Eliott van der Straten-Waillet");
     }
     
 }
