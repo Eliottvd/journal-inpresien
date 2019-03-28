@@ -16,6 +16,9 @@ public class Applic_Salle_Presse {
      */
     public static void main(String[] args) {
         System.out.println("Eliott van der Straten-Waillet");
+        mainWindow myWindow = new mainWindow();
+        myWindow.setVisible(true);
+                
     }
     
 }
