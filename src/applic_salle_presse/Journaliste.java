@@ -9,8 +9,6 @@ package applic_salle_presse;
  *
  * @author Eliott
  */
-public interface Identifiable 
-{
-    int Identifiant = 0;
+public class Journaliste extends Personne {
+    int numCarteP; 
 }
-    

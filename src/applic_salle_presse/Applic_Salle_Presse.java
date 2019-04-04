@@ -8,7 +8,7 @@ package applic_salle_presse;
 /**
  *
  * @author Eliott van der Straten-Waillet 
- * @author Ibrahim Tahiri-Alaoui
+ * @authorSup Ibrahim Tahiri-Alaoui
  */
 public class Applic_Salle_Presse {
 
