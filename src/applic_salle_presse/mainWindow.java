@@ -27,7 +27,7 @@ public class mainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        RadioButtonGroup = new javax.swing.ButtonGroup();
         jlblJournaliste = new javax.swing.JLabel();
         jlblNomJournaliste = new javax.swing.JLabel();
         jlblNewsRecues = new javax.swing.JLabel();
@@ -50,6 +50,9 @@ public class mainWindow extends javax.swing.JFrame {
         jTextA3 = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextA4 = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextPaneAjouterNews = new javax.swing.JTextPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -93,10 +96,13 @@ public class mainWindow extends javax.swing.JFrame {
 
         jButtonSupprimer.setText("Supprimer");
 
+        RadioButtonGroup.add(jRadioInter);
         jRadioInter.setText("Internationnales");
 
+        RadioButtonGroup.add(jRadioPolitique);
         jRadioPolitique.setText("Vie politique");
 
+        RadioButtonGroup.add(jRadioSport);
         jRadioSport.setText("Infos Sports ");
         jRadioSport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +110,7 @@ public class mainWindow extends javax.swing.JFrame {
             }
         });
 
+        RadioButtonGroup.add(jRadioRagots);
         jRadioRagots.setText("Ragots et potins");
 
         jTextA1.setColumns(20);
@@ -121,6 +128,10 @@ public class mainWindow extends javax.swing.JFrame {
         jTextA4.setColumns(20);
         jTextA4.setRows(5);
         jScrollPane4.setViewportView(jTextA4);
+
+        jScrollPane5.setViewportView(jTextPaneAjouterNews);
+
+        jLabel1.setText("Nom du journaliste");
 
         jMenu2.setText("Edit");
 
@@ -155,8 +166,11 @@ public class mainWindow extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jlblNomJournaliste, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jCBnews, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jScrollPane5)
+                                            .addComponent(jCBnews, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jlblNomJournaliste, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(99, 99, 99)
@@ -189,7 +203,7 @@ public class mainWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioRagots)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,16 +213,19 @@ public class mainWindow extends javax.swing.JFrame {
                     .addComponent(jlblJournaliste)
                     .addComponent(jlblNomJournaliste)
                     .addComponent(jlblDate)
-                    .addComponent(jlblDate2))
-                .addGap(18, 18, 18)
+                    .addComponent(jlblDate2)
+                    .addComponent(jLabel1))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblNewsRecues)
                     .addComponent(jCBnews, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonTraiter))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblAddNews)
-                    .addComponent(jButtonAjouter))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jlblAddNews)
+                        .addComponent(jButtonAjouter))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jButtonSupprimer)
                 .addGap(15, 15, 15)
@@ -283,11 +300,12 @@ public class mainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup RadioButtonGroup;
     private javax.swing.JButton jButtonAjouter;
     private javax.swing.JButton jButtonSupprimer;
     private javax.swing.JButton jButtonTraiter;
     private javax.swing.JComboBox<String> jCBnews;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -301,10 +319,12 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea jTextA1;
     private javax.swing.JTextArea jTextA2;
     private javax.swing.JTextArea jTextA3;
     private javax.swing.JTextArea jTextA4;
+    private javax.swing.JTextPane jTextPaneAjouterNews;
     private javax.swing.JLabel jlblAddNews;
     private javax.swing.JLabel jlblDate;
     private javax.swing.JLabel jlblDate2;
