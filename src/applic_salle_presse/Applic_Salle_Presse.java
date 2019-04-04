@@ -7,7 +7,7 @@ package applic_salle_presse;
 
 /**
  *
- * @author Eliott
+ * @author Eliott van der Straten-Waillet
  */
 public class Applic_Salle_Presse {
 
