@@ -9,8 +9,7 @@ package applic_salle_presse;
  *
  * @author Eliott
  */
-public class Personne implements Identifiable {
-    String nom = "van der Straten-Waillet";
-    String Prenom;
-    
+public interface Identifiable 
+{
+    int Identifiant = 0;
 }
