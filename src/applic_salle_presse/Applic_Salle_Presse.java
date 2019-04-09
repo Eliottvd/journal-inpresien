@@ -16,10 +16,8 @@ public class Applic_Salle_Presse {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        mainWindow myWindow = new mainWindow();
-        myWindow.setVisible(true);
-
-
+        loginWindow lw = new loginWindow();
+        lw.setVisible(true);
     }
     
 }
