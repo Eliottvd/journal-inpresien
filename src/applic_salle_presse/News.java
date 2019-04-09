@@ -20,6 +20,9 @@ public class News {
     StringBuffer cat;
     StringBuffer source;
     int refJournaliste;
-    Calendar c = Calendar.getInstance();
+    //Calendar c = Calendar.getInstance();
+    boolean important;
+    //Vector motClés;
+    
     
 }
