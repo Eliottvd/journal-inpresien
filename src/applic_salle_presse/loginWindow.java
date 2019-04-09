@@ -55,6 +55,12 @@ public class loginWindow extends javax.swing.JFrame {
 
         jLabel3.setText("Mot de passe");
 
+        jPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordActionPerformed(evt);
+            }
+        });
+
         jTextIdentifiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextIdentifiantActionPerformed(evt);
@@ -145,7 +151,7 @@ public class loginWindow extends javax.swing.JFrame {
         {
             if(pass.equals((String)repertoire.get(id)))
             {
-                mainWindow myWindow = new mainWindow();
+                mainWindow myWindow = new mainWindow(id);
                 myWindow.setVisible(true);
                 this.dispose();
             }
@@ -168,6 +174,11 @@ public class loginWindow extends javax.swing.JFrame {
     private void jTextIdentifiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextIdentifiantActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextIdentifiantActionPerformed
+
+    private void jPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordActionPerformed
+        // TODO add your handling code here:
+        jButtonValiderActionPerformed(evt);
+    }//GEN-LAST:event_jPasswordActionPerformed
 
     /**
      * @param args the command line arguments

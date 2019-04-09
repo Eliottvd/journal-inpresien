@@ -17,7 +17,11 @@ public class mainWindow extends javax.swing.JFrame {
     public mainWindow() {
         initComponents();
     }
-
+    
+    public mainWindow(String nom){
+        initComponents();
+        jlblJournaliste.setText(nom);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,7 +32,7 @@ public class mainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         RadioButtonGroup = new javax.swing.ButtonGroup();
-        jlblJournaliste = new javax.swing.JLabel();
+        jlabel1 = new javax.swing.JLabel();
         jlblNomJournaliste = new javax.swing.JLabel();
         jlblNewsRecues = new javax.swing.JLabel();
         jCBnews = new javax.swing.JComboBox<>();
@@ -52,7 +56,7 @@ public class mainWindow extends javax.swing.JFrame {
         jTextA4 = new javax.swing.JTextArea();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextPaneAjouterNews = new javax.swing.JTextPane();
-        jLabel1 = new javax.swing.JLabel();
+        jlblJournaliste = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -61,7 +65,7 @@ public class mainWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jlblJournaliste.setText("Journaliste :");
+        jlabel1.setText("Journaliste :");
 
         jlblNomJournaliste.setText(" ");
 
@@ -95,6 +99,11 @@ public class mainWindow extends javax.swing.JFrame {
         });
 
         jButtonSupprimer.setText("Supprimer");
+        jButtonSupprimer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSupprimerActionPerformed(evt);
+            }
+        });
 
         RadioButtonGroup.add(jRadioInter);
         jRadioInter.setText("Internationnales");
@@ -131,7 +140,7 @@ public class mainWindow extends javax.swing.JFrame {
 
         jScrollPane5.setViewportView(jTextPaneAjouterNews);
 
-        jLabel1.setText("Nom du journaliste");
+        jlblJournaliste.setText("Nom du journaliste");
 
         jMenu2.setText("Edit");
 
@@ -159,7 +168,7 @@ public class mainWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jlblAddNews, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlblNewsRecues, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlblJournaliste, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jlabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -168,7 +177,7 @@ public class mainWindow extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jScrollPane5)
                                             .addComponent(jCBnews, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(jlblJournaliste, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jlblNomJournaliste, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,11 +219,11 @@ public class mainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblJournaliste)
+                    .addComponent(jlabel1)
                     .addComponent(jlblNomJournaliste)
                     .addComponent(jlblDate)
                     .addComponent(jlblDate2)
-                    .addComponent(jLabel1))
+                    .addComponent(jlblJournaliste))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblNewsRecues)
@@ -254,15 +263,24 @@ public class mainWindow extends javax.swing.JFrame {
 
     private void jButtonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterActionPerformed
         // TODO add your handling code here:
+        jCBnews.addItem(jTextPaneAjouterNews.getText());
     }//GEN-LAST:event_jButtonAjouterActionPerformed
 
     private void jButtonTraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTraiterActionPerformed
         // TODO add your handling code here:
+        newsProcessingWindow npw = new newsProcessingWindow();
+        npw.setVisible(true);
+        
     }//GEN-LAST:event_jButtonTraiterActionPerformed
 
     private void jRadioSportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSportActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioSportActionPerformed
+
+    private void jButtonSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupprimerActionPerformed
+        // TODO add your handling code here:
+        jCBnews.removeItem(jCBnews.getSelectedItem());
+    }//GEN-LAST:event_jButtonSupprimerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -305,7 +323,6 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSupprimer;
     private javax.swing.JButton jButtonTraiter;
     private javax.swing.JComboBox<String> jCBnews;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -325,6 +342,7 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextA3;
     private javax.swing.JTextArea jTextA4;
     private javax.swing.JTextPane jTextPaneAjouterNews;
+    private javax.swing.JLabel jlabel1;
     private javax.swing.JLabel jlblAddNews;
     private javax.swing.JLabel jlblDate;
     private javax.swing.JLabel jlblDate2;
