@@ -12,19 +12,23 @@ import java.util.StringTokenizer;
  *
  * @author Eliott
  */
+
+
 public class newsProcessingWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form newsProcessingWindow
      */
     String tmpCat;
+    mainWindow mw2;
     public newsProcessingWindow() {
         initComponents();
     }
     
-    public newsProcessingWindow(String titre) {
+    public newsProcessingWindow(String titre, mainWindow mw) {
         initComponents();
         jTextNomNews.setText(titre);
+        mw2 = mw;
     }
 
     /**
@@ -250,7 +254,12 @@ public class newsProcessingWindow extends javax.swing.JFrame {
         n.setCat(tmpCat);
         n.setImportance(jCheckBox1.isSelected());
         n.setTexte(jTextComments.getText());
-        
+        mw2.listeNews.add(n);
+        this.dispose();
+        mw2.jTextA4.setText(mw2.jTextA3.getText());
+        mw2.jTextA3.setText(mw2.jTextA2.getText());
+        mw2.jTextA2.setText(mw2.jTextA1.getText());
+        mw2.jTextA1.setText(n.texte);
     }//GEN-LAST:event_jButtonAjouterActionPerformed
 
     private void jRadioInterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioInterActionPerformed

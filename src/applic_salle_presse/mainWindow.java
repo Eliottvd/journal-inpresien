@@ -71,6 +71,11 @@ public class mainWindow extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuAide = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,6 +138,11 @@ public class mainWindow extends javax.swing.JFrame {
 
         jTextA1.setColumns(20);
         jTextA1.setRows(5);
+        jTextA1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextA1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextA1);
 
         jTextA2.setColumns(20);
@@ -163,6 +173,27 @@ public class mainWindow extends javax.swing.JFrame {
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
+
+        jMenu3.setText("Recherche");
+        jMenuBar1.add(jMenu3);
+
+        jMenuAide.setText("Aide");
+        jMenuAide.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAideActionPerformed(evt);
+            }
+        });
+
+        jMenuItem3.setText("Paramètre date");
+        jMenuAide.add(jMenuItem3);
+
+        jMenuItem4.setText("Afficher le log");
+        jMenuAide.add(jMenuItem4);
+
+        jMenuItem5.setText("A propos");
+        jMenuAide.add(jMenuItem5);
+
+        jMenuBar1.add(jMenuAide);
 
         setJMenuBar(jMenuBar1);
 
@@ -279,7 +310,7 @@ public class mainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(jCBnews.getSelectedItem() != null)
         {
-            newsProcessingWindow npw = new newsProcessingWindow((String)jCBnews.getSelectedItem());
+            newsProcessingWindow npw = new newsProcessingWindow((String)jCBnews.getSelectedItem(), this);
             npw.setVisible(true);
         }
         else
@@ -297,6 +328,15 @@ public class mainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         jCBnews.removeItem(jCBnews.getSelectedItem());
     }//GEN-LAST:event_jButtonSupprimerActionPerformed
+
+    private void jTextA1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextA1MouseClicked
+        // TODO add your handling code here:
+        jTextA1.setText(listeNews.get(0).titre+"\n"+listeNews.get(0).cat);
+    }//GEN-LAST:event_jTextA1MouseClicked
+
+    private void jMenuAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAideActionPerformed
+        
+    }//GEN-LAST:event_jMenuAideActionPerformed
 
     /**
      * @param args the command line arguments
@@ -341,9 +381,14 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jCBnews;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenuAide;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JRadioButton jRadioInter;
     private javax.swing.JRadioButton jRadioPolitique;
     private javax.swing.JRadioButton jRadioRagots;
@@ -353,10 +398,10 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTextArea jTextA1;
-    private javax.swing.JTextArea jTextA2;
-    private javax.swing.JTextArea jTextA3;
-    private javax.swing.JTextArea jTextA4;
+    public javax.swing.JTextArea jTextA1;
+    public javax.swing.JTextArea jTextA2;
+    public javax.swing.JTextArea jTextA3;
+    public javax.swing.JTextArea jTextA4;
     private javax.swing.JTextPane jTextPaneAjouterNews;
     private javax.swing.JLabel jlabel1;
     private javax.swing.JLabel jlblAddNews;
