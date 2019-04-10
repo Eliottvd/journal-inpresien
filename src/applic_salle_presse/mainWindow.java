@@ -5,6 +5,10 @@
  */
 package applic_salle_presse;
 
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Eliott
@@ -14,12 +18,17 @@ public class mainWindow extends javax.swing.JFrame {
     /**
      * Creates new form mainWindow
      */
+    ArrayList<News> listeNews;
+            
     public mainWindow() {
         initComponents();
+        listeNews = new ArrayList<News>();
     }
+    
     
     public mainWindow(String nom){
         initComponents();
+        listeNews = new ArrayList<News>();
         jlblJournaliste.setText(nom);
     }
     /**
@@ -268,9 +277,16 @@ public class mainWindow extends javax.swing.JFrame {
 
     private void jButtonTraiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTraiterActionPerformed
         // TODO add your handling code here:
-        newsProcessingWindow npw = new newsProcessingWindow();
-        npw.setVisible(true);
-        
+        if(jCBnews.getSelectedItem() != null)
+        {
+            newsProcessingWindow npw = new newsProcessingWindow((String)jCBnews.getSelectedItem());
+            npw.setVisible(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "Pas de news selectionnée !", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jButtonTraiterActionPerformed
 
     private void jRadioSportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSportActionPerformed

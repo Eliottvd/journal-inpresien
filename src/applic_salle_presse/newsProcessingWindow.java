@@ -5,6 +5,9 @@
  */
 package applic_salle_presse;
 
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 /**
  *
  * @author Eliott
@@ -14,10 +17,14 @@ public class newsProcessingWindow extends javax.swing.JFrame {
     /**
      * Creates new form newsProcessingWindow
      */
-    News n;
+    String tmpCat;
     public newsProcessingWindow() {
         initComponents();
-        n = new News();
+    }
+    
+    public newsProcessingWindow(String titre) {
+        initComponents();
+        jTextNomNews.setText(titre);
     }
 
     /**
@@ -214,17 +221,21 @@ public class newsProcessingWindow extends javax.swing.JFrame {
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
-        n.setImportance(jCheckBox1.isSelected());
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jButtonPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPlusActionPerformed
         // TODO add your handling code here:
-        n.addMotcle(jTextMotsCles.getText());
+        jCMmotscles.removeAllItems();
+        StringTokenizer st = new StringTokenizer(jTextMotsCles.getText(), "-");
+        while(st.hasMoreTokens())
+        {
+            jCMmotscles.addItem(st.nextToken());
+        }
     }//GEN-LAST:event_jButtonPlusActionPerformed
 
     private void jRadioSportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSportActionPerformed
         // TODO add your handling code here:
-        n.setCat("Sport");
+        tmpCat = "Sport";
     }//GEN-LAST:event_jRadioSportActionPerformed
 
     private void jButtonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerActionPerformed
@@ -234,22 +245,27 @@ public class newsProcessingWindow extends javax.swing.JFrame {
 
     private void jButtonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterActionPerformed
         // TODO add your handling code here:
+        News n = new News();
         n.setTitre(jTextNomNews.getText());
+        n.setCat(tmpCat);
+        n.setImportance(jCheckBox1.isSelected());
+        n.setTexte(jTextComments.getText());
+        
     }//GEN-LAST:event_jButtonAjouterActionPerformed
 
     private void jRadioInterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioInterActionPerformed
         // TODO add your handling code here:
-        n.setCat("Internationnales");
+        tmpCat = "Internationnales";
     }//GEN-LAST:event_jRadioInterActionPerformed
 
     private void jRadioPolitiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioPolitiqueActionPerformed
         // TODO add your handling code here:
-        n.setCat("Vie politique");
+        tmpCat = "Vie politique";
     }//GEN-LAST:event_jRadioPolitiqueActionPerformed
 
     private void jRadioRagotsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioRagotsActionPerformed
         // TODO add your handling code here:
-        n.setCat("Rogots et potins");
+        tmpCat = "Rogots et potins";
     }//GEN-LAST:event_jRadioRagotsActionPerformed
 
     /**
