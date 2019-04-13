@@ -29,6 +29,7 @@ public class newsProcessingWindow extends javax.swing.JFrame {
         initComponents();
         jTextNomNews.setText(titre);
         mw2 = mw;
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**

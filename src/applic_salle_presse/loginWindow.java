@@ -5,7 +5,6 @@
  */
 package applic_salle_presse;
 
-import java.awt.TrayIcon;
 import java.util.Hashtable;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -24,6 +23,8 @@ public class loginWindow extends javax.swing.JFrame {
     
     public loginWindow() {
         initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
         string1 = "root/toor";
         repertoire = new Hashtable();
         repertoire.put("root","toor");
@@ -110,12 +111,12 @@ public class loginWindow extends javax.swing.JFrame {
                             .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(99, 99, 99))
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGap(149, 149, 149)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,6 +185,7 @@ public class loginWindow extends javax.swing.JFrame {
 
     private void jTextIdentifiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextIdentifiantActionPerformed
         // TODO add your handling code here:
+        jButtonValiderActionPerformed(evt);
     }//GEN-LAST:event_jTextIdentifiantActionPerformed
 
     private void jPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordActionPerformed
