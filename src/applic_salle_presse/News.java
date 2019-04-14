@@ -5,6 +5,9 @@
  */
 package applic_salle_presse;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,6 +45,13 @@ public class News {
     public void addMotcle(String m){motcles.add(m);}
     public void removeMotcle(String m){motcles.remove(m);}
     public ArrayList<String> getMotcles(){return motcles;}
+    public boolean isMotclePresent(String s){
+        boolean i = false;
+        final AtomicReference<Boolean> reference = new AtomicReference<>();
+        
+        motcles.forEach((mot)->{if(mot.equalsIgnoreCase(s)) reference.set(true);});
+        return i;
+    }
     
     
     

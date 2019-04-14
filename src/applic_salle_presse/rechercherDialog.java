@@ -6,6 +6,8 @@
 package applic_salle_presse;
 
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,6 +19,7 @@ public class rechercherDialog extends javax.swing.JDialog {
      * Creates new form rechercherDialog
      */
     ArrayList<News> listNews;
+    ArrayList<String> listMots;
     
     public rechercherDialog(java.awt.Frame parent, boolean modal)
     {
@@ -115,8 +118,16 @@ public class rechercherDialog extends javax.swing.JDialog {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        listNews.forEach((News)->{
-            
+        listNews.forEach((New)->{
+            /*if(New.isMotclePresent(jTextField1.getText()))
+            {
+                jComboBox1.addItem(New.getTitre());
+            }*/
+            listMots = New.getMotcles();
+            if(listMots.contains(jTextField1.getText()))
+            {
+                jComboBox1.addItem(New.getTitre());
+            }
         });
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
