@@ -5,6 +5,7 @@
  */
 package applic_salle_presse;
 
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -94,6 +95,11 @@ public class mainWindow extends javax.swing.JFrame {
         jCBnews.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBnewsActionPerformed(evt);
+            }
+        });
+        jCBnews.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jCBnewsKeyPressed(evt);
             }
         });
 
@@ -404,6 +410,15 @@ public class mainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         jButtonAjouterActionPerformed(evt);
     }//GEN-LAST:event_jTextFieldAjouterNewsActionPerformed
+
+    private void jCBnewsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCBnewsKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_DELETE)
+        {
+            if(jCBnews.getSelectedItem() != null)
+                jCBnews.removeItem(jCBnews.getSelectedItem());
+        }
+    }//GEN-LAST:event_jCBnewsKeyPressed
 
     /**
      * @param args the command line arguments
