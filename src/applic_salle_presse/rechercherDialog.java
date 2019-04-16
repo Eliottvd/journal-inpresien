@@ -26,6 +26,7 @@ public class rechercherDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setTitle("Fenetre de recherche");
+        this.setLocationRelativeTo(null);
     }
     
     public rechercherDialog(java.awt.Frame parent, boolean modal, ArrayList<News> listNewsl) {
@@ -34,7 +35,7 @@ public class rechercherDialog extends javax.swing.JDialog {
         initComponents();
         this.setTitle("Fenetre de recherche");
         listNews = listNewsl;
-        listNews.forEach((News)->{jComboBox1.addItem(News.titre);});
+        listNews.forEach((News)->{jComboBox1.addItem(News.getTitre());});
         
     }
 

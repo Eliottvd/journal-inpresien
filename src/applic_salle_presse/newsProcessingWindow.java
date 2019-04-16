@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
  */
 
 
-public class newsProcessingWindow extends javax.swing.JFrame {
+public class newsProcessingWindow extends javax.swing.JDialog {
 
     /**
      * Creates new form newsProcessingWindow
@@ -24,12 +24,13 @@ public class newsProcessingWindow extends javax.swing.JFrame {
     public newsProcessingWindow() {
         initComponents();
     }
-    
-    public newsProcessingWindow(String titre, mainWindow mw) {
+       
+    public newsProcessingWindow(java.awt.Frame parent, boolean modal, String titre, mainWindow mw) { 
+        super(parent, modal);
         initComponents();
         jTextNomNews.setText(titre);
         mw2 = mw;
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -66,7 +67,7 @@ public class newsProcessingWindow extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("News");
 
@@ -85,8 +86,6 @@ public class newsProcessingWindow extends javax.swing.JFrame {
                 jButtonPlusActionPerformed(evt);
             }
         });
-
-        jCMmotscles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Commentaires :");
 
@@ -256,11 +255,12 @@ public class newsProcessingWindow extends javax.swing.JFrame {
         n.setImportance(jCheckBox1.isSelected());
         n.setTexte(jTextComments.getText());
         mw2.listeNews.add(n);
+        mw2.jCBnews.removeItem(mw2.jCBnews.getSelectedItem());
         this.dispose();
         mw2.jTextA4.setText(mw2.jTextA3.getText());
         mw2.jTextA3.setText(mw2.jTextA2.getText());
         mw2.jTextA2.setText(mw2.jTextA1.getText());
-        mw2.jTextA1.setText(n.texte);
+        mw2.jTextA1.setText(n.getTitre()+"\n"+n.getTexte());
     }//GEN-LAST:event_jButtonAjouterActionPerformed
 
     private void jRadioInterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioInterActionPerformed
@@ -308,7 +308,7 @@ public class newsProcessingWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new newsProcessingWindow().setVisible(true);
+                newsProcessingWindow dialog = new newsProcessingWindow(new javax.swing.JFrame(), true, "titre", new mainWindow());
             }
         });
     }

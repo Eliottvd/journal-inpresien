@@ -18,15 +18,15 @@ important ou pas, un container (Vector, ArrayList, etc) de ses mots-clé, …)
 
  */
 public class News {
-    int idNews;
-    String titre;
-    String texte;
-    String cat;
-    String source;
-    int refJournaliste;
+    private int idNews;
+    private String titre;
+    private String texte;
+    private String cat;
+    private String source;
+    private int refJournaliste;
     //Calendar c = Calendar.getInstance();
-    boolean important;
-    ArrayList<String> motcles;
+    private boolean important;
+    private ArrayList<String> motcles;
     
     public void setId(int i){idNews = i;}
     public int getId(){ return idNews;}
