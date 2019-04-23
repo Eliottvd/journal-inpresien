@@ -36,7 +36,7 @@ public class rechercherDialog extends javax.swing.JDialog {
         this.setTitle("Fenetre de recherche");
         listNews = listNewsl;
         listNews.forEach((News)->{jComboBox1.addItem(News.getTitre());});
-        
+        listNews.forEach((News)->{jComboBox1.addItem(News.getMotcles().get(0));});
     }
 
     /**
@@ -119,17 +119,24 @@ public class rechercherDialog extends javax.swing.JDialog {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        listNews.forEach((New)->{
-            /*if(New.isMotclePresent(jTextField1.getText()))
+        for(int i =0; i < listNews.size();i++)
+        {
+
+            /*if(listNews.get(i).isMotclePresent(jTextField1.getText()))
             {
-                jComboBox1.addItem(New.getTitre());
+               jComboBox1.addItem(listNews.get(i).getTitre());
             }*/
-            listMots = New.getMotcles();
-            if(listMots.contains(jTextField1.getText()))
+            listMots = listNews.get(i).getMotcles();
+            listMots.forEach((listMot) -> {
+                jComboBox1.addItem(listMot);
+            }); 
+            //listMots.forEach((motcl)->{jComboBox1.addItem(motcl);});
+            /*if(listMots.contains(jTextField1.getText()))
             {
-                jComboBox1.addItem(New.getTitre());
-            }
-        });
+            jComboBox1.addItem(listNews.get(i).getTitre());
+            }*/            
+        }
+        
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**

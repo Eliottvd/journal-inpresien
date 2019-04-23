@@ -333,7 +333,7 @@ public class mainWindow extends javax.swing.JFrame {
         boolean test = true;
         if(!jTextFieldAjouterNews.getText().isBlank())
         {
-            for(int i = 0; i< jCBnews.getItemCount(); i++)
+            for(int i = 0; i< jCBnews.getItemCount() && test; i++)
             {
                 if(jCBnews.getItemAt(i).equalsIgnoreCase(jTextFieldAjouterNews.getText()))
                 {
@@ -382,7 +382,6 @@ public class mainWindow extends javax.swing.JFrame {
 
     private void jTextA1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextA1MouseClicked
         // TODO add your handling code here:
-        jTextA1.setText(listeNews.get(0).getTitre()+"\n"+listeNews.get(0).getCat());
     }//GEN-LAST:event_jTextA1MouseClicked
 
     private void jMenuAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAideActionPerformed

@@ -18,14 +18,12 @@ public class loginWindow extends javax.swing.JFrame {
     /**
      * Creates new form loginWindow
      */
-    String string1 = new String();
     Hashtable repertoire;
     
     public loginWindow() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        string1 = "root/toor";
         repertoire = new Hashtable();
         repertoire.put("root","toor");
     }
