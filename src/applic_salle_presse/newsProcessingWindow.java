@@ -254,6 +254,12 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         n.setCat(tmpCat);
         n.setImportance(jCheckBox1.isSelected());
         n.setTexte(jTextComments.getText());
+        
+        StringTokenizer st = new StringTokenizer(jTextMotsCles.getText(), "-");
+        while(st.hasMoreTokens())
+        {
+            n.addMotcle(st.nextToken());        }
+        
         mw2.listeNews.add(n);
         mw2.jCBnews.removeItem(mw2.jCBnews.getSelectedItem());
         this.dispose();

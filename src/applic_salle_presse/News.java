@@ -27,6 +27,11 @@ public class News {
     //Calendar c = Calendar.getInstance();
     private boolean important;
     private ArrayList<String> motcles;
+
+    public News() {
+        motcles = new ArrayList<String>();
+    }
+    
     
     public void setId(int i){idNews = i;}
     public int getId(){ return idNews;}
