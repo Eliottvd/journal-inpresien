@@ -24,6 +24,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
     String tmpCat;
     mainWindow mw2;
     boolean modif;
+    News newsASuppr;
        
     public newsProcessingWindow(java.awt.Frame parent, boolean modal, String titre) { 
         super(parent, modal);
@@ -35,13 +36,15 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         modif = false;
     }
     
-    public newsProcessingWindow(java.awt.Frame parent, boolean modal)
+    public newsProcessingWindow(java.awt.Frame parent, boolean modal, News n)
     {
         super(parent, modal);
         initComponents();
         mw2 = (mainWindow)parent;
         this.setLocationRelativeTo(null);
         modif = true;
+        newsASuppr = n;
+        jButtonAjouter.setText("Modifier");
     }
 
     /**
@@ -260,6 +263,26 @@ public class newsProcessingWindow extends javax.swing.JDialog {
 
     private void jButtonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterActionPerformed
         // TODO add your handling code here:
+        if(modif)
+        {
+            mw2.listeNews.remove(newsASuppr);
+            switch(newsASuppr.getCat())
+            {
+                case "Internationnales" : mw2.getModInter().removeElement(newsASuppr.getTitre());
+                                          mw2.jListInter.setModel(mw2.getModInter());
+                                          break;
+                case "Vie politique" : mw2.getModViePol().removeElement(newsASuppr.getTitre());
+                                       mw2.jListViePol.setModel(mw2.getModViePol());
+                                       break;
+                case "Ragots et potins" : mw2.getModRagots().removeElement(newsASuppr.getTitre());
+                                          mw2.jListRagots.setModel(mw2.getModRagots());
+                                          break;
+                case "Sport" : mw2.getModInfosSports().removeElement(newsASuppr.getTitre());
+                               mw2.jListInfosSports.setModel(mw2.getModInfosSports());
+                               break;                                                                            
+            }
+        }
+            
         News n = new News();
         n.setTitre(jTextNomNews.getText());
         n.setCat(tmpCat);

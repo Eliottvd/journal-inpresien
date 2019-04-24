@@ -24,7 +24,6 @@ public class News {
     private String cat;
     private String source;
     private int refJournaliste;
-    //Calendar c = Calendar.getInstance();
     private boolean important;
     private ArrayList<String> motcles;
 
@@ -50,12 +49,14 @@ public class News {
     public void addMotcle(String m){motcles.add(m);}
     public void removeMotcle(String m){motcles.remove(m);}
     public ArrayList<String> getMotcles(){return motcles;}
-    public boolean isMotclePresent(String s){
-        boolean i = false;
-        final AtomicReference<Boolean> reference = new AtomicReference<>();
-        
-        motcles.forEach((mot)->{if(mot.equalsIgnoreCase(s)) reference.set(true);});
-        return i;
+    public String getMotCles1String(){
+        String s = new String("");
+        for(String mot : motcles)
+        {
+            s = s.concat(mot+"-");
+        }
+        s = s.substring(0, s.length()-1);
+        return s;
     }
     
     

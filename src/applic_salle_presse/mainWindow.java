@@ -497,54 +497,97 @@ public class mainWindow extends javax.swing.JFrame {
         {
             News n;
             String motCles = new String("");
-            
-            
-            
             if(jListInter.getSelectedValue() == null)
                 JOptionPane.showMessageDialog(new JFrame(), "Pas de news selectionnée", 
                         "Information manquante", JOptionPane.ERROR_MESSAGE);
             else 
             {
-                
-                
                 listeNews.forEach((ntmp)->{
                 if(ntmp.getTitre().equals(jListInter.getSelectedValue()))
                 {
-                    newsProcessingWindow npWin = new newsProcessingWindow(this, false);
+                    newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp);
                     npWin.setVisible(true);
                     npWin.jTextNomNews.setText(ntmp.getTitre());
                     npWin.jTextComments.setText(ntmp.getTexte());
-                    switch(ntmp.getCat())
-                    {
-                        case "Internationnales" : npWin.jRadioInter.setSelected(true);
-                                                  break;
-                        case "Vie politique" : npWin.jRadioPolitique.setSelected(true);
-                                               break;
-                        case "Ragots et potins" : npWin.jRadioSport.setSelected(true);
-                                                  break;
-                        case "Sport" : npWin.jRadioRagots.setSelected(true);
-                                       break;
-                    }
+                    npWin.jRadioInter.setSelected(true);
+                    npWin.tmpCat = ntmp.getCat();
                     npWin.jCheckBox1.setSelected(ntmp.getImportance());
-                    //ntmp.getMotcles().forEach((mot)->{motCles.concat(mot);});
-                    npWin.jTextMotsCles.setText(ntmp.getMotcles().toString());;
+                    npWin.jTextMotsCles.setText(ntmp.getMotCles1String());
                 }
             });
-                //npWin.jTextNomNews.setText();
-                //TODO
             }
         }
         else if(jListViePol.getBackground() == Color.lightGray)
         {
-            
+            News n;
+            String motCles = new String("");
+            if(jListViePol.getSelectedValue() == null)
+                JOptionPane.showMessageDialog(new JFrame(), "Pas de news selectionnée", 
+                        "Information manquante", JOptionPane.ERROR_MESSAGE);
+            else 
+            {
+                listeNews.forEach((ntmp)->{
+                if(ntmp.getTitre().equals(jListViePol.getSelectedValue()))
+                {
+                    newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp);
+                    npWin.setVisible(true);
+                    npWin.jTextNomNews.setText(ntmp.getTitre());
+                    npWin.jTextComments.setText(ntmp.getTexte());
+                    npWin.jRadioPolitique.setSelected(true);
+                    npWin.tmpCat = ntmp.getCat();
+                    npWin.jCheckBox1.setSelected(ntmp.getImportance());
+                    npWin.jTextMotsCles.setText(ntmp.getMotCles1String());
+                }
+            });
+            }
         }
         else if(jListInfosSports.getBackground() == Color.lightGray)
         {
-            
+            News n;
+            String motCles = new String("");
+            if(jListInfosSports.getSelectedValue() == null)
+                JOptionPane.showMessageDialog(new JFrame(), "Pas de news selectionnée", 
+                        "Information manquante", JOptionPane.ERROR_MESSAGE);
+            else 
+            {
+                listeNews.forEach((ntmp)->{
+                if(ntmp.getTitre().equals(jListInfosSports.getSelectedValue()))
+                {
+                    newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp);
+                    npWin.setVisible(true);
+                    npWin.jTextNomNews.setText(ntmp.getTitre());
+                    npWin.jTextComments.setText(ntmp.getTexte());
+                    npWin.jRadioSport.setSelected(true);
+                    npWin.tmpCat = ntmp.getCat();
+                    npWin.jCheckBox1.setSelected(ntmp.getImportance());
+                    npWin.jTextMotsCles.setText(ntmp.getMotCles1String());
+                }
+            });
+            }
         }
         else if(jListRagots.getBackground() == Color.lightGray)
         {
-            
+            News n;
+            String motCles = new String("");
+            if(jListRagots.getSelectedValue() == null)
+                JOptionPane.showMessageDialog(new JFrame(), "Pas de news selectionnée", 
+                        "Information manquante", JOptionPane.ERROR_MESSAGE);
+            else 
+            {
+                listeNews.forEach((ntmp)->{
+                if(ntmp.getTitre().equals(jListRagots.getSelectedValue()))
+                {
+                    newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp);
+                    npWin.setVisible(true);
+                    npWin.jTextNomNews.setText(ntmp.getTitre());
+                    npWin.jTextComments.setText(ntmp.getTexte());
+                    npWin.jRadioRagots.setSelected(true);
+                    npWin.tmpCat = ntmp.getCat();
+                    npWin.jCheckBox1.setSelected(ntmp.getImportance());
+                    npWin.jTextMotsCles.setText(ntmp.getMotCles1String());
+                }
+            });
+            }
         }
         else
         {
