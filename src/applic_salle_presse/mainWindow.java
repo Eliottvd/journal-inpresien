@@ -5,11 +5,13 @@
  */
 package applic_salle_presse;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -26,9 +28,12 @@ public class mainWindow extends javax.swing.JFrame {
             
     public mainWindow() {
         initComponents();
-        listeNews = new ArrayList<News>();
     }
     
+    private DefaultListModel _modInter; 
+    private DefaultListModel _modViePol; 
+    private DefaultListModel _modInfosSports; 
+    private DefaultListModel _modRagots; 
     
     public mainWindow(String nom){
         initComponents();
@@ -38,6 +43,10 @@ public class mainWindow extends javax.swing.JFrame {
         Date maintenant = new Date();
         String maDate = DateFormat.getDateTimeInstance(DateFormat.DATE_FIELD,DateFormat.LONG, Locale.FRANCE).format(maintenant);
         jlblDate2.setText(maDate);
+        setModInter(new DefaultListModel());
+        setModViePol(new DefaultListModel());
+        setModInfosSports(new DefaultListModel());
+        setModRagots(new DefaultListModel());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,20 +72,24 @@ public class mainWindow extends javax.swing.JFrame {
         jRadioPolitique = new javax.swing.JRadioButton();
         jRadioSport = new javax.swing.JRadioButton();
         jRadioRagots = new javax.swing.JRadioButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextA1 = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextA2 = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextA3 = new javax.swing.JTextArea();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextA4 = new javax.swing.JTextArea();
         jlblJournaliste = new javax.swing.JLabel();
         jTextFieldAjouterNews = new javax.swing.JTextField();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jListRagots = new javax.swing.JList<>();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jListInter = new javax.swing.JList<>();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jListViePol = new javax.swing.JList<>();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jListInfosSports = new javax.swing.JList<>();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItemRecherche = new javax.swing.JMenuItem();
@@ -132,9 +145,19 @@ public class mainWindow extends javax.swing.JFrame {
 
         RadioButtonGroup.add(jRadioInter);
         jRadioInter.setText("Internationnales");
+        jRadioInter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioInterActionPerformed(evt);
+            }
+        });
 
         RadioButtonGroup.add(jRadioPolitique);
         jRadioPolitique.setText("Vie politique");
+        jRadioPolitique.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioPolitiqueActionPerformed(evt);
+            }
+        });
 
         RadioButtonGroup.add(jRadioSport);
         jRadioSport.setText("Infos Sports ");
@@ -146,27 +169,11 @@ public class mainWindow extends javax.swing.JFrame {
 
         RadioButtonGroup.add(jRadioRagots);
         jRadioRagots.setText("Ragots et potins");
-
-        jTextA1.setColumns(20);
-        jTextA1.setRows(5);
-        jTextA1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextA1MouseClicked(evt);
+        jRadioRagots.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioRagotsActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(jTextA1);
-
-        jTextA2.setColumns(20);
-        jTextA2.setRows(5);
-        jScrollPane2.setViewportView(jTextA2);
-
-        jTextA3.setColumns(20);
-        jTextA3.setRows(5);
-        jScrollPane3.setViewportView(jTextA3);
-
-        jTextA4.setColumns(20);
-        jTextA4.setRows(5);
-        jScrollPane4.setViewportView(jTextA4);
 
         jlblJournaliste.setText("Nom du journaliste");
 
@@ -176,13 +183,42 @@ public class mainWindow extends javax.swing.JFrame {
             }
         });
 
-        jMenu2.setText("Edit");
+        jScrollPane5.setViewportView(jListRagots);
 
-        jMenuItem1.setText("jMenuItem1");
+        jScrollPane6.setViewportView(jListInter);
+
+        jListViePol.setMaximumSize(new java.awt.Dimension(135, 131));
+        jScrollPane7.setViewportView(jListViePol);
+
+        jScrollPane8.setViewportView(jListInfosSports);
+
+        jToggleButton1.setText("Editer");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
+        jMenu2.setText("Utilisateurs");
+
+        jMenuItem1.setText("Login");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem1);
 
-        jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.setText("Logout");
         jMenu2.add(jMenuItem2);
+        jMenu2.add(jSeparator1);
+
+        jMenuItem3.setText("Nouvel utilisateur");
+        jMenu2.add(jMenuItem3);
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("Liste");
+        jMenu2.add(jRadioButtonMenuItem1);
 
         jMenuBar1.add(jMenu2);
 
@@ -262,23 +298,25 @@ public class mainWindow extends javax.swing.JFrame {
                         .addGap(72, 72, 72))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(54, 54, 54)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioInter)
-                                .addGap(83, 83, 83)
-                                .addComponent(jRadioPolitique)
-                                .addGap(96, 96, 96)
-                                .addComponent(jRadioSport)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                            .addComponent(jRadioInter)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioPolitique)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(61, 61, 61)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioSport)
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioRagots)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28))))
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jToggleButton1)
+                .addGap(367, 367, 367))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,19 +349,60 @@ public class mainWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRadioInter)
                             .addComponent(jRadioPolitique))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jToggleButton1)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public final void setModInter(DefaultListModel m)
+    {
+        _modInter = m;
+    }
+    
+    public DefaultListModel getModInter()
+    {
+        return _modInter;
+    }
+    
+    public final void setModViePol(DefaultListModel m)
+    {
+        _modViePol = m;
+    }
+    
+    public DefaultListModel getModViePol()
+    {
+        return _modViePol;
+    }
+    
+    public final void setModInfosSports(DefaultListModel m)
+    {
+        _modInfosSports = m;
+    }
+    
+    public DefaultListModel getModInfosSports()
+    {
+        return _modInfosSports;
+    }
+    
+    public final void setModRagots(DefaultListModel m)
+    {
+        _modRagots = m;
+    }
+    
+    public DefaultListModel getModRagots()
+    {
+        return _modRagots;
+    }
+    
     private void jCBnewsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBnewsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBnewsActionPerformed
@@ -356,7 +435,7 @@ public class mainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(jCBnews.getSelectedItem() != null)
         {
-            newsProcessingWindow npw = new newsProcessingWindow(this, true,(String)jCBnews.getSelectedItem(), this);
+            newsProcessingWindow npw = new newsProcessingWindow(this, true,(String)jCBnews.getSelectedItem());
             npw.setVisible(true);
             
         }
@@ -369,6 +448,10 @@ public class mainWindow extends javax.swing.JFrame {
 
     private void jRadioSportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSportActionPerformed
         // TODO add your handling code here:
+        jListInter.setBackground(Color.WHITE);
+        jListViePol.setBackground(Color.WHITE);
+        jListInfosSports.setBackground(Color.lightGray);
+        jListRagots.setBackground(Color.WHITE);
     }//GEN-LAST:event_jRadioSportActionPerformed
 
     private void jButtonSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupprimerActionPerformed
@@ -379,10 +462,6 @@ public class mainWindow extends javax.swing.JFrame {
         else
             JOptionPane.showMessageDialog(new JFrame(), "Pas de news selectionnée !", "Erreur", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButtonSupprimerActionPerformed
-
-    private void jTextA1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextA1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextA1MouseClicked
 
     private void jMenuAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAideActionPerformed
         
@@ -418,6 +497,64 @@ public class mainWindow extends javax.swing.JFrame {
                 jCBnews.removeItem(jCBnews.getSelectedItem());
         }
     }//GEN-LAST:event_jCBnewsKeyPressed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        if(jListInter.getBackground() == Color.lightGray)
+        {
+            if(jListInter.getSelectedValue() == null)
+                JOptionPane.showMessageDialog(new JFrame(), "Pas de news selectionnée", 
+                        "Information manquante", JOptionPane.ERROR_MESSAGE);
+            else 
+            {
+                //TODO
+            }
+        }
+        else if(jListViePol.getBackground() == Color.lightGray)
+        {
+            
+        }
+        else if(jListInfosSports.getBackground() == Color.lightGray)
+        {
+            
+        }
+        else if(jListRagots.getBackground() == Color.lightGray)
+        {
+            
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "Pas de catégorie selectionnée", "Information manquante", JOptionPane.ERROR_MESSAGE);   
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jRadioInterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioInterActionPerformed
+        // TODO add your handling code here:
+        jListInter.setBackground(Color.lightGray);
+        jListViePol.setBackground(Color.WHITE);
+        jListInfosSports.setBackground(Color.WHITE);
+        jListRagots.setBackground(Color.WHITE);
+    }//GEN-LAST:event_jRadioInterActionPerformed
+
+    private void jRadioPolitiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioPolitiqueActionPerformed
+        // TODO add your handling code here:
+        jListInter.setBackground(Color.WHITE);
+        jListViePol.setBackground(Color.lightGray);
+        jListInfosSports.setBackground(Color.WHITE);
+        jListRagots.setBackground(Color.WHITE);
+    }//GEN-LAST:event_jRadioPolitiqueActionPerformed
+
+    private void jRadioRagotsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioRagotsActionPerformed
+        // TODO add your handling code here:
+        jListInter.setBackground(Color.WHITE);
+        jListViePol.setBackground(Color.WHITE);
+        jListInfosSports.setBackground(Color.WHITE);
+        jListRagots.setBackground(Color.lightGray);
+    }//GEN-LAST:event_jRadioRagotsActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -460,6 +597,10 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSupprimer;
     private javax.swing.JButton jButtonTraiter;
     protected javax.swing.JComboBox<String> jCBnews;
+    protected javax.swing.JList<String> jListInfosSports;
+    protected javax.swing.JList<String> jListInter;
+    protected javax.swing.JList<String> jListRagots;
+    protected javax.swing.JList<String> jListViePol;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -467,22 +608,22 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItemRecherche;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButton jRadioInter;
     private javax.swing.JRadioButton jRadioPolitique;
     private javax.swing.JRadioButton jRadioRagots;
     private javax.swing.JRadioButton jRadioSport;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    protected javax.swing.JTextArea jTextA1;
-    protected javax.swing.JTextArea jTextA2;
-    protected javax.swing.JTextArea jTextA3;
-    protected javax.swing.JTextArea jTextA4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextField jTextFieldAjouterNews;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel jlabel1;
     private javax.swing.JLabel jlblAddNews;
     private javax.swing.JLabel jlblDate;

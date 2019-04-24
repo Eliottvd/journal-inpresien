@@ -7,6 +7,8 @@ package applic_salle_presse;
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,16 +23,25 @@ public class newsProcessingWindow extends javax.swing.JDialog {
      */
     String tmpCat;
     mainWindow mw2;
-    public newsProcessingWindow() {
-        initComponents();
-    }
+    boolean modif;
        
-    public newsProcessingWindow(java.awt.Frame parent, boolean modal, String titre, mainWindow mw) { 
+    public newsProcessingWindow(java.awt.Frame parent, boolean modal, String titre) { 
         super(parent, modal);
         initComponents();
         jTextNomNews.setText(titre);
-        mw2 = mw;
+        mw2 = (mainWindow)parent;
         this.setLocationRelativeTo(null);
+        tmpCat = "";
+        modif = false;
+    }
+    
+    public newsProcessingWindow(java.awt.Frame parent, boolean modal)
+    {
+        super(parent, modal);
+        initComponents();
+        mw2 = (mainWindow)parent;
+        this.setLocationRelativeTo(null);
+        modif = true;
     }
 
     /**
@@ -249,6 +260,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
 
     private void jButtonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterActionPerformed
         // TODO add your handling code here:
+        
         News n = new News();
         n.setTitre(jTextNomNews.getText());
         n.setCat(tmpCat);
@@ -259,14 +271,36 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         while(st.hasMoreTokens())
         {
             n.addMotcle(st.nextToken());        }
-        
-        mw2.listeNews.add(n);
-        mw2.jCBnews.removeItem(mw2.jCBnews.getSelectedItem());
-        this.dispose();
-        mw2.jTextA4.setText(mw2.jTextA3.getText());
-        mw2.jTextA3.setText(mw2.jTextA2.getText());
-        mw2.jTextA2.setText(mw2.jTextA1.getText());
-        mw2.jTextA1.setText(n.getTitre()+"\n"+n.getTexte());
+
+        switch(tmpCat)
+        {
+            case "Internationnales" : mw2.getModInter().addElement(n.getTitre());
+                                      mw2.jListInter.setModel(mw2.getModInter());
+                                      mw2.listeNews.add(n);
+                                      mw2.jCBnews.removeItem(mw2.jCBnews.getSelectedItem());
+                                      this.dispose();
+                                      break;
+            case "Vie politique" : mw2.getModViePol().addElement(n.getTitre());
+                                   mw2.jListViePol.setModel(mw2.getModViePol());
+                                   mw2.listeNews.add(n);
+                                   mw2.jCBnews.removeItem(mw2.jCBnews.getSelectedItem());
+                                   this.dispose();
+                                   break;
+            case "Ragots et potins" : mw2.getModRagots().addElement(n.getTitre());
+                                      mw2.jListRagots.setModel(mw2.getModRagots());
+                                      mw2.listeNews.add(n);
+                                      mw2.jCBnews.removeItem(mw2.jCBnews.getSelectedItem());
+                                      this.dispose();
+                                      break;
+            case "Sport" : mw2.getModInfosSports().addElement(n.getTitre());
+                           mw2.jListInfosSports.setModel(mw2.getModInfosSports());
+                           mw2.listeNews.add(n);
+                           mw2.jCBnews.removeItem(mw2.jCBnews.getSelectedItem());
+                           this.dispose();
+                           break;
+            default : JOptionPane.showMessageDialog(new JFrame(), "Veuillez choisir une catégorie", 
+                    "Information manquante", JOptionPane.ERROR_MESSAGE);                                                                              
+        }
     }//GEN-LAST:event_jButtonAjouterActionPerformed
 
     private void jRadioInterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioInterActionPerformed
@@ -281,7 +315,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
 
     private void jRadioRagotsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioRagotsActionPerformed
         // TODO add your handling code here:
-        tmpCat = "Rogots et potins";
+        tmpCat = "Ragots et potins";
     }//GEN-LAST:event_jRadioRagotsActionPerformed
 
     /**
@@ -314,7 +348,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                newsProcessingWindow dialog = new newsProcessingWindow(new javax.swing.JFrame(), true, "titre", new mainWindow());
+                newsProcessingWindow dialog = new newsProcessingWindow(new javax.swing.JFrame(), true, "titre");
             }
         });
     }
