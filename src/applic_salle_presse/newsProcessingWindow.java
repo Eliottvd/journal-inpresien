@@ -260,7 +260,6 @@ public class newsProcessingWindow extends javax.swing.JDialog {
 
     private void jButtonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterActionPerformed
         // TODO add your handling code here:
-        
         News n = new News();
         n.setTitre(jTextNomNews.getText());
         n.setCat(tmpCat);
@@ -359,20 +358,20 @@ public class newsProcessingWindow extends javax.swing.JDialog {
     private javax.swing.JButton jButtonAnnuler;
     private javax.swing.JButton jButtonPlus;
     private javax.swing.JComboBox<String> jCMmotscles;
-    private javax.swing.JCheckBox jCheckBox1;
+    protected javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JRadioButton jRadioInter;
-    private javax.swing.JRadioButton jRadioPolitique;
-    private javax.swing.JRadioButton jRadioRagots;
-    private javax.swing.JRadioButton jRadioSport;
+    protected javax.swing.JRadioButton jRadioInter;
+    protected javax.swing.JRadioButton jRadioPolitique;
+    protected javax.swing.JRadioButton jRadioRagots;
+    protected javax.swing.JRadioButton jRadioSport;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextComments;
-    private javax.swing.JTextField jTextMotsCles;
-    private javax.swing.JTextField jTextNomNews;
+    protected javax.swing.JTextArea jTextComments;
+    protected javax.swing.JTextField jTextMotsCles;
+    protected javax.swing.JTextField jTextNomNews;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,10 @@
  */
 package applic_salle_presse;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 /**
  *
  * @author Eliott
@@ -14,9 +18,11 @@ public class dateSettingsDialog extends javax.swing.JDialog {
     /**
      * Creates new form dateSettingsDialog
      */
+    private mainWindow mw;
     public dateSettingsDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        mw = (mainWindow)parent;
     }
 
     /**
@@ -35,6 +41,7 @@ public class dateSettingsDialog extends javax.swing.JDialog {
         jComboBoxPays = new javax.swing.JComboBox<>();
         jComboBoxFDate = new javax.swing.JComboBox<>();
         jComboBoxFHeure = new javax.swing.JComboBox<>();
+        jButtonAppliquer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -48,9 +55,21 @@ public class dateSettingsDialog extends javax.swing.JDialog {
 
         jComboBoxPays.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " France", "Royaume Uni", "Allemagne", "Italie", "U.S.A." }));
 
-        jComboBoxFDate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DD/MM/YYYY", "DD/MM/YY", "YYYY/MM/DD", "YY/MM/DD", "MM/DD/YYYY", "MM/DD/YY", " " }));
+        jComboBoxFDate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "short", "medium", "full" }));
 
-        jComboBoxFHeure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "HH:MM:SS", "HH:MM", " " }));
+        jComboBoxFHeure.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "short", "medium", "full" }));
+        jComboBoxFHeure.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFHeureActionPerformed(evt);
+            }
+        });
+
+        jButtonAppliquer.setText("Appliquer");
+        jButtonAppliquer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAppliquerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,12 +84,17 @@ public class dateSettingsDialog extends javax.swing.JDialog {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jComboBoxPays, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBoxFDate, 0, 161, Short.MAX_VALUE)
-                    .addComponent(jComboBoxFHeure, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(88, 88, 88))
+                        .addComponent(jButtonAppliquer)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jComboBoxPays, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxFDate, 0, 161, Short.MAX_VALUE)
+                            .addComponent(jComboBoxFHeure, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(88, 88, 88))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,11 +113,24 @@ public class dateSettingsDialog extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jComboBoxFHeure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonAppliquer)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBoxFHeureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFHeureActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxFHeureActionPerformed
+
+    private void jButtonAppliquerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAppliquerActionPerformed
+        // TODO add your handling code here:
+        Date maintenant = new Date();
+        String maDate = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.MEDIUM, Locale.ITALY).format(maintenant);
+        mw.jlblDate2.setText(maDate);
+    }//GEN-LAST:event_jButtonAppliquerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,6 +175,7 @@ public class dateSettingsDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAppliquer;
     private javax.swing.JComboBox<String> jComboBoxFDate;
     private javax.swing.JComboBox<String> jComboBoxFHeure;
     private javax.swing.JComboBox<String> jComboBoxPays;

@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -33,14 +33,22 @@
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jButtonAppliquer" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jComboBoxPays" max="32767" attributes="0"/>
-                  <Component id="jComboBoxFDate" alignment="0" pref="161" max="32767" attributes="0"/>
-                  <Component id="jComboBoxFHeure" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jComboBoxPays" max="32767" attributes="0"/>
+                          <Component id="jComboBoxFDate" alignment="0" pref="161" max="32767" attributes="0"/>
+                          <Component id="jComboBoxFHeure" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -64,7 +72,9 @@
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jComboBoxFHeure" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="61" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jButtonAppliquer" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="11" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -109,14 +119,10 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxFDate">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="7">
-            <StringItem index="0" value="DD/MM/YYYY"/>
-            <StringItem index="1" value="DD/MM/YY"/>
-            <StringItem index="2" value="YYYY/MM/DD"/>
-            <StringItem index="3" value="YY/MM/DD"/>
-            <StringItem index="4" value="MM/DD/YYYY"/>
-            <StringItem index="5" value="MM/DD/YY"/>
-            <StringItem index="6" value=" "/>
+          <StringArray count="3">
+            <StringItem index="0" value="short"/>
+            <StringItem index="1" value="medium"/>
+            <StringItem index="2" value="full"/>
           </StringArray>
         </Property>
       </Properties>
@@ -128,15 +134,26 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
-            <StringItem index="0" value="HH:MM:SS"/>
-            <StringItem index="1" value="HH:MM"/>
-            <StringItem index="2" value=" "/>
+            <StringItem index="0" value="short"/>
+            <StringItem index="1" value="medium"/>
+            <StringItem index="2" value="full"/>
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxFHeureActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonAppliquer">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Appliquer"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAppliquerActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

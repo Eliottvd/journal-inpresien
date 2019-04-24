@@ -24,6 +24,7 @@ public class loginWindow extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.setTitle("Connexion");
         repertoire = new Hashtable();
         repertoire.put("root","toor");
     }
@@ -37,7 +38,6 @@ public class loginWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox1 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -47,12 +47,6 @@ public class loginWindow extends javax.swing.JFrame {
         jButtonAnnuler = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setText("Bienvenue !");
@@ -109,9 +103,6 @@ public class loginWindow extends javax.swing.JFrame {
                             .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(99, 99, 99))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(149, 149, 149)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -119,8 +110,7 @@ public class loginWindow extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jCheckBox1)
-                .addGap(22, 22, 22)
+                .addGap(46, 46, 46)
                 .addComponent(jLabel1)
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -156,7 +146,7 @@ public class loginWindow extends javax.swing.JFrame {
 
     private void Login() throws ExceptionLogin{
         String id = jTextIdentifiant.getText();
-        String pass = String.valueOf(jPassword.getPassword());
+        String pass = String.valueOf(jPassword.getPassword()); //getPassword() retourne un char[] 
         if(repertoire.containsKey(id))
         {
             if(pass.equals((String)repertoire.get(id)))
@@ -167,36 +157,30 @@ public class loginWindow extends javax.swing.JFrame {
             }
             else
             {
-                throw new ExceptionLogin(1);
+                throw new ExceptionLogin(1); //MAuvais password
             }
             
         }
         else
         {
-            throw new ExceptionLogin(0);
+            throw new ExceptionLogin(0); //Mauvais identifiant 
         }
     }
     
     private void jButtonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerActionPerformed
-        this.dispose();
+        jTextIdentifiant.setText("");
+        jPassword.setText("");
     }//GEN-LAST:event_jButtonAnnulerActionPerformed
 
     private void jTextIdentifiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextIdentifiantActionPerformed
         // TODO add your handling code here:
-        jButtonValiderActionPerformed(evt);
+        jButtonValiderActionPerformed(evt); //On effectue la meme fonction que si on appuyait sur le bouton valider 
     }//GEN-LAST:event_jTextIdentifiantActionPerformed
 
     private void jPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordActionPerformed
         // TODO add your handling code here:
         jButtonValiderActionPerformed(evt);
     }//GEN-LAST:event_jPasswordActionPerformed
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-        mainWindow myWindow = new mainWindow("Admin");
-        myWindow.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,7 +220,6 @@ public class loginWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAnnuler;
     private javax.swing.JButton jButtonValider;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

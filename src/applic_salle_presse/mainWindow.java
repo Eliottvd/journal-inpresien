@@ -38,6 +38,7 @@ public class mainWindow extends javax.swing.JFrame {
     public mainWindow(String nom){
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setTitle("Journal");
         listeNews = new ArrayList<News>();
         jlblJournaliste.setText(nom);
         Date maintenant = new Date();
@@ -82,19 +83,16 @@ public class mainWindow extends javax.swing.JFrame {
         jListViePol = new javax.swing.JList<>();
         jScrollPane8 = new javax.swing.JScrollPane();
         jListInfosSports = new javax.swing.JList<>();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        jToggleButtonEditer = new javax.swing.JToggleButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItemRecherche = new javax.swing.JMenuItem();
         jMenuAide = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -119,8 +117,6 @@ public class mainWindow extends javax.swing.JFrame {
         jlblAddNews.setText("Ajouter news : ");
 
         jlblDate.setText("Nous sommes le : ");
-
-        jlblDate2.setText("28/03/2019");
 
         jButtonAjouter.setText("Ajouter");
         jButtonAjouter.addActionListener(new java.awt.event.ActionListener() {
@@ -192,33 +188,22 @@ public class mainWindow extends javax.swing.JFrame {
 
         jScrollPane8.setViewportView(jListInfosSports);
 
-        jToggleButton1.setText("Editer");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        jToggleButtonEditer.setText("Editer");
+        jToggleButtonEditer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                jToggleButtonEditerActionPerformed(evt);
             }
         });
 
         jMenu2.setText("Utilisateurs");
 
-        jMenuItem1.setText("Login");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem2.setText("Logout");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
-
-        jMenuItem2.setText("Logout");
         jMenu2.add(jMenuItem2);
-        jMenu2.add(jSeparator1);
-
-        jMenuItem3.setText("Nouvel utilisateur");
-        jMenu2.add(jMenuItem3);
-
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("Liste");
-        jMenu2.add(jRadioButtonMenuItem1);
 
         jMenuBar1.add(jMenu2);
 
@@ -251,6 +236,14 @@ public class mainWindow extends javax.swing.JFrame {
 
         jMenuItem4.setText("Afficher le log");
         jMenuAide.add(jMenuItem4);
+
+        jMenuItem1.setText("Date");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuAide.add(jMenuItem1);
 
         jMenuItem5.setText("A propos");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -315,7 +308,7 @@ public class mainWindow extends javax.swing.JFrame {
                         .addGap(30, 30, 30))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton1)
+                .addComponent(jToggleButtonEditer)
                 .addGap(367, 367, 367))
         );
         layout.setVerticalGroup(
@@ -355,8 +348,8 @@ public class mainWindow extends javax.swing.JFrame {
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jToggleButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(jToggleButtonEditer)
                 .addContainerGap())
         );
 
@@ -498,15 +491,46 @@ public class mainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCBnewsKeyPressed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void jToggleButtonEditerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonEditerActionPerformed
         // TODO add your handling code here:
         if(jListInter.getBackground() == Color.lightGray)
         {
+            News n;
+            String motCles = new String("");
+            
+            
+            
             if(jListInter.getSelectedValue() == null)
                 JOptionPane.showMessageDialog(new JFrame(), "Pas de news selectionnée", 
                         "Information manquante", JOptionPane.ERROR_MESSAGE);
             else 
             {
+                
+                
+                listeNews.forEach((ntmp)->{
+                if(ntmp.getTitre().equals(jListInter.getSelectedValue()))
+                {
+                    newsProcessingWindow npWin = new newsProcessingWindow(this, false);
+                    npWin.setVisible(true);
+                    npWin.jTextNomNews.setText(ntmp.getTitre());
+                    npWin.jTextComments.setText(ntmp.getTexte());
+                    switch(ntmp.getCat())
+                    {
+                        case "Internationnales" : npWin.jRadioInter.setSelected(true);
+                                                  break;
+                        case "Vie politique" : npWin.jRadioPolitique.setSelected(true);
+                                               break;
+                        case "Ragots et potins" : npWin.jRadioSport.setSelected(true);
+                                                  break;
+                        case "Sport" : npWin.jRadioRagots.setSelected(true);
+                                       break;
+                    }
+                    npWin.jCheckBox1.setSelected(ntmp.getImportance());
+                    //ntmp.getMotcles().forEach((mot)->{motCles.concat(mot);});
+                    npWin.jTextMotsCles.setText(ntmp.getMotcles().toString());;
+                }
+            });
+                //npWin.jTextNomNews.setText();
                 //TODO
             }
         }
@@ -526,7 +550,7 @@ public class mainWindow extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(new JFrame(), "Pas de catégorie selectionnée", "Information manquante", JOptionPane.ERROR_MESSAGE);   
         }
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_jToggleButtonEditerActionPerformed
 
     private void jRadioInterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioInterActionPerformed
         // TODO add your handling code here:
@@ -552,8 +576,17 @@ public class mainWindow extends javax.swing.JFrame {
         jListRagots.setBackground(Color.lightGray);
     }//GEN-LAST:event_jRadioRagotsActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        loginWindow logWin = new loginWindow();
+        logWin.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
+        dateSettingsDialog dateDialog = new dateSettingsDialog(this, true);
+        dateDialog.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
@@ -608,11 +641,9 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItemRecherche;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButton jRadioInter;
     private javax.swing.JRadioButton jRadioPolitique;
     private javax.swing.JRadioButton jRadioRagots;
@@ -621,13 +652,12 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextField jTextFieldAjouterNews;
-    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButtonEditer;
     private javax.swing.JLabel jlabel1;
     private javax.swing.JLabel jlblAddNews;
     private javax.swing.JLabel jlblDate;
-    private javax.swing.JLabel jlblDate2;
+    protected javax.swing.JLabel jlblDate2;
     private javax.swing.JLabel jlblJournaliste;
     private javax.swing.JLabel jlblNewsRecues;
     private javax.swing.JLabel jlblNomJournaliste;
