@@ -54,6 +54,11 @@ public class dateSettingsDialog extends javax.swing.JDialog {
         jLabel4.setText("Format Temps ");
 
         jComboBoxPays.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " France", "Royaume Uni", "Allemagne", "Italie", "U.S.A." }));
+        jComboBoxPays.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPaysActionPerformed(evt);
+            }
+        });
 
         jComboBoxFDate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "short", "medium", "full" }));
 
@@ -128,9 +133,47 @@ public class dateSettingsDialog extends javax.swing.JDialog {
     private void jButtonAppliquerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAppliquerActionPerformed
         // TODO add your handling code here:
         Date maintenant = new Date();
-        String maDate = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.MEDIUM, Locale.ITALY).format(maintenant);
+        int dfHeure = DateFormat.SHORT; 
+        int dfDate = DateFormat.FULL;
+        Locale pays = Locale.ITALY;
+        switch(jComboBoxPays.getSelectedIndex())
+        {
+            case 0 : pays = Locale.FRANCE;
+                     break;
+            case 1 : pays = Locale.UK;
+                     break;
+            case 2 : pays = Locale.GERMANY;
+                     break;
+            case 3 : pays = Locale.ITALY;
+                     break;
+            case 4 : pays = Locale.US;
+                     break;
+        }
+        switch(jComboBoxFHeure.getSelectedIndex())
+        {
+            case 0 : dfHeure = DateFormat.SHORT;
+                     break;
+            case 1 : dfHeure = DateFormat.MEDIUM;
+                     break;
+            case 2 : dfHeure = DateFormat.FULL;
+                     break;
+        }
+        switch(jComboBoxFDate.getSelectedIndex())
+        {
+            case 0 : dfDate = DateFormat.SHORT;
+                     break;
+            case 1 : dfDate = DateFormat.MEDIUM;
+                     break;
+            case 2 : dfDate = DateFormat.FULL;
+                     break;
+        }
+        String maDate = DateFormat.getDateTimeInstance(dfDate, dfHeure, pays).format(maintenant);
         mw.jlblDate2.setText(maDate);
     }//GEN-LAST:event_jButtonAppliquerActionPerformed
+
+    private void jComboBoxPaysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPaysActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxPaysActionPerformed
 
     /**
      * @param args the command line arguments
