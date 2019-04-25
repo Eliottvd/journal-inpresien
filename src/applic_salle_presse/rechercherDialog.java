@@ -247,7 +247,7 @@ public class rechercherDialog extends javax.swing.JDialog {
                     jLabelImportance.setText("Non");
                 jComboBoxMC.removeAllItems();
                 listNews.get(i).getMotcles().forEach((motC)->{jComboBoxMC.addItem(motC);});
-                jTextArea1.setText(listNews.get(i).getTexte());
+                jTextAreaCom.setText(listNews.get(i).getTexte());
             }          
         }
     }//GEN-LAST:event_jList1ValueChanged

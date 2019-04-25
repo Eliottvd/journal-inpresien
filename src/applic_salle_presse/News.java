@@ -17,7 +17,7 @@ identifiant, sa source, la référence du journaliste qui l'a produite, sa date,
 important ou pas, un container (Vector, ArrayList, etc) de ses mots-clé, …) 
 
  */
-public class News {
+public class News implements Identifiable{
     private int idNews;
     private String titre;
     private String texte;
