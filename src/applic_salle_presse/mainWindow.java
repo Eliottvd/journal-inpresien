@@ -294,7 +294,7 @@ public class mainWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioRagots)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
+                        .addContainerGap(58, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jlblAddNews, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -303,16 +303,16 @@ public class mainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldAjouterNews)
-                            .addComponent(jlblJournaliste, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                            .addComponent(jlblJournaliste, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                             .addComponent(jCBnews, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                                .addGap(16, 16, 16)
                                 .addComponent(jlblNomJournaliste, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jlblDate)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlblDate2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jlblDate2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
@@ -544,8 +544,6 @@ public class mainWindow extends javax.swing.JFrame {
         }
         else if(jListViePol.getBackground() == Color.lightGray)
         {
-            News n;
-            String motCles = new String("");
             if(jListViePol.getSelectedValue() == null)
                 JOptionPane.showMessageDialog(new JFrame(), "Pas de news selectionnée", 
                         "Information manquante", JOptionPane.ERROR_MESSAGE);
