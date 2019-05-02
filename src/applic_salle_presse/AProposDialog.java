@@ -27,7 +27,7 @@ public class AProposDialog extends javax.swing.JDialog {
         this.setTitle("Eliott > Ibra");
         this.setResizable(false);
         //URL de l'image
-        String imgUrl="C:\\Users\\Eliott\\Desktop\\ibra.jpg";
+        String imgUrl="img\\ibra.jpg";
         ImageIcon icone = new ImageIcon(imgUrl);
         jLabel3.setIcon(icone);
         jLabel3.setSize(350, 300);
@@ -50,7 +50,7 @@ public class AProposDialog extends javax.swing.JDialog {
 
         jLabel1.setText("Crée par Eliott van der Straten-Waillet");
 
-        jLabel2.setText("(et ibra peut etre un jour)");
+        jLabel2.setText("(et Ibrahim Tahiri-Alaoui)");
         jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jLabel2MouseDragged(evt);

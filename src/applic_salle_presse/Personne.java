@@ -10,7 +10,6 @@ package applic_salle_presse;
  * @author Eliott
  */
 public class Personne implements Identifiable {
-    String nom = "van der Straten-Waillet";
-    String Prenom;
-    
+    String _nom;
+    String _Prenom;
 }

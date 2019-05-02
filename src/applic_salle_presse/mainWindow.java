@@ -50,7 +50,7 @@ public class mainWindow extends javax.swing.JFrame {
         setModInfosSports(new DefaultListModel());
         setModRagots(new DefaultListModel());
         
-        String imgUrl="C:\\Users\\Eliott\\Desktop\\ibra2.jpg";
+        String imgUrl="img\\ibra2.jpg";
         ImageIcon icone = new ImageIcon(imgUrl);
         jLabelImg.setIcon(icone);
         jLabelImg.setSize(177, 149);
@@ -327,21 +327,22 @@ public class mainWindow extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addComponent(jLabelImg, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(73, 73, 73))))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(386, 386, 386)
                 .addComponent(jToggleButtonEditer)
-                .addGap(367, 367, 367))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlabel1)
-                    .addComponent(jlblNomJournaliste)
-                    .addComponent(jlblDate)
-                    .addComponent(jlblDate2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlblJournaliste))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlblDate2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jlabel1)
+                        .addComponent(jlblNomJournaliste)
+                        .addComponent(jlblDate)
+                        .addComponent(jlblJournaliste)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
