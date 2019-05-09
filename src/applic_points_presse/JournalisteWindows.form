@@ -268,14 +268,14 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="jTableNews">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="News" type="java.lang.Object"/>
-                <Column editable="true" title="Type" type="java.lang.Object"/>
-                <Column editable="true" title="Important ?" type="java.lang.Object"/>
-                <Column editable="true" title="Journaliste" type="java.lang.Object"/>
+                <Column editable="false" title="News" type="java.lang.Object"/>
+                <Column editable="false" title="Type" type="java.lang.Object"/>
+                <Column editable="false" title="Important ?" type="java.lang.Object"/>
+                <Column editable="false" title="Journaliste" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

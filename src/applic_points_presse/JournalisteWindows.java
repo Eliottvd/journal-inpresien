@@ -5,6 +5,8 @@
  */
 package applic_points_presse;
 import applic_salle_presse.*;
+import java.util.*;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -15,8 +17,14 @@ public class JournalisteWindows extends javax.swing.JFrame {
     /**
      * Creates new form JournalisteWindows
      */
+    public String tmpCategorie;
+    public ArrayList<News> listeJournalisteNews;
+   
+    
     public JournalisteWindows() {
         initComponents();
+        listeJournalisteNews=new ArrayList<News>();
+        
     }
 
     /**
@@ -43,7 +51,7 @@ public class JournalisteWindows extends javax.swing.JFrame {
         jButtonAnnuler = new javax.swing.JButton();
         jButtonEnvoyer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableNews = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -112,7 +120,7 @@ public class JournalisteWindows extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableNews.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -122,8 +130,16 @@ public class JournalisteWindows extends javax.swing.JFrame {
             new String [] {
                 "News", "Type", "Important ?", "Journaliste"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableNews);
 
         jLabel4.setText("Log des evenements :");
 
@@ -266,18 +282,25 @@ public class JournalisteWindows extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRadioButtonPolitiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPolitiqueActionPerformed
-        // TODO add your handling code here:
+             
+        tmpCategorie="Politique";    
+// TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonPolitiqueActionPerformed
 
     private void jRadioButtonInternationalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonInternationalActionPerformed
+       tmpCategorie="International"; 
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonInternationalActionPerformed
 
     private void jRadioButtonSportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonSportsActionPerformed
-        // TODO add your handling code here:
+            
+        tmpCategorie="Sports"; 
+
+            // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonSportsActionPerformed
 
     private void jRadioButtonRagotPotinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonRagotPotinActionPerformed
+       tmpCategorie="RagotPotin"; 
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonRagotPotinActionPerformed
 
@@ -293,6 +316,47 @@ public class JournalisteWindows extends javax.swing.JFrame {
         // TODO add your handling code here:
         News newsJournaliste= new News();
         newsJournaliste.setTitre(jTextFieldTitre.getText());
+        newsJournaliste.setCat(tmpCategorie);
+        newsJournaliste.setImportance(jCheckBoxImportant.isSelected());
+        newsJournaliste.setTexte(jTextFieldTexte.getText());
+        newsJournaliste.setSource(jTextFieldJournaliste.getText());
+        
+        listeJournalisteNews.add(newsJournaliste);
+        int i;
+        for( i=0;i<listeJournalisteNews.size();i++)
+        {
+            News tmps;
+            tmps= listeJournalisteNews.get(i);
+             jTableNews.getModel().setValueAt(tmps.getTitre(), i, 0);
+             jTableNews.getModel().setValueAt(tmps.getCat(), i, 1);
+             if(tmps.getImportance())
+             {
+                 jTableNews.getModel().setValueAt("Y", i, 2);
+             }
+             else
+             {
+                 jTableNews.getModel().setValueAt("N", i, 2);
+             }
+             
+             jTableNews.getModel().setValueAt(tmps.getSource(), i, 3);
+
+                 
+        }
+        String Nbrenvoye=Integer.toString(i);
+        jLabelCompteurNews.setText(Nbrenvoye);
+        
+        Date date=new Date();
+        Calendar calendar= GregorianCalendar.getInstance();
+        calendar.setTime(date);
+        String sep=System.getProperty("line.separator");
+        
+        jTextArea1.append("["+ calendar.get(Calendar.HOUR_OF_DAY)+":"+calendar.get(Calendar.MINUTE)+"]"+"Une news enregistree avec succes("+newsJournaliste.getSource()+")-"+newsJournaliste.getTitre()+sep);
+        
+        
+        
+        
+        
+        
         //newsJournaliste.sets
     }//GEN-LAST:event_jButtonEnregistrerActionPerformed
 
@@ -352,7 +416,7 @@ public class JournalisteWindows extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonSports;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableNews;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextFieldJournaliste;
     private javax.swing.JTextField jTextFieldTexte;
