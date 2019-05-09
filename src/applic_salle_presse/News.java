@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.io.*;
 
 /**
  *
@@ -17,7 +18,7 @@ identifiant, sa source, la référence du journaliste qui l'a produite, sa date,
 important ou pas, un container (Vector, ArrayList, etc) de ses mots-clé, …) 
 
  */
-public class News implements Identifiable{
+public class News implements Identifiable,Serializable{
     private int idNews;
     private String titre;
     private String texte;

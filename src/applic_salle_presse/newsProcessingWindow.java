@@ -5,10 +5,21 @@
  */
 package applic_salle_presse;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.util.Properties;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -323,6 +334,30 @@ public class newsProcessingWindow extends javax.swing.JDialog {
             default : JOptionPane.showMessageDialog(new JFrame(), "Veuillez choisir une catégorie", 
                     "Information manquante", JOptionPane.ERROR_MESSAGE);                                                                              
         }
+        String rep;
+        String sep;
+        String cheminNews;
+        rep = System.getProperty("user.home");
+        sep=System.getProperty("file.separator");
+        cheminNews=rep+sep+"News.ser";
+        try 
+        {
+            FileOutputStream Fos=new  FileOutputStream(cheminNews);
+            ObjectOutputStream oos= new ObjectOutputStream(Fos);
+            oos.writeObject(mw2.listeNews);
+        } 
+        catch (FileNotFoundException e) 
+        {
+             JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "2 !", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException ex) {
+            Logger.getLogger(newsProcessingWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+                
+        
+        
+
+        
     }//GEN-LAST:event_jButtonAjouterActionPerformed
 
     private void jRadioInterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioInterActionPerformed

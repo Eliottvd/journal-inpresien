@@ -15,7 +15,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+import java.util.Properties;
+import java.io.*;
 /**
  *
  * @author Eliott
@@ -34,9 +35,10 @@ public class mainWindow extends javax.swing.JFrame {
     private DefaultListModel _modInter; 
     private DefaultListModel _modViePol; 
     private DefaultListModel _modInfosSports; 
-    private DefaultListModel _modRagots; 
+    private DefaultListModel _modRagots;
+    private News Newstemp;
     
-    public mainWindow(String nom){
+    public mainWindow(String nom) throws ClassNotFoundException{
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Journal");
@@ -50,10 +52,73 @@ public class mainWindow extends javax.swing.JFrame {
         setModInfosSports(new DefaultListModel());
         setModRagots(new DefaultListModel());
         
-        String imgUrl="img\\ibra2.jpg";
-        ImageIcon icone = new ImageIcon(imgUrl);
-        jLabelImg.setIcon(icone);
-        jLabelImg.setSize(177, 149);
+        String rep;
+        String sep;
+        String cheminNews;
+        rep = System.getProperty("user.home");
+        sep=System.getProperty("file.separator");
+        cheminNews=rep+sep+"News.ser";
+         try 
+        {
+            FileInputStream Fis=new  FileInputStream(cheminNews);
+            ObjectInputStream ois= new ObjectInputStream(Fis);
+
+            listeNews=(ArrayList<News>)ois.readObject();
+            System.out.println(listeNews.size());
+         //du ajouter throws ClassNotFoundException a la ligne 40
+            for(int i=0;i<listeNews.size();i++)
+            {
+                Newstemp=listeNews.get(i);
+                switch(Newstemp.getCat())
+                {
+                    case "Internationnales" : this.getModInter().addElement(Newstemp.getTitre());
+                                              this.jListInter.setModel(this.getModInter());
+                                              this.jCBnews.removeItem(this.jCBnews.getSelectedItem());
+                                              this.dispose();
+                                              break;
+                    case "Vie politique" : this.getModViePol().addElement(Newstemp.getTitre());
+                                           this.jListViePol.setModel(this.getModViePol());
+                                           this.jCBnews.removeItem(this.jCBnews.getSelectedItem());
+                                           this.dispose();
+                                           break;
+                    case "Ragots et potins" : this.getModRagots().addElement(Newstemp.getTitre());
+                                              this.jListRagots.setModel(this.getModRagots());
+                                              this.jCBnews.removeItem(this.jCBnews.getSelectedItem());
+                                              this.dispose();
+                                              break;
+                    case "Sport" : this.getModInfosSports().addElement(Newstemp.getTitre());
+                                   this.jListInfosSports.setModel(this.getModInfosSports());
+                                   this.jCBnews.removeItem(this.jCBnews.getSelectedItem());
+                                   this.dispose();
+                                   break;
+                    default : JOptionPane.showMessageDialog(new JFrame(), "Veuillez choisir une catégorie", 
+                            "Information manquante", JOptionPane.ERROR_MESSAGE);                                                                              
+                }
+                        System.out.println(i);
+            }
+            
+        }
+        catch (EOFException e) 
+        {
+            String imgUrl="img\\ibra2.jpg";
+            ImageIcon icone = new ImageIcon(imgUrl);
+            jLabelImg.setIcon(icone);
+            jLabelImg.setSize(177, 149);
+        }
+        catch (FileNotFoundException e) 
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "Premiere fois", "First try", JOptionPane.ERROR_MESSAGE);
+            String imgUrl="img\\ibra2.jpg";
+            ImageIcon icone = new ImageIcon(imgUrl);
+            jLabelImg.setIcon(icone);
+            jLabelImg.setSize(177, 149);
+        }
+
+        catch(IOException e)
+        {
+             JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Imposteur !", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
     /**
      * This method is called from within the constructor to initialize the form.

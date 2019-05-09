@@ -5,9 +5,9 @@
  */
 package applic_salle_presse;
 
-import java.util.Hashtable;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.util.Properties;
 
 /**
  *
@@ -18,14 +18,14 @@ public class loginWindow extends javax.swing.JFrame {
     /**
      * Creates new form loginWindow
      */
-    Hashtable repertoire;
+    Properties repertoire;
     
     public loginWindow() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setTitle("Connexion");
-        repertoire = new Hashtable();
+        repertoire = new Properties();
         repertoire.put("root","toor");
     }
 
