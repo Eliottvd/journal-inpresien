@@ -8,6 +8,8 @@ package applic_salle_presse;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -138,13 +140,17 @@ public class loginWindow extends javax.swing.JFrame {
         catch (ExceptionLogin el) 
         {
             JOptionPane.showMessageDialog(new JFrame(), el.getMessage(), "Imposteur !", JOptionPane.ERROR_MESSAGE);
+        } 
+        catch (ClassNotFoundException ex) 
+        {
+            Logger.getLogger(loginWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
         
     }//GEN-LAST:event_jButtonValiderActionPerformed
 
-    private void Login() throws ExceptionLogin{
+    private void Login() throws ExceptionLogin, ClassNotFoundException{
         String id = jTextIdentifiant.getText();
         String pass = String.valueOf(jPassword.getPassword()); //getPassword() retourne un char[] 
         if(repertoire.containsKey(id))
