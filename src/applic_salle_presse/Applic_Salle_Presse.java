@@ -1,7 +1,9 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * and open the template in the editor.++
+
+
  */
 package applic_salle_presse;
 
@@ -10,6 +12,7 @@ package applic_salle_presse;
  * @author Eliott van der Straten-Waillet 
  * @authorSup Ibrahim Tahiri-Alaoui
  */
+
 public class Applic_Salle_Presse {
 
     /**
