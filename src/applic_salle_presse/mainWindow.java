@@ -5,6 +5,7 @@
  */
 package applic_salle_presse;
 
+import applic_points_presse.JournalisteWindows;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
@@ -17,11 +18,16 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.Properties;
 import java.io.*;
+import java.util.StringTokenizer;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import network.NetworkBasicServer;
 /**
  *
  * @author Eliott
  */
-public class mainWindow extends javax.swing.JFrame {
+public class mainWindow extends javax.swing.JFrame implements Notifmessage{
 
     /**
      * Creates new form mainWindow
@@ -37,6 +43,12 @@ public class mainWindow extends javax.swing.JFrame {
     private DefaultListModel _modInfosSports; 
     private DefaultListModel _modRagots;
     private News Newstemp;
+    public NetworkBasicServer NBS;
+    private JournalisteWindows Jw;
+    private String _messageTraite;
+    public void setMessageTraite(String m){_messageTraite=new String();
+        _messageTraite=m;}
+    public String getMessageTraite(){return _messageTraite;}
     
     public mainWindow(String nom) throws ClassNotFoundException{
         initComponents();
@@ -51,6 +63,10 @@ public class mainWindow extends javax.swing.JFrame {
         setModViePol(new DefaultListModel());
         setModInfosSports(new DefaultListModel());
         setModRagots(new DefaultListModel());
+        
+       
+        
+        
         
         String rep;
         String sep;
@@ -156,9 +172,12 @@ public class mainWindow extends javax.swing.JFrame {
         jListInfosSports = new javax.swing.JList<>();
         jToggleButtonEditer = new javax.swing.JToggleButton();
         jLabelImg = new javax.swing.JLabel();
+        jCheckBoxMessageRecu = new javax.swing.JCheckBox();
+        jTextFieldTitrenotif = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemloginJournaliste = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItemRecherche = new javax.swing.JMenuItem();
@@ -274,6 +293,19 @@ public class mainWindow extends javax.swing.JFrame {
             }
         });
 
+        jCheckBoxMessageRecu.setText("Message notif");
+        jCheckBoxMessageRecu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMessageRecuActionPerformed(evt);
+            }
+        });
+
+        jTextFieldTitrenotif.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTitrenotifActionPerformed(evt);
+            }
+        });
+
         jMenu2.setText("Utilisateurs");
 
         jMenuItem2.setText("Logout");
@@ -283,6 +315,14 @@ public class mainWindow extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem2);
+
+        jMenuItemloginJournaliste.setText("loginJournaliste");
+        jMenuItemloginJournaliste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemloginJournalisteActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemloginJournaliste);
 
         jMenuBar1.add(jMenu2);
 
@@ -393,7 +433,11 @@ public class mainWindow extends javax.swing.JFrame {
                                 .addComponent(jLabelImg, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(73, 73, 73))))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(386, 386, 386)
+                .addGap(19, 19, 19)
+                .addComponent(jCheckBoxMessageRecu)
+                .addGap(33, 33, 33)
+                .addComponent(jTextFieldTitrenotif, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79)
                 .addComponent(jToggleButtonEditer)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -433,15 +477,23 @@ public class mainWindow extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jRadioInter)
                         .addComponent(jRadioPolitique)))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addComponent(jToggleButtonEditer)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBoxMessageRecu)
+                            .addComponent(jTextFieldTitrenotif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jToggleButtonEditer)
+                        .addGap(31, 31, 31))))
         );
 
         pack();
@@ -726,6 +778,28 @@ public class mainWindow extends javax.swing.JFrame {
         jlblDate2.setText(DateFormat.getDateTimeInstance(DateFormat.DATE_FIELD,DateFormat.LONG, Locale.FRANCE).format(new Date()));
     }//GEN-LAST:event_jlblDate2MouseClicked
 
+    private void jCheckBoxMessageRecuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMessageRecuActionPerformed
+        
+     
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxMessageRecuActionPerformed
+
+    private void jMenuItemloginJournalisteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemloginJournalisteActionPerformed
+         NBS=new NetworkBasicServer(60001, jCheckBoxMessageRecu);
+         Jw=new JournalisteWindows();
+         Jw.Addliste(this);
+         Jw.setVisible(true);
+         
+         
+         
+         
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemloginJournalisteActionPerformed
+
+    private void jTextFieldTitrenotifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTitrenotifActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTitrenotifActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -760,13 +834,53 @@ public class mainWindow extends javax.swing.JFrame {
             }
         });
     }
+  
+    @Override
+    public void ActionReceive()
+{
+   
+        try {
+            TimeUnit.MILLISECONDS.sleep(10);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
 
+        //System.out.println(NBS.getMessage());
+        setMessageTraite(NBS.getMessage());
+    
+    
+         //System.out.println(getMessageTraite()+"YOYOYOYO");
+         String[] tmp;
+         tmp=getMessageTraite().split("/");
+         
+         //System.out.println(tmp[5]+"JFEV?EPIVNIE");
+         News tmpNews=new News();
+         tmpNews.setTitre(tmp[0]);
+         tmpNews.setTexte(tmp[1]);
+         tmpNews.setSource(tmp[2]);
+         tmpNews.setCat(tmp[3]);
+         if(tmp[4].equals("true"))
+         {
+             tmpNews.setImportance(true);
+         }
+         else
+         {
+             tmpNews.setImportance(false);
+         }
+                  
+         jTextFieldTitrenotif.setText(tmpNews.getTitre());
+    
+
+    
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup RadioButtonGroup;
     private javax.swing.JButton jButtonAjouter;
     private javax.swing.JButton jButtonSupprimer;
     private javax.swing.JButton jButtonTraiter;
     protected javax.swing.JComboBox<String> jCBnews;
+    private javax.swing.JCheckBox jCheckBoxMessageRecu;
     private javax.swing.JLabel jLabelImg;
     protected javax.swing.JList<String> jListInfosSports;
     protected javax.swing.JList<String> jListInter;
@@ -782,6 +896,7 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItemRecherche;
+    private javax.swing.JMenuItem jMenuItemloginJournaliste;
     private javax.swing.JRadioButton jRadioInter;
     private javax.swing.JRadioButton jRadioPolitique;
     private javax.swing.JRadioButton jRadioRagots;
@@ -791,6 +906,7 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTextField jTextFieldAjouterNews;
+    private javax.swing.JTextField jTextFieldTitrenotif;
     private javax.swing.JToggleButton jToggleButtonEditer;
     private javax.swing.JLabel jlabel1;
     private javax.swing.JLabel jlblAddNews;

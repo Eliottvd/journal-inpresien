@@ -7,6 +7,9 @@ package applic_points_presse;
 import applic_salle_presse.*;
 import java.util.*;
 import java.util.GregorianCalendar;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import network.NetworkBasicClient;
 
 /**
  *
@@ -19,11 +22,25 @@ public class JournalisteWindows extends javax.swing.JFrame {
      */
     public String tmpCategorie;
     public ArrayList<News> listeJournalisteNews;
+    public NetworkBasicClient NBC;
+    private ArrayList<mainWindow> _framePrincipale;
+    public void setPrincipale(mainWindow m)
+    {
+        _framePrincipale=new ArrayList<mainWindow>();
+        _framePrincipale.add(m);
+    }
+    public mainWindow getPrincipale(){return _framePrincipale.get(0);}
+    
+     
+    
+    
+    
    
     
     public JournalisteWindows() {
         initComponents();
         listeJournalisteNews=new ArrayList<News>();
+        NBC=new NetworkBasicClient("localhost", 60001);
         
     }
 
@@ -309,6 +326,30 @@ public class JournalisteWindows extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldJournalisteActionPerformed
 
     private void jButtonEnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoyerActionPerformed
+       News tmps=new News();
+       String Envoye =new String();
+        
+       if(jTableNews.getRowSelectionAllowed())
+       {
+           int i;
+           for(i=0;i<jTableNews.getSelectedRow();i++)
+           {
+                
+  
+           }
+           tmps= listeJournalisteNews.get(i);
+           Envoye=tmps.getTitre()+"/"+tmps.getTexte()+"/"+tmps.getSource()+"/"+tmps.getCat()+"/"+tmps.getImportance();
+           
+           System.out.println(Envoye+"MEEEEEEEEEEEERDE");
+          
+           NBC.sendStringWithoutWaiting(Envoye);
+           getPrincipale().ActionReceive();
+
+       }
+       else
+       {
+           JOptionPane.showMessageDialog(new JFrame(), "Pas de catégorie selectionnée", "Information manquante", JOptionPane.ERROR_MESSAGE);
+       }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEnvoyerActionPerformed
 
@@ -394,6 +435,12 @@ public class JournalisteWindows extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void Addliste(mainWindow m)
+    {
+        setPrincipale(m);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
