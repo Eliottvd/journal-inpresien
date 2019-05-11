@@ -85,7 +85,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
             for(int i=0;i<listeNews.size();i++)
             {
                 Newstemp=listeNews.get(i);
-                switch(Newstemp.getCat().getString())
+                switch(Newstemp.getCat().toString())
                 {
                     case "Internationnales" : this.getModInter().addElement(Newstemp.getTitre());
                                               this.jListInter.setModel(this.getModInter());
@@ -849,7 +849,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
     private void jButtonConfirmerReceptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmerReceptionActionPerformed
         
         
-        switch(tmpNewsEnvoye.getCat().getString())
+        switch(tmpNewsEnvoye.getCat().toString())
         {
             case "Internationnales" :    this.getModInter().addElement(tmpNewsEnvoye.getTitre());
                                       this.jListInter.setModel(this.getModInter());

@@ -163,13 +163,13 @@ public class loginWindow extends javax.swing.JFrame {
             }
             else
             {
-                throw new ExceptionLogin(1); //MAuvais password
+                throw new ExceptionLogin(ExceptionLogin.erreur.ERRPASS); //MAuvais password
             }
             
         }
         else
         {
-            throw new ExceptionLogin(0); //Mauvais identifiant 
+            throw new ExceptionLogin(ExceptionLogin.erreur.ERRLOGIN); //Mauvais identifiant 
         }
     }
     

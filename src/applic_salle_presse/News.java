@@ -48,7 +48,7 @@ public class News implements Identifiable,Serializable{
     public void removeMotcle(String m){_motcles.remove(m);}
     public ArrayList<String> getMotcles(){return _motcles;}
     public String getMotCles1String(){
-        String s = new String("");
+        String s = "";
         for(String mot : _motcles)
         {
             s = s.concat(mot+"-");
@@ -57,7 +57,9 @@ public class News implements Identifiable,Serializable{
         return s;
     }
     
-    
+    @Override public String toString(){
+        return "\nId = " + _idNews + "\nTitre = " + _titre + "\nCat = " + _cat;
+    }
     
     
 }

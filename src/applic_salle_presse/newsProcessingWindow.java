@@ -278,7 +278,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         if(modif)
         {
             mw2.listeNews.remove(newsASuppr);
-            switch(newsASuppr.getCat().getString())
+            switch(newsASuppr.getCat().toString())
             {
                 case "Internationnales" : mw2.getModInter().removeElement(newsASuppr.getTitre());
                                           mw2.jListInter.setModel(mw2.getModInter());
@@ -306,7 +306,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         {
             n.addMotcle(st.nextToken());        }
 
-        switch(tmpCat.getString())
+        switch(tmpCat.toString())
         {
             case "Internationnales" : mw2.getModInter().addElement(n.getTitre());
                                       mw2.jListInter.setModel(mw2.getModInter());

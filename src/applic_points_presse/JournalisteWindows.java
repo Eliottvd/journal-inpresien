@@ -339,7 +339,7 @@ public class JournalisteWindows extends javax.swing.JFrame {
   
            }
            tmps= listeJournalisteNews.get(i);
-           Envoye=tmps.getTitre()+"/"+tmps.getTexte()+"/"+tmps.getSource()+"/"+tmps.getCat().getString()+"/"+tmps.getImportance();
+           Envoye=tmps.getTitre()+"/"+tmps.getTexte()+"/"+tmps.getSource()+"/"+tmps.getCat().toString()+"/"+tmps.getImportance();
            
            System.out.println(Envoye);
           

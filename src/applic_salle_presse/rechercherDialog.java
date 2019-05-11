@@ -238,7 +238,7 @@ public class rechercherDialog extends javax.swing.JDialog {
         {
             if(listNews.get(i).getTitre().equalsIgnoreCase(jList1.getSelectedValue()))
             {
-                jLabelCat.setText(listNews.get(i).getCat().getString());
+                jLabelCat.setText(listNews.get(i).getCat().toString());
                 if(listNews.get(i).getImportance())
                     jLabelImportance.setText("Oui");
                 else

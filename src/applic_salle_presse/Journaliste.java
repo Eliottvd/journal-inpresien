@@ -10,5 +10,6 @@ package applic_salle_presse;
  * @author Eliott
  */
 public class Journaliste extends Personne {
-    int numCarteP; 
+    private int _numCarteP; 
+    
 }
