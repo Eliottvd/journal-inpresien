@@ -33,6 +33,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
      * Creates new form mainWindow
      */
     ArrayList<News> listeNews;
+   
             
     public mainWindow() {
         initComponents();
@@ -42,6 +43,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
     private DefaultListModel _modViePol; 
     private DefaultListModel _modInfosSports; 
     private DefaultListModel _modRagots;
+    public News tmpNewsEnvoye;
     private News Newstemp;
     public NetworkBasicServer NBS;
     private JournalisteWindows Jw;
@@ -63,6 +65,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
         setModViePol(new DefaultListModel());
         setModInfosSports(new DefaultListModel());
         setModRagots(new DefaultListModel());
+        
         
        
         
@@ -174,6 +177,9 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
         jLabelImg = new javax.swing.JLabel();
         jCheckBoxMessageRecu = new javax.swing.JCheckBox();
         jTextFieldTitrenotif = new javax.swing.JTextField();
+        jButtonLireNews = new javax.swing.JButton();
+        jButtonConfirmerReception = new javax.swing.JButton();
+        jButtonEnvoyeMessage = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -300,9 +306,31 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
             }
         });
 
+        jTextFieldTitrenotif.setEnabled(false);
         jTextFieldTitrenotif.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldTitrenotifActionPerformed(evt);
+            }
+        });
+
+        jButtonLireNews.setText("Lire News");
+        jButtonLireNews.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLireNewsActionPerformed(evt);
+            }
+        });
+
+        jButtonConfirmerReception.setText("Confirmer reception");
+        jButtonConfirmerReception.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmerReceptionActionPerformed(evt);
+            }
+        });
+
+        jButtonEnvoyeMessage.setText("Envoye message");
+        jButtonEnvoyeMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEnvoyeMessageActionPerformed(evt);
             }
         });
 
@@ -385,18 +413,30 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioInter)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(70, 70, 70)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioInter)
+                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(70, 70, 70))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButtonLireNews)
+                                .addGap(28, 28, 28)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioPolitique)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(61, 61, 61)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioPolitique)
+                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(61, 61, 61)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jRadioSport)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextFieldTitrenotif, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(55, 55, 55)
+                                .addComponent(jButtonConfirmerReception)))
+                        .addGap(64, 64, 64)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioSport))
-                        .addGap(77, 77, 77)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonEnvoyeMessage)
                             .addComponent(jRadioRagots)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(58, Short.MAX_VALUE))
@@ -433,12 +473,13 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
                                 .addComponent(jLabelImg, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(73, 73, 73))))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jCheckBoxMessageRecu)
-                .addGap(33, 33, 33)
-                .addComponent(jTextFieldTitrenotif, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
-                .addComponent(jToggleButtonEditer)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jCheckBoxMessageRecu))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(386, 386, 386)
+                        .addComponent(jToggleButtonEditer)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -477,23 +518,22 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jRadioInter)
                         .addComponent(jRadioPolitique)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBoxMessageRecu)
-                            .addComponent(jTextFieldTitrenotif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToggleButtonEditer)
-                        .addGap(31, 31, 31))))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5))
+                .addGap(18, 18, 18)
+                .addComponent(jToggleButtonEditer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxMessageRecu)
+                    .addComponent(jTextFieldTitrenotif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonLireNews)
+                    .addComponent(jButtonConfirmerReception)
+                    .addComponent(jButtonEnvoyeMessage))
+                .addContainerGap())
         );
 
         pack();
@@ -778,12 +818,6 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
         jlblDate2.setText(DateFormat.getDateTimeInstance(DateFormat.DATE_FIELD,DateFormat.LONG, Locale.FRANCE).format(new Date()));
     }//GEN-LAST:event_jlblDate2MouseClicked
 
-    private void jCheckBoxMessageRecuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMessageRecuActionPerformed
-        
-     
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBoxMessageRecuActionPerformed
-
     private void jMenuItemloginJournalisteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemloginJournalisteActionPerformed
          NBS=new NetworkBasicServer(60001, jCheckBoxMessageRecu);
          Jw=new JournalisteWindows();
@@ -799,6 +833,82 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
     private void jTextFieldTitrenotifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTitrenotifActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTitrenotifActionPerformed
+
+    private void jButtonLireNewsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLireNewsActionPerformed
+        // TODO add your handling code here:
+        if(jCheckBoxMessageRecu.isSelected())
+        {
+                       this.ActionReceive();
+
+            
+        }
+    }//GEN-LAST:event_jButtonLireNewsActionPerformed
+
+    private void jCheckBoxMessageRecuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMessageRecuActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxMessageRecuActionPerformed
+
+    private void jButtonConfirmerReceptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmerReceptionActionPerformed
+        
+        
+        switch(tmpNewsEnvoye.getCat())
+        {
+            case "Internationnales" :    this.getModInter().addElement(tmpNewsEnvoye.getTitre());
+                                      this.jListInter.setModel(this.getModInter());
+                                      this.listeNews.add(tmpNewsEnvoye);
+                                      this.jCBnews.removeItem(this.jCBnews.getSelectedItem());
+                                      
+                                      break;
+            case "Vie politique" :     this.getModViePol().addElement(tmpNewsEnvoye.getTitre());
+                                   this.jListViePol.setModel(this.getModViePol());
+                                   this.listeNews.add(tmpNewsEnvoye);
+                                   this.jCBnews.removeItem(this.jCBnews.getSelectedItem());
+                                  
+                                   break;
+                                   
+            case "Ragots et potins" :       this.getModRagots().addElement(tmpNewsEnvoye.getTitre());
+                                      this.jListRagots.setModel(this.getModRagots());
+                                      this.listeNews.add(tmpNewsEnvoye);
+                                      this.jCBnews.removeItem(this.jCBnews.getSelectedItem());
+                                      
+                                      break;
+            case "Sport" : this.getModInfosSports().addElement(tmpNewsEnvoye.getTitre());
+                            this.jListInfosSports.setModel(this.getModInfosSports());
+                            this.listeNews.add(tmpNewsEnvoye);
+                            this.jCBnews.removeItem(this.jCBnews.getSelectedItem());
+                            
+                            break;
+                                                                                    
+        }
+        String rep;
+        String sep;
+        String cheminNews;
+        rep = System.getProperty("user.home");
+        sep=System.getProperty("file.separator");
+        cheminNews=rep+sep+"News.ser";
+        try 
+        {
+            FileOutputStream Fos=new  FileOutputStream(cheminNews);
+            ObjectOutputStream oos= new ObjectOutputStream(Fos);
+            oos.writeObject(listeNews);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButtonConfirmerReceptionActionPerformed
+
+    private void jButtonEnvoyeMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoyeMessageActionPerformed
+        // TODO add your handling code here:
+        if(!(jTextFieldTitrenotif.getText().equals("")))
+        {
+            
+        }
+    }//GEN-LAST:event_jButtonEnvoyeMessageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -839,37 +949,35 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
     public void ActionReceive()
 {
    
-        try {
-            TimeUnit.MILLISECONDS.sleep(10);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+
     
 
         //System.out.println(NBS.getMessage());
         setMessageTraite(NBS.getMessage());
     
     
-         //System.out.println(getMessageTraite()+"YOYOYOYO");
+        // System.out.println(getMessageTraite()+"YOYOYOYO");
          String[] tmp;
          tmp=getMessageTraite().split("/");
          
          //System.out.println(tmp[5]+"JFEV?EPIVNIE");
-         News tmpNews=new News();
-         tmpNews.setTitre(tmp[0]);
-         tmpNews.setTexte(tmp[1]);
-         tmpNews.setSource(tmp[2]);
-         tmpNews.setCat(tmp[3]);
+         tmpNewsEnvoye=new News();
+         tmpNewsEnvoye.setTitre(tmp[0]);
+         tmpNewsEnvoye.setTexte(tmp[1]);
+         tmpNewsEnvoye.setSource(tmp[2]);
+         tmpNewsEnvoye.setCat(tmp[3]);
          if(tmp[4].equals("true"))
          {
-             tmpNews.setImportance(true);
+             tmpNewsEnvoye.setImportance(true);
          }
          else
          {
-             tmpNews.setImportance(false);
+             tmpNewsEnvoye.setImportance(false);
          }
-                  
-         jTextFieldTitrenotif.setText(tmpNews.getTitre());
+         
+       
+         jTextFieldTitrenotif.setText(tmpNewsEnvoye.getTitre());
     
 
     
@@ -877,6 +985,9 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup RadioButtonGroup;
     private javax.swing.JButton jButtonAjouter;
+    private javax.swing.JButton jButtonConfirmerReception;
+    private javax.swing.JButton jButtonEnvoyeMessage;
+    private javax.swing.JButton jButtonLireNews;
     private javax.swing.JButton jButtonSupprimer;
     private javax.swing.JButton jButtonTraiter;
     protected javax.swing.JComboBox<String> jCBnews;
