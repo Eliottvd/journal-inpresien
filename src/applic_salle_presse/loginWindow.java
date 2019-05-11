@@ -20,7 +20,7 @@ public class loginWindow extends javax.swing.JFrame {
     /**
      * Creates new form loginWindow
      */
-    Properties repertoire;
+    private final Properties repertoire;
     
     public loginWindow() {
         initComponents();

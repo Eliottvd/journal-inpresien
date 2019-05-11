@@ -20,7 +20,7 @@ public class JournalisteWindows extends javax.swing.JFrame {
     /**
      * Creates new form JournalisteWindows
      */
-    public String tmpCategorie;
+    public Categorie tmpCategorie;
     public ArrayList<News> listeJournalisteNews;
     public NetworkBasicClient NBC;
     private ArrayList<mainWindow> _framePrincipale;
@@ -301,24 +301,24 @@ public class JournalisteWindows extends javax.swing.JFrame {
 
     private void jRadioButtonPolitiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonPolitiqueActionPerformed
              
-        tmpCategorie="Politique";    
+        tmpCategorie=Categorie.POLITIQUE;    
 // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonPolitiqueActionPerformed
 
     private void jRadioButtonInternationalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonInternationalActionPerformed
-       tmpCategorie="International"; 
+       tmpCategorie=Categorie.INTERNATIONNAL; 
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonInternationalActionPerformed
 
     private void jRadioButtonSportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonSportsActionPerformed
             
-        tmpCategorie="Sports"; 
+        tmpCategorie=Categorie.SPORT; 
 
             // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonSportsActionPerformed
 
     private void jRadioButtonRagotPotinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonRagotPotinActionPerformed
-       tmpCategorie="RagotPotin"; 
+       tmpCategorie=Categorie.RAGOT; 
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonRagotPotinActionPerformed
 
@@ -339,7 +339,7 @@ public class JournalisteWindows extends javax.swing.JFrame {
   
            }
            tmps= listeJournalisteNews.get(i);
-           Envoye=tmps.getTitre()+"/"+tmps.getTexte()+"/"+tmps.getSource()+"/"+tmps.getCat()+"/"+tmps.getImportance();
+           Envoye=tmps.getTitre()+"/"+tmps.getTexte()+"/"+tmps.getSource()+"/"+tmps.getCat().getString()+"/"+tmps.getImportance();
            
            System.out.println(Envoye);
           

@@ -23,15 +23,17 @@ package applic_salle_presse;
 
 //Noninstanciable Categorie class
 public class Categorie { 
-    private final String nomCategorie; //Car jamais instaciable
+    private final String _nomCategorie; //Car jamais instaciable
     
     private Categorie(String nc)       //Empêche l'utilisation autre que par les variables static
     {
-        nomCategorie = nc;
+        _nomCategorie = nc;
     }
     
-    public static Categorie POLITIQUE = new Categorie("politique");
-    public static Categorie SPORT = new Categorie("sport");
-    public static Categorie INTERNATIONNAL = new Categorie("internationnal");
-    public static Categorie RAGOT = new Categorie("ragot");
+    public String getString(){ return _nomCategorie; }
+    
+    public static Categorie POLITIQUE = new Categorie("Vie politique");
+    public static Categorie SPORT = new Categorie("Sport");
+    public static Categorie INTERNATIONNAL = new Categorie("Internationnales");
+    public static Categorie RAGOT = new Categorie("Ragots et potins");
 }
