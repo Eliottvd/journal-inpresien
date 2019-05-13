@@ -123,7 +123,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
         }
         catch (FileNotFoundException e) 
         {
-            JOptionPane.showMessageDialog(new JFrame(), "Premiere fois", "First try", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), "Pas de donnée à charger", "Bienvenue", JOptionPane.INFORMATION_MESSAGE);
             String imgUrl="img\\ibra2.jpg";
             ImageIcon icone = new ImageIcon(imgUrl);
             jLabelImg.setIcon(icone);

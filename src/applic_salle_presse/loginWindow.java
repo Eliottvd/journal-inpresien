@@ -163,7 +163,7 @@ public class loginWindow extends javax.swing.JFrame {
             }
             else
             {
-                throw new ExceptionLogin(ExceptionLogin.erreur.ERRPASS); //MAuvais password
+                throw new ExceptionLogin(ExceptionLogin.erreur.ERRPASS); //Mauvais password
             }
             
         }

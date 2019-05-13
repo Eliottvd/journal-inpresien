@@ -5,6 +5,8 @@
  */
 package applic_salle_presse;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Eliott
@@ -22,7 +24,7 @@ package applic_salle_presse;
 
 
 //Noninstanciable Categorie class
-public class Categorie { 
+public class Categorie implements Serializable { 
     private final String _nomCategorie; //Car jamais instaciable
     public static Categorie POLITIQUE = new Categorie("Vie politique");
     public static Categorie SPORT = new Categorie("Sport");
