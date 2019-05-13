@@ -32,7 +32,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
     /**
      * Creates new form newsProcessingWindow
      */
-    String tmpCat;
+    Categorie tmpCat;
     mainWindow mw2;
     boolean modif;
     News newsASuppr;
@@ -43,7 +43,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         jTextNomNews.setText(titre);
         mw2 = (mainWindow)parent;
         this.setLocationRelativeTo(null);
-        tmpCat = "";
+        tmpCat = null;
         modif = false;
     }
     
@@ -264,7 +264,8 @@ public class newsProcessingWindow extends javax.swing.JDialog {
 
     private void jRadioSportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSportActionPerformed
         // TODO add your handling code here:
-        tmpCat = "Sport";
+        tmpCat = Categorie.SPORT
+                ;
     }//GEN-LAST:event_jRadioSportActionPerformed
 
     private void jButtonAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnulerActionPerformed
@@ -277,7 +278,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         if(modif)
         {
             mw2.listeNews.remove(newsASuppr);
-            switch(newsASuppr.getCat())
+            switch(newsASuppr.getCat().toString())
             {
                 case "Internationnales" : mw2.getModInter().removeElement(newsASuppr.getTitre());
                                           mw2.jListInter.setModel(mw2.getModInter());
@@ -305,7 +306,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         {
             n.addMotcle(st.nextToken());        }
 
-        switch(tmpCat)
+        switch(tmpCat.toString())
         {
             case "Internationnales" : mw2.getModInter().addElement(n.getTitre());
                                       mw2.jListInter.setModel(mw2.getModInter());
@@ -362,17 +363,17 @@ public class newsProcessingWindow extends javax.swing.JDialog {
 
     private void jRadioInterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioInterActionPerformed
         // TODO add your handling code here:
-        tmpCat = "Internationnales";
+        tmpCat = Categorie.INTERNATIONNAL;
     }//GEN-LAST:event_jRadioInterActionPerformed
 
     private void jRadioPolitiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioPolitiqueActionPerformed
         // TODO add your handling code here:
-        tmpCat = "Vie politique";
+        tmpCat = Categorie.POLITIQUE;
     }//GEN-LAST:event_jRadioPolitiqueActionPerformed
 
     private void jRadioRagotsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioRagotsActionPerformed
         // TODO add your handling code here:
-        tmpCat = "Ragots et potins";
+        tmpCat = Categorie.RAGOT;
     }//GEN-LAST:event_jRadioRagotsActionPerformed
 
     /**

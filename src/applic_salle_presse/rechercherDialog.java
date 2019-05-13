@@ -7,8 +7,6 @@ package applic_salle_presse;
 
 import java.util.ArrayList;
 import java.util.Vector;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -240,7 +238,7 @@ public class rechercherDialog extends javax.swing.JDialog {
         {
             if(listNews.get(i).getTitre().equalsIgnoreCase(jList1.getSelectedValue()))
             {
-                jLabelCat.setText(listNews.get(i).getCat());
+                jLabelCat.setText(listNews.get(i).getCat().toString());
                 if(listNews.get(i).getImportance())
                     jLabelImportance.setText("Oui");
                 else

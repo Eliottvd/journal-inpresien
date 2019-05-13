@@ -11,20 +11,28 @@ package applic_salle_presse;
  */
 public class ExceptionLogin extends Exception {
 
-    private String msgErr;
-    public ExceptionLogin(int i) {
-        switch(i)
+    private String _msgErr;
+    static public enum erreur{
+        ERRLOGIN,
+        ERRPASS;
+    };
+    
+    public ExceptionLogin(erreur e) {
+        switch(e)
         {
-            case 0 : msgErr = "Login inconnu";
+            case ERRLOGIN : _msgErr = "Login inconnu";
                 break;
-            case 1 : msgErr = "Mauvais mot de passe";
+            case ERRPASS : _msgErr = "Mauvais mot de passe";
                 break;
         }
     }
     
     @Override
     public String getMessage(){
-        return msgErr;
-    }    
+        return _msgErr;
+    }
+    @Override public String toString(){
+        return _msgErr;
+    }
     
 }

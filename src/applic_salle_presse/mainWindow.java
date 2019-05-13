@@ -16,10 +16,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import java.util.Properties;
 import java.io.*;
-import java.util.StringTokenizer;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import network.NetworkBasicServer;
@@ -88,7 +85,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
             for(int i=0;i<listeNews.size();i++)
             {
                 Newstemp=listeNews.get(i);
-                switch(Newstemp.getCat())
+                switch(Newstemp.getCat().toString())
                 {
                     case "Internationnales" : this.getModInter().addElement(Newstemp.getTitre());
                                               this.jListInter.setModel(this.getModInter());
@@ -126,7 +123,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
         }
         catch (FileNotFoundException e) 
         {
-            JOptionPane.showMessageDialog(new JFrame(), "Premiere fois", "First try", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(), "Pas de donnée à charger", "Bienvenue", JOptionPane.INFORMATION_MESSAGE);
             String imgUrl="img\\ibra2.jpg";
             ImageIcon icone = new ImageIcon(imgUrl);
             jLabelImg.setIcon(icone);
@@ -852,7 +849,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
     private void jButtonConfirmerReceptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmerReceptionActionPerformed
         
         
-        switch(tmpNewsEnvoye.getCat())
+        switch(tmpNewsEnvoye.getCat().toString())
         {
             case "Internationnales" :    this.getModInter().addElement(tmpNewsEnvoye.getTitre());
                                       this.jListInter.setModel(this.getModInter());
@@ -948,11 +945,6 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
     @Override
     public void ActionReceive()
 {
-   
-        
-
-    
-
         //System.out.println(NBS.getMessage());
         setMessageTraite(NBS.getMessage());
     
@@ -966,7 +958,19 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
          tmpNewsEnvoye.setTitre(tmp[0]);
          tmpNewsEnvoye.setTexte(tmp[1]);
          tmpNewsEnvoye.setSource(tmp[2]);
-         tmpNewsEnvoye.setCat(tmp[3]);
+         switch(tmp[3])
+         {
+            case "Internationnales" : tmpNewsEnvoye.setCat(Categorie.INTERNATIONNAL);
+                                      break;
+            case "Vie politique" : tmpNewsEnvoye.setCat(Categorie.POLITIQUE);
+                                   break;
+                                   
+            case "Ragots et potins" : tmpNewsEnvoye.setCat(Categorie.RAGOT);
+                                      break;
+            case "Sport" : tmpNewsEnvoye.setCat(Categorie.SPORT);
+                           break;
+         }
+         
          if(tmp[4].equals("true"))
          {
              tmpNewsEnvoye.setImportance(true);

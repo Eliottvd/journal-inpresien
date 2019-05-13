@@ -20,7 +20,7 @@ public class loginWindow extends javax.swing.JFrame {
     /**
      * Creates new form loginWindow
      */
-    Properties repertoire;
+    private final Properties repertoire;
     
     public loginWindow() {
         initComponents();
@@ -163,13 +163,13 @@ public class loginWindow extends javax.swing.JFrame {
             }
             else
             {
-                throw new ExceptionLogin(1); //MAuvais password
+                throw new ExceptionLogin(ExceptionLogin.erreur.ERRPASS); //Mauvais password
             }
             
         }
         else
         {
-            throw new ExceptionLogin(0); //Mauvais identifiant 
+            throw new ExceptionLogin(ExceptionLogin.erreur.ERRLOGIN); //Mauvais identifiant 
         }
     }
     
