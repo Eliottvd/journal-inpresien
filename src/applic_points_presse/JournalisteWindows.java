@@ -306,19 +306,19 @@ public class JournalisteWindows extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonPolitiqueActionPerformed
 
     private void jRadioButtonInternationalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonInternationalActionPerformed
-       tmpCategorie="International"; 
+       tmpCategorie="Internationnales"; 
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonInternationalActionPerformed
 
     private void jRadioButtonSportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonSportsActionPerformed
             
-        tmpCategorie="Sports"; 
+        tmpCategorie="Sport"; 
 
             // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonSportsActionPerformed
 
     private void jRadioButtonRagotPotinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonRagotPotinActionPerformed
-       tmpCategorie="RagotPotin"; 
+       tmpCategorie="Ragots et potins"; 
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonRagotPotinActionPerformed
 
@@ -344,7 +344,7 @@ public class JournalisteWindows extends javax.swing.JFrame {
            System.out.println(Envoye);
           
            NBC.sendStringWithoutWaiting(Envoye);
-           getPrincipale().ActionReceive();
+           
 
        }
        else
