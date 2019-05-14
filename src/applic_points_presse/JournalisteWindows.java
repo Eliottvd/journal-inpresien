@@ -7,6 +7,8 @@ package applic_points_presse;
 import applic_salle_presse.*;
 import java.util.*;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import network.NetworkBasicClient;
@@ -25,24 +27,36 @@ public class JournalisteWindows extends javax.swing.JFrame {
     public Categorie tmpCategorie;
     public ArrayList<News> listeJournalisteNews;
     public NetworkBasicClient NBC;
-    private ArrayList<mainWindow> _framePrincipale;
-    public void setPrincipale(mainWindow m)
+    private ArrayList<Notifmessage> _framePrincipale;
+    public void setPrincipale(ArrayList<Notifmessage> m)
     {
-        _framePrincipale=new ArrayList<mainWindow>();
-        _framePrincipale.add(m);
+        _framePrincipale=(m);
     }
-    public mainWindow getPrincipale(){return _framePrincipale.get(0);}
+    public void addListener(Notifmessage k)
+    {
+        getPrincipale().add(k);
+    }
+    public ArrayList<Notifmessage> getPrincipale(){return _framePrincipale;}
     
+     private NotifyNewsListener _mainPrincipale;
+     
+     public void setMainPrincipale(NotifyNewsListener n){_mainPrincipale=n;}
+     
+     public NotifyNewsListener getMainPrincipale(){return _mainPrincipale;}
      
     
     
     
    
     
-    public JournalisteWindows() {
+    public JournalisteWindows(NotifyNewsListener no) {
         initComponents();
+        _framePrincipale=new ArrayList<Notifmessage>();
         listeJournalisteNews=new ArrayList<News>();
-        NBC=new NetworkBasicClient("localhost", 60001);
+        
+        setMainPrincipale(no);
+        
+        
         
     }
 
@@ -80,6 +94,9 @@ public class JournalisteWindows extends javax.swing.JFrame {
         jLabelReponse = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButtonEnregistrer = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nouvelle News");
@@ -169,6 +186,11 @@ public class JournalisteWindows extends javax.swing.JFrame {
         jLabelCompteurNews.setText("0");
 
         jCheckBox1.setText("News envoyé");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Reponse:");
 
@@ -182,6 +204,20 @@ public class JournalisteWindows extends javax.swing.JFrame {
                 jButtonEnregistrerActionPerformed(evt);
             }
         });
+
+        jMenu1.setText("Connexion");
+
+        jMenuItem1.setText("Demarrer reception");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -255,11 +291,9 @@ public class JournalisteWindows extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldTexte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(53, 53, 53))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)))
+                            .addComponent(jLabel3)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
                 .addComponent(jRadioButtonPolitique)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jRadioButtonInternational)
@@ -272,7 +306,6 @@ public class JournalisteWindows extends javax.swing.JFrame {
                         .addGap(2, 2, 2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelReponse))
@@ -331,6 +364,8 @@ public class JournalisteWindows extends javax.swing.JFrame {
     private void jButtonEnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoyerActionPerformed
        News tmps=new News();
        String Envoye =new String();
+       
+       
         
        if(jTableNews.getRowSelectionAllowed())
        {
@@ -344,9 +379,34 @@ public class JournalisteWindows extends javax.swing.JFrame {
            Envoye=tmps.getTitre()+"/"+tmps.getTexte()+"/"+tmps.getSource()+"/"+tmps.getCat().toString()+"/"+tmps.getImportance();
            
            System.out.println(Envoye);
+           
+
+           
+           
           
+           
+           Event1News EvNews1=new Event1News();
+           EvNews1.setMessageTraite(Envoye);
+           EvNews1.setLocalite("Charleroi");
+           
+           EvNews1.setMainPrincipale(getMainPrincipale());
+           
            NBC.sendStringWithoutWaiting(Envoye);
            
+                      
+            try 
+            {
+                Thread.sleep(1000, 0);
+            } catch (InterruptedException ex) 
+            {
+                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+           for(i=0;i<getPrincipale().size();i++)
+               getPrincipale().get(i).ActionReceive(EvNews1);
+
+
+           // NBC.setEndSending();
 
        }
        else
@@ -364,6 +424,7 @@ public class JournalisteWindows extends javax.swing.JFrame {
         newsJournaliste.setImportance(jCheckBoxImportant.isSelected());
         newsJournaliste.setTexte(jTextFieldTexte.getText());
         newsJournaliste.setSource(jTextFieldJournaliste.getText());
+        NBC=new NetworkBasicClient("localhost", 60001);
         
         listeJournalisteNews.add(newsJournaliste);
         int i;
@@ -404,6 +465,15 @@ public class JournalisteWindows extends javax.swing.JFrame {
         //newsJournaliste.sets
     }//GEN-LAST:event_jButtonEnregistrerActionPerformed
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+               Destinataire=new ReceivingBean(jCheckBox1);
+                addListener(Destinataire);// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -434,16 +504,14 @@ public class JournalisteWindows extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JournalisteWindows().setVisible(true);
+                NotifyNewsListener nodefaut=new mainWindow();
+                new JournalisteWindows(nodefaut).setVisible(true);
             }
         });
     }
     
-    public void Addliste(mainWindow m)
-    {
-        setPrincipale(m);
-    }
 
+    public ReceivingBean Destinataire;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -460,6 +528,9 @@ public class JournalisteWindows extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelCompteurNews;
     private javax.swing.JLabel jLabelReponse;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JRadioButton jRadioButtonInternational;
     private javax.swing.JRadioButton jRadioButtonPolitique;
     private javax.swing.JRadioButton jRadioButtonRagotPotin;

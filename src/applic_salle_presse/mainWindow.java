@@ -24,7 +24,7 @@ import network.NetworkBasicServer;
  *
  * @author Eliott
  */
-public class mainWindow extends javax.swing.JFrame implements Notifmessage{
+public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener{
 
     /**
      * Creates new form mainWindow
@@ -42,18 +42,42 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
     private DefaultListModel _modRagots;
     public News tmpNewsEnvoye;
     private News Newstemp;
-    public NetworkBasicServer NBS;
+   // public NetworkBasicServer NBS;
     private JournalisteWindows Jw;
-    private String _messageTraite;
-    public void setMessageTraite(String m){_messageTraite=new String();
-        _messageTraite=m;}
-    public String getMessageTraite(){return _messageTraite;}
+    private String _messagerecu;
+    public void setMessageRecu(String m){_messagerecu=m;}
+    public String getMessageRecu(){return _messagerecu;}
+    
+    private ArrayList<StoreNewsListener> _storeNewsListeners;
+    public void setStoreNewsListener(ArrayList<StoreNewsListener> m)
+    {
+       _storeNewsListeners=(m);
+    }
+    public void addStoreNewsListener(StoreNewsListener k)
+    {
+        getStoreNewsListener().add(k);
+    }
+    public ArrayList<StoreNewsListener> getStoreNewsListener(){return _storeNewsListeners;}
+    
+    private ArrayList<NewsCounterListener> _newsCounterListeners;
+    public void setNewsCounterListener(ArrayList<NewsCounterListener> m)
+    {
+       _newsCounterListeners=(m);
+    }
+    public void addNewsCounterListener(NewsCounterListener k)
+    {
+        getNewsCounterListener().add(k);
+    }
+    public ArrayList<NewsCounterListener> getNewsCounterListener(){return _newsCounterListeners;}
+
     
     public mainWindow(String nom) throws ClassNotFoundException{
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Journal");
         listeNews = new ArrayList<News>();
+        _storeNewsListeners=new ArrayList<StoreNewsListener>();
+        _newsCounterListeners=new ArrayList<NewsCounterListener>();
         jlblJournaliste.setText(nom);
         Date maintenant = new Date();
         String maDate = DateFormat.getDateTimeInstance(DateFormat.DATE_FIELD,DateFormat.LONG, Locale.FRANCE).format(maintenant);
@@ -62,7 +86,9 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
         setModViePol(new DefaultListModel());
         setModInfosSports(new DefaultListModel());
         setModRagots(new DefaultListModel());
-        
+        tmpNewsEnvoye1 =new News();
+        //NBS=new NetworkBasicServer(60003, jCheckBoxMessageRecu);
+        _messagerecu=new String();
         
        
         
@@ -80,7 +106,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
             ObjectInputStream ois= new ObjectInputStream(Fis);
 
             listeNews=(ArrayList<News>)ois.readObject();
-            System.out.println(listeNews.size());
+            //System.out.println(listeNews.size());
          //du ajouter throws ClassNotFoundException a la ligne 40
             for(int i=0;i<listeNews.size();i++)
             {
@@ -110,7 +136,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
                     default : JOptionPane.showMessageDialog(new JFrame(), "Veuillez choisir une catégorie", 
                             "Information manquante", JOptionPane.ERROR_MESSAGE);                                                                              
                 }
-                        System.out.println(i);
+                        //System.out.println(i);
             }
             
         }
@@ -177,6 +203,8 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
         jButtonLireNews = new javax.swing.JButton();
         jButtonConfirmerReception = new javax.swing.JButton();
         jButtonEnvoyeMessage = new javax.swing.JButton();
+        jLabelStockNews = new javax.swing.JLabel();
+        jLabelCompteurNews = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -331,6 +359,10 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
             }
         });
 
+        jLabelStockNews.setText("Stock de News: ");
+
+        jLabelCompteurNews.setText("0");
+
         jMenu2.setText("Utilisateurs");
 
         jMenuItem2.setText("Logout");
@@ -445,17 +477,9 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldAjouterNews)
-                            .addComponent(jlblJournaliste, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                            .addComponent(jlblJournaliste, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                             .addComponent(jCBnews, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jlblNomJournaliste, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlblDate)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlblDate2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,7 +492,21 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
                                         .addComponent(jButtonSupprimer)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addComponent(jLabelImg, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(73, 73, 73))))))
+                                .addGap(73, 73, 73))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jlblNomJournaliste, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jlblDate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelStockNews)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabelCompteurNews, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jlblDate2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap())))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -522,7 +560,10 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5))
                 .addGap(18, 18, 18)
-                .addComponent(jToggleButtonEditer)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jToggleButtonEditer)
+                    .addComponent(jLabelStockNews)
+                    .addComponent(jLabelCompteurNews))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBoxMessageRecu)
@@ -608,7 +649,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
         // TODO add your handling code here:
         if(jCBnews.getSelectedItem() != null)
         {
-            newsProcessingWindow npw = new newsProcessingWindow(this, true,(String)jCBnews.getSelectedItem());
+            newsProcessingWindow npw = new newsProcessingWindow(this, true,(String)jCBnews.getSelectedItem(),jLabelCompteurNews);
             npw.setVisible(true);
             
         }
@@ -685,7 +726,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
                 listeNews.forEach((ntmp)->{
                 if(ntmp.getTitre().equals(jListInter.getSelectedValue()))
                 {
-                    newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp);
+                    newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp,jLabelCompteurNews);
                     npWin.setVisible(true);
                     npWin.jTextNomNews.setText(ntmp.getTitre());
                     npWin.jTextComments.setText(ntmp.getTexte());
@@ -707,7 +748,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
                 listeNews.forEach((ntmp)->{
                 if(ntmp.getTitre().equals(jListViePol.getSelectedValue()))
                 {
-                    newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp);
+                    newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp,jLabelCompteurNews);
                     npWin.setVisible(true);
                     npWin.jTextNomNews.setText(ntmp.getTitre());
                     npWin.jTextComments.setText(ntmp.getTexte());
@@ -731,7 +772,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
                 listeNews.forEach((ntmp)->{
                 if(ntmp.getTitre().equals(jListInfosSports.getSelectedValue()))
                 {
-                    newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp);
+                    newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp,jLabelCompteurNews);
                     npWin.setVisible(true);
                     npWin.jTextNomNews.setText(ntmp.getTitre());
                     npWin.jTextComments.setText(ntmp.getTexte());
@@ -755,7 +796,7 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
                 listeNews.forEach((ntmp)->{
                 if(ntmp.getTitre().equals(jListRagots.getSelectedValue()))
                 {
-                    newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp);
+                    newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp,jLabelCompteurNews);
                     npWin.setVisible(true);
                     npWin.jTextNomNews.setText(ntmp.getTitre());
                     npWin.jTextComments.setText(ntmp.getTexte());
@@ -816,9 +857,9 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
     }//GEN-LAST:event_jlblDate2MouseClicked
 
     private void jMenuItemloginJournalisteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemloginJournalisteActionPerformed
-         NBS=new NetworkBasicServer(60001, jCheckBoxMessageRecu);
-         Jw=new JournalisteWindows();
-         Jw.Addliste(this);
+         //NBS=new NetworkBasicServer(60001, jCheckBoxMessageRecu);
+         Jw=new JournalisteWindows(this);
+         //Jw.addListener(this);
          Jw.setVisible(true);
          
          
@@ -833,12 +874,12 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
 
     private void jButtonLireNewsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLireNewsActionPerformed
         // TODO add your handling code here:
-        if(jCheckBoxMessageRecu.isSelected())
+       /* if(jCheckBoxMessageRecu.isSelected())
         {
                        this.ActionReceive();
 
             
-        }
+        }*/
     }//GEN-LAST:event_jButtonLireNewsActionPerformed
 
     private void jCheckBoxMessageRecuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMessageRecuActionPerformed
@@ -847,53 +888,35 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
     }//GEN-LAST:event_jCheckBoxMessageRecuActionPerformed
 
     private void jButtonConfirmerReceptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmerReceptionActionPerformed
+    
+        News stockernews=new News();
+        stockernews=tmpNewsEnvoye1;
+       // System.out.println(stockernews.getTitre());
+        StoreNewsEvent storeNewsEvent =new StoreNewsEvent();
+        storeNewsEvent.setStoreNews(stockernews);
+        storeNewsEvent.setRefWindow(this);
         
         
-        switch(tmpNewsEnvoye.getCat().toString())
+        StoringNewsBeans stockNewsBeans=new StoringNewsBeans();
+        addStoreNewsListener(stockNewsBeans);
+        for(int i=0;i<getStoreNewsListener().size();i++)
         {
-            case "Internationnales" :    this.getModInter().addElement(tmpNewsEnvoye.getTitre());
-                                      this.jListInter.setModel(this.getModInter());
-                                      this.listeNews.add(tmpNewsEnvoye);
-                                      this.jCBnews.removeItem(this.jCBnews.getSelectedItem());
-                                      
-                                      break;
-            case "Vie politique" :     this.getModViePol().addElement(tmpNewsEnvoye.getTitre());
-                                   this.jListViePol.setModel(this.getModViePol());
-                                   this.listeNews.add(tmpNewsEnvoye);
-                                   this.jCBnews.removeItem(this.jCBnews.getSelectedItem());
-                                  
-                                   break;
-                                   
-            case "Ragots et potins" :       this.getModRagots().addElement(tmpNewsEnvoye.getTitre());
-                                      this.jListRagots.setModel(this.getModRagots());
-                                      this.listeNews.add(tmpNewsEnvoye);
-                                      this.jCBnews.removeItem(this.jCBnews.getSelectedItem());
-                                      
-                                      break;
-            case "Sport" : this.getModInfosSports().addElement(tmpNewsEnvoye.getTitre());
-                            this.jListInfosSports.setModel(this.getModInfosSports());
-                            this.listeNews.add(tmpNewsEnvoye);
-                            this.jCBnews.removeItem(this.jCBnews.getSelectedItem());
-                            
-                            break;
-                                                                                    
+            getStoreNewsListener().get(i).storeNewsDetected(storeNewsEvent);
         }
-        String rep;
-        String sep;
-        String cheminNews;
-        rep = System.getProperty("user.home");
-        sep=System.getProperty("file.separator");
-        cheminNews=rep+sep+"News.ser";
-        try 
+        
+        NewsCounterEvent comptNewsCounterEvent=new NewsCounterEvent();
+        comptNewsCounterEvent.setRefWindowCounter(this);
+        
+        NewsCounterBean compteurBean=new NewsCounterBean(jLabelCompteurNews);
+        addNewsCounterListener(compteurBean);
+        
+        for(int i=0;i<getNewsCounterListener().size();i++)
         {
-            FileOutputStream Fos=new  FileOutputStream(cheminNews);
-            ObjectOutputStream oos= new ObjectOutputStream(Fos);
-            oos.writeObject(listeNews);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+            getNewsCounterListener().get(i).ajoutCompteur(comptNewsCounterEvent);
+        }
+        
+       
+
 
         // TODO add your handling code here:
         
@@ -941,51 +964,69 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
             }
         });
     }
-  
-    @Override
-    public void ActionReceive()
-{
-        //System.out.println(NBS.getMessage());
-        setMessageTraite(NBS.getMessage());
-    
-    
-        // System.out.println(getMessageTraite()+"YOYOYOYO");
-         String[] tmp;
-         tmp=getMessageTraite().split("/");
-         
-         //System.out.println(tmp[5]+"JFEV?EPIVNIE");
-         tmpNewsEnvoye=new News();
-         tmpNewsEnvoye.setTitre(tmp[0]);
-         tmpNewsEnvoye.setTexte(tmp[1]);
-         tmpNewsEnvoye.setSource(tmp[2]);
-         switch(tmp[3])
-         {
-            case "Internationnales" : tmpNewsEnvoye.setCat(Categorie.INTERNATIONNAL);
-                                      break;
-            case "Vie politique" : tmpNewsEnvoye.setCat(Categorie.POLITIQUE);
-                                   break;
-                                   
-            case "Ragots et potins" : tmpNewsEnvoye.setCat(Categorie.RAGOT);
-                                      break;
-            case "Sport" : tmpNewsEnvoye.setCat(Categorie.SPORT);
-                           break;
-         }
-         
-         if(tmp[4].equals("true"))
-         {
-             tmpNewsEnvoye.setImportance(true);
-         }
-         else
-         {
-             tmpNewsEnvoye.setImportance(false);
-         }
-         
-       
-         jTextFieldTitrenotif.setText(tmpNewsEnvoye.getTitre());
-    
 
+    @Override
     
-}
+    public void notificationNewsDetected(NotifyNewsEvent NtNE)
+    {
+        
+        
+       /* try 
+        {
+            Thread.sleep(1000, 0);
+        } catch (InterruptedException ex) 
+        {
+            Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //System.out.println(NBS.getMessage());*/
+        
+        JOptionPane.showMessageDialog(new JFrame(), "Une news est arrivée", "Notification", JOptionPane.INFORMATION_MESSAGE);
+        
+       // setMessageRecu(NBS.getMessage());
+       
+        setMessageRecu(NtNE.getMessageRecu());
+        
+        String [] tmp;
+        tmp=getMessageRecu().split("/");
+        
+        
+        
+        tmpNewsEnvoye1.setTitre(tmp[0]);
+        tmpNewsEnvoye1.setTexte(tmp[1]);
+        tmpNewsEnvoye1.setSource(tmp[2]);
+        
+        System.out.println(tmp[3]);
+        
+        switch(tmp[3])
+        {
+            
+            case  "Internationnales"  : tmpNewsEnvoye1 . setCat ( Categorie . INTERNATIONNAL );
+                System.out.println("INTERRRRRR");
+                                            break;
+            case  "Vie politique"  : tmpNewsEnvoye1 . setCat ( Categorie . POLITIQUE );
+                System.out.println("POLITIIIIIIIIQUE");
+                                            break;
+                                   
+            case  "Ragots et potins"  : tmpNewsEnvoye1 . setCat ( Categorie . RAGOT );
+            System.out.println("RAGOOOOOOOOt");
+                                           break;
+            case  "Sport"  : tmpNewsEnvoye1 . setCat ( Categorie . SPORT );
+                                        System.out.println("SPPPPPPPPPPPORT");
+                                            break;    
+        }
+        if(tmp[4].equals("true"))
+        {
+            tmpNewsEnvoye1.setImportance(true);
+        }
+        else
+        {
+            tmpNewsEnvoye1.setImportance(false);
+        }
+        
+        jTextFieldTitrenotif.setText(tmpNewsEnvoye1.getTitre());
+    }
+  
+    public News tmpNewsEnvoye1;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup RadioButtonGroup;
     private javax.swing.JButton jButtonAjouter;
@@ -996,7 +1037,9 @@ public class mainWindow extends javax.swing.JFrame implements Notifmessage{
     private javax.swing.JButton jButtonTraiter;
     protected javax.swing.JComboBox<String> jCBnews;
     private javax.swing.JCheckBox jCheckBoxMessageRecu;
+    private javax.swing.JLabel jLabelCompteurNews;
     private javax.swing.JLabel jLabelImg;
+    private javax.swing.JLabel jLabelStockNews;
     protected javax.swing.JList<String> jListInfosSports;
     protected javax.swing.JList<String> jListInter;
     protected javax.swing.JList<String> jListRagots;

@@ -36,8 +36,35 @@ public class newsProcessingWindow extends javax.swing.JDialog {
     mainWindow mw2;
     boolean modif;
     News newsASuppr;
+    
+    private javax.swing.JLabel _affcompteur2;
+    public javax.swing.JLabel getAffCompteur2(){return _affcompteur2;}
+    public void setAffCompteur2 (javax.swing.JLabel aff){_affcompteur2=aff;}
+    
+    
+    private ArrayList<StoreNewsListener> _storeNewsListeners;
+    public void setStoreNewsListener(ArrayList<StoreNewsListener> m)
+    {
+       _storeNewsListeners=(m);
+    }
+    public void addStoreNewsListener(StoreNewsListener k)
+    {
+        getStoreNewsListener().add(k);
+    }
+    public ArrayList<StoreNewsListener> getStoreNewsListener(){return _storeNewsListeners;}
+    
+    private ArrayList<NewsCounterListener> _newsCounterListeners;
+    public void setNewsCounterListener(ArrayList<NewsCounterListener> m)
+    {
+       _newsCounterListeners=(m);
+    }
+    public void addNewsCounterListener(NewsCounterListener k)
+    {
+        getNewsCounterListener().add(k);
+    }
+    public ArrayList<NewsCounterListener> getNewsCounterListener(){return _newsCounterListeners;}
        
-    public newsProcessingWindow(java.awt.Frame parent, boolean modal, String titre) { 
+    public newsProcessingWindow(java.awt.Frame parent, boolean modal, String titre,javax.swing.JLabel affcompteur) { 
         super(parent, modal);
         initComponents();
         jTextNomNews.setText(titre);
@@ -45,9 +72,12 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         tmpCat = null;
         modif = false;
+        _storeNewsListeners=new ArrayList<StoreNewsListener>();
+        _newsCounterListeners=new ArrayList<NewsCounterListener>();
+        setAffCompteur2(affcompteur);
     }
     
-    public newsProcessingWindow(java.awt.Frame parent, boolean modal, News n)
+    public newsProcessingWindow(java.awt.Frame parent, boolean modal, News n,javax.swing.JLabel affcompteur)
     {
         super(parent, modal);
         initComponents();
@@ -56,6 +86,9 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         modif = true;
         newsASuppr = n;
         jButtonAjouter.setText("Modifier");
+        _storeNewsListeners=new ArrayList<StoreNewsListener>();
+        _newsCounterListeners=new ArrayList<NewsCounterListener>();
+        setAffCompteur2(affcompteur);
     }
 
     /**
@@ -275,6 +308,8 @@ public class newsProcessingWindow extends javax.swing.JDialog {
 
     private void jButtonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterActionPerformed
         // TODO add your handling code here:
+
+        
         if(modif)
         {
             mw2.listeNews.remove(newsASuppr);
@@ -300,63 +335,43 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         n.setCat(tmpCat);
         n.setImportance(jCheckBox1.isSelected());
         n.setTexte(jTextComments.getText());
-        
+        //System.out.println(n.toString());
         StringTokenizer st = new StringTokenizer(jTextMotsCles.getText(), "-");
         while(st.hasMoreTokens())
         {
-            n.addMotcle(st.nextToken());        }
-
-        switch(tmpCat.toString())
-        {
-            case "Internationnales" : mw2.getModInter().addElement(n.getTitre());
-                                      mw2.jListInter.setModel(mw2.getModInter());
-                                      mw2.listeNews.add(n);
-                                      mw2.jCBnews.removeItem(mw2.jCBnews.getSelectedItem());
-                                      this.dispose();
-                                      break;
-            case "Vie politique" : mw2.getModViePol().addElement(n.getTitre());
-                                   mw2.jListViePol.setModel(mw2.getModViePol());
-                                   mw2.listeNews.add(n);
-                                   mw2.jCBnews.removeItem(mw2.jCBnews.getSelectedItem());
-                                   this.dispose();
-                                   break;
-            case "Ragots et potins" : mw2.getModRagots().addElement(n.getTitre());
-                                      mw2.jListRagots.setModel(mw2.getModRagots());
-                                      mw2.listeNews.add(n);
-                                      mw2.jCBnews.removeItem(mw2.jCBnews.getSelectedItem());
-                                      this.dispose();
-                                      break;
-            case "Sport" : mw2.getModInfosSports().addElement(n.getTitre());
-                           mw2.jListInfosSports.setModel(mw2.getModInfosSports());
-                           mw2.listeNews.add(n);
-                           mw2.jCBnews.removeItem(mw2.jCBnews.getSelectedItem());
-                           this.dispose();
-                           break;
-            default : JOptionPane.showMessageDialog(new JFrame(), "Veuillez choisir une catégorie", 
-                    "Information manquante", JOptionPane.ERROR_MESSAGE);                                                                              
+            n.addMotcle(st.nextToken());       
         }
-        String rep;
-        String sep;
-        String cheminNews;
-        rep = System.getProperty("user.home");
-        sep=System.getProperty("file.separator");
-        cheminNews=rep+sep+"News.ser";
-        try 
-        {
-            FileOutputStream Fos=new  FileOutputStream(cheminNews);
-            ObjectOutputStream oos= new ObjectOutputStream(Fos);
-            oos.writeObject(mw2.listeNews);
-        } 
-        catch (FileNotFoundException e) 
-        {
-             JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "2 !", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException ex) {
-            Logger.getLogger(newsProcessingWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        System.out.println(n.getCat().toString());
+        
 
-                
+       // System.out.println(stockernews.getTitre());
+        StoreNewsEvent storeNewsEvent =new StoreNewsEvent();
+        storeNewsEvent.setStoreNews(n);
+        storeNewsEvent.setRefWindow(mw2);
         
         
+        StoringNewsBeans stockNewsBeans=new StoringNewsBeans();
+        addStoreNewsListener(stockNewsBeans);
+        for(int i=0;i<getStoreNewsListener().size();i++)
+        {
+            getStoreNewsListener().get(i).storeNewsDetected(storeNewsEvent);
+        }
+        
+        
+        
+        NewsCounterEvent comptNewsCounterEvent=new NewsCounterEvent();
+        comptNewsCounterEvent.setRefWindowCounter(mw2);
+        
+        NewsCounterBean compteurBean=new NewsCounterBean(getAffCompteur2());
+        addNewsCounterListener(compteurBean);
+        
+        for(int i=0;i<getNewsCounterListener().size();i++)
+        {
+            getNewsCounterListener().get(i).ajoutCompteur(comptNewsCounterEvent);
+        }
+        
+        this.dispose();
 
         
     }//GEN-LAST:event_jButtonAjouterActionPerformed
@@ -406,7 +421,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                newsProcessingWindow dialog = new newsProcessingWindow(new javax.swing.JFrame(), true, "titre");
+                //newsProcessingWindow dialog = new newsProcessingWindow(new javax.swing.JFrame(), true, "titre",get);
             }
         });
     }

@@ -9,8 +9,7 @@ package applic_salle_presse;
  *
  * @author Admin
  */
-public interface Notifmessage {
+public interface StoreNewsListener {
     
-    public void ActionReceive(Event1News e);
-    
+    public void storeNewsDetected(StoreNewsEvent se);
 }

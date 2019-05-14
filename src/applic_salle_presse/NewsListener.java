@@ -9,8 +9,8 @@ package applic_salle_presse;
  *
  * @author Admin
  */
-public interface Notifmessage {
+public interface NewsListener {
     
-    public void ActionReceive(Event1News e);
+    public void newsDecteced(NewsEvent e);
     
 }
