@@ -5,6 +5,7 @@
  */
 package applic_salle_presse;
 
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class StoringNewsBeans implements StoreNewsListener{
         
     }
     
+
     @Override
     
      public void storeNewsDetected(StoreNewsEvent se)

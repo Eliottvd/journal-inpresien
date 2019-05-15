@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package applic_salle_presse;
+package applic_points_presse;
 
 /**
  *
  * @author Admin
  */
-public interface NewsCounterListener {
+public interface RecevoirMsgListener {
     
-    public void ajoutCompteur(NewsCounterEvent newscompteur);
+    public void actionliremessage(RecuMessageEvent RME);
 }

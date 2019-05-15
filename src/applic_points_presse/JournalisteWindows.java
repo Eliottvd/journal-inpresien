@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import network.NetworkBasicClient;
+import network.NetworkBasicServer;
 
 
 
@@ -19,7 +20,7 @@ import network.NetworkBasicClient;
  *
  * @author Admin
  */
-public class JournalisteWindows extends javax.swing.JFrame {
+public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMsgListener{
 
     /**
      * Creates new form JournalisteWindows
@@ -45,8 +46,11 @@ public class JournalisteWindows extends javax.swing.JFrame {
      public NotifyNewsListener getMainPrincipale(){return _mainPrincipale;}
      
     
+    public NetworkBasicServer NBS;
     
-    
+    private String _reponseRecu;
+    public void setReponseRecu(String x){_reponseRecu=x;}
+    public String getReponseRecu(){return _reponseRecu;}
    
     
     public JournalisteWindows(NotifyNewsListener no) {
@@ -94,6 +98,7 @@ public class JournalisteWindows extends javax.swing.JFrame {
         jLabelReponse = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButtonEnregistrer = new javax.swing.JButton();
+        javax.swing.JButton jButtonLireNews = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -205,6 +210,13 @@ public class JournalisteWindows extends javax.swing.JFrame {
             }
         });
 
+        jButtonLireNews.setText("Lire News");
+        jButtonLireNews.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLireNewsActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Connexion");
 
         jMenuItem1.setText("Demarrer reception");
@@ -233,20 +245,24 @@ public class JournalisteWindows extends javax.swing.JFrame {
                             .addComponent(jRadioButtonInternational)
                             .addComponent(jRadioButtonPolitique)
                             .addComponent(jCheckBoxImportant))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabelReponse, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jButtonEnregistrer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButtonEnvoyer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButtonAnnuler, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGap(74, 74, 74)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(31, 31, 31)
-                                .addComponent(jCheckBox1)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(31, 31, 31))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelReponse, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(9, 9, 9)))
+                                .addComponent(jCheckBox1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButtonEnvoyer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonAnnuler, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonEnregistrer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonLireNews, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(53, 53, 53)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
@@ -309,22 +325,25 @@ public class JournalisteWindows extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelReponse))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox1)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jCheckBox1))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jCheckBoxImportant)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
+                .addGap(146, 146, 146)
+                .addComponent(jButtonLireNews)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jButtonAnnuler))
-                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonEnvoyer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonEnregistrer)))
@@ -457,8 +476,8 @@ public class JournalisteWindows extends javax.swing.JFrame {
         
         jTextArea1.append("["+ calendar.get(Calendar.HOUR_OF_DAY)+":"+calendar.get(Calendar.MINUTE)+"]"+"Une news enregistree avec succes("+newsJournaliste.getSource()+")-"+newsJournaliste.getTitre()+sep);
         
-        
-        
+       
+        NBS=new NetworkBasicServer(60002, jCheckBoxImportant);
         
         
         
@@ -472,7 +491,14 @@ public class JournalisteWindows extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
                Destinataire=new ReceivingBean(jCheckBox1);
                 addListener(Destinataire);// TODO add your handling code here:
+                
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButtonLireNewsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLireNewsActionPerformed
+        
+        setReponseRecu(NBS.getMessage());
+        jLabelReponse.setText(getReponseRecu());        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonLireNewsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -510,6 +536,11 @@ public class JournalisteWindows extends javax.swing.JFrame {
         });
     }
     
+    @Override
+     public void actionliremessage(RecuMessageEvent RME)
+     {
+         jLabelReponse.setText(RME.getMsg());
+     }
 
     public ReceivingBean Destinataire;
 

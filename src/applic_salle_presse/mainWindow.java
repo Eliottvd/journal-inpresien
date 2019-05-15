@@ -8,6 +8,7 @@ package applic_salle_presse;
 import applic_points_presse.JournalisteWindows;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.beans.*;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,9 +45,12 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
     private News Newstemp;
    // public NetworkBasicServer NBS;
     private JournalisteWindows Jw;
+    public JournalisteWindows getRefjournaliste(){return Jw;}
     private String _messagerecu;
     public void setMessageRecu(String m){_messagerecu=m;}
     public String getMessageRecu(){return _messagerecu;}
+    
+    protected PropertyChangeSupport GestProp; 
     
     private ArrayList<StoreNewsListener> _storeNewsListeners;
     public void setStoreNewsListener(ArrayList<StoreNewsListener> m)
@@ -58,26 +62,13 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         getStoreNewsListener().add(k);
     }
     public ArrayList<StoreNewsListener> getStoreNewsListener(){return _storeNewsListeners;}
-    
-    private ArrayList<NewsCounterListener> _newsCounterListeners;
-    public void setNewsCounterListener(ArrayList<NewsCounterListener> m)
-    {
-       _newsCounterListeners=(m);
-    }
-    public void addNewsCounterListener(NewsCounterListener k)
-    {
-        getNewsCounterListener().add(k);
-    }
-    public ArrayList<NewsCounterListener> getNewsCounterListener(){return _newsCounterListeners;}
 
-    
     public mainWindow(String nom) throws ClassNotFoundException{
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Journal");
         listeNews = new ArrayList<News>();
         _storeNewsListeners=new ArrayList<StoreNewsListener>();
-        _newsCounterListeners=new ArrayList<NewsCounterListener>();
         jlblJournaliste.setText(nom);
         Date maintenant = new Date();
         String maDate = DateFormat.getDateTimeInstance(DateFormat.DATE_FIELD,DateFormat.LONG, Locale.FRANCE).format(maintenant);
@@ -90,8 +81,9 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         //NBS=new NetworkBasicServer(60003, jCheckBoxMessageRecu);
         _messagerecu=new String();
         
-       
-        
+       GestProp = new PropertyChangeSupport(this);
+       NewsCounterBean compteurBean=new NewsCounterBean(jLabelCompteurNews,this);
+       addPropertyChangeListener(compteurBean);
         
         
         String rep;
@@ -106,6 +98,8 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
             ObjectInputStream ois= new ObjectInputStream(Fis);
 
             listeNews=(ArrayList<News>)ois.readObject();
+            
+            jLabelCompteurNews.setText(Integer.toString(listeNews.size()));
             //System.out.println(listeNews.size());
          //du ajouter throws ClassNotFoundException a la ligne 40
             for(int i=0;i<listeNews.size();i++)
@@ -212,6 +206,8 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItemRecherche = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItemImprimmer = new javax.swing.JMenuItem();
         jMenuAide = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -402,6 +398,18 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         jMenu3.add(jMenuItemRecherche);
 
         jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Outils");
+
+        jMenuItemImprimmer.setText("Imprimmer");
+        jMenuItemImprimmer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemImprimmerActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItemImprimmer);
+
+        jMenuBar1.add(jMenu4);
 
         jMenuAide.setText("Aide");
         jMenuAide.addActionListener(new java.awt.event.ActionListener() {
@@ -889,46 +897,60 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
 
     private void jButtonConfirmerReceptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmerReceptionActionPerformed
     
-        News stockernews=new News();
-        stockernews=tmpNewsEnvoye1;
-       // System.out.println(stockernews.getTitre());
-        StoreNewsEvent storeNewsEvent =new StoreNewsEvent();
-        storeNewsEvent.setStoreNews(stockernews);
-        storeNewsEvent.setRefWindow(this);
-        
-        
-        StoringNewsBeans stockNewsBeans=new StoringNewsBeans();
-        addStoreNewsListener(stockNewsBeans);
-        for(int i=0;i<getStoreNewsListener().size();i++)
+        if(!(jTextFieldTitrenotif.getText().equals("")))
         {
-            getStoreNewsListener().get(i).storeNewsDetected(storeNewsEvent);
+            News stockernews=new News();
+            stockernews=tmpNewsEnvoye1;
+            int old = listeNews.size();
+           // System.out.println(stockernews.getTitre());
+            StoreNewsEvent storeNewsEvent =new StoreNewsEvent();
+            storeNewsEvent.setStoreNews(stockernews);
+            storeNewsEvent.setRefWindow(this);
+
+
+            StoringNewsBeans stockNewsBeans=new StoringNewsBeans();
+            addStoreNewsListener(stockNewsBeans);
+            for(int i=0;i<getStoreNewsListener().size();i++)
+            {
+                getStoreNewsListener().get(i).storeNewsDetected(storeNewsEvent);
+            }
+
+
+            GestProp.firePropertyChange("listeNews", old, listeNews.size());
+
+           // NewsCounterBean compteurBean=new NewsCounterBean(getCompteur(),this);
+            //addPropertyChangeListener(compteurBean);
+            
+            jTextFieldTitrenotif.setText("");
+            
         }
         
-        NewsCounterEvent comptNewsCounterEvent=new NewsCounterEvent();
-        comptNewsCounterEvent.setRefWindowCounter(this);
-        
-        NewsCounterBean compteurBean=new NewsCounterBean(jLabelCompteurNews);
-        addNewsCounterListener(compteurBean);
-        
-        for(int i=0;i<getNewsCounterListener().size();i++)
-        {
-            getNewsCounterListener().get(i).ajoutCompteur(comptNewsCounterEvent);
-        }
-        
+
        
-
-
-        // TODO add your handling code here:
         
+
+        
+        
+        
+        
+        // TODO add your handling code here:    
     }//GEN-LAST:event_jButtonConfirmerReceptionActionPerformed
 
     private void jButtonEnvoyeMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoyeMessageActionPerformed
         // TODO add your handling code here:
         if(!(jTextFieldTitrenotif.getText().equals("")))
         {
+            EnvoieMessage em =new EnvoieMessage(Jw,tmpNewsEnvoye1.getTitre());
+            em.setVisible(true);
+            
             
         }
     }//GEN-LAST:event_jButtonEnvoyeMessageActionPerformed
+
+    private void jMenuItemImprimmerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemImprimmerActionPerformed
+        // TODO add your handling code here:
+            
+    }//GEN-LAST:event_jMenuItemImprimmerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1025,8 +1047,15 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         
         jTextFieldTitrenotif.setText(tmpNewsEnvoye1.getTitre());
     }
+    
+    @Override
+    public void addPropertyChangeListener(PropertyChangeListener l)
+    {
+        GestProp.addPropertyChangeListener(l);
+    }
   
     public News tmpNewsEnvoye1;
+    public javax.swing.JLabel getCompteur(){return jLabelCompteurNews;}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup RadioButtonGroup;
     private javax.swing.JButton jButtonAjouter;
@@ -1047,12 +1076,14 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenuAide;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItemImprimmer;
     private javax.swing.JMenuItem jMenuItemRecherche;
     private javax.swing.JMenuItem jMenuItemloginJournaliste;
     private javax.swing.JRadioButton jRadioInter;

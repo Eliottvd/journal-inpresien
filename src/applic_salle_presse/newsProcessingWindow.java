@@ -5,6 +5,8 @@
  */
 package applic_salle_presse;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -35,7 +37,8 @@ public class newsProcessingWindow extends javax.swing.JDialog {
     Categorie tmpCat;
     mainWindow mw2;
     boolean modif;
-    News newsASuppr;
+    public News newsASuppr;
+    private ArrayList<News> _newsListe;
     
     private javax.swing.JLabel _affcompteur2;
     public javax.swing.JLabel getAffCompteur2(){return _affcompteur2;}
@@ -53,16 +56,8 @@ public class newsProcessingWindow extends javax.swing.JDialog {
     }
     public ArrayList<StoreNewsListener> getStoreNewsListener(){return _storeNewsListeners;}
     
-    private ArrayList<NewsCounterListener> _newsCounterListeners;
-    public void setNewsCounterListener(ArrayList<NewsCounterListener> m)
-    {
-       _newsCounterListeners=(m);
-    }
-    public void addNewsCounterListener(NewsCounterListener k)
-    {
-        getNewsCounterListener().add(k);
-    }
-    public ArrayList<NewsCounterListener> getNewsCounterListener(){return _newsCounterListeners;}
+    protected PropertyChangeSupport GestProp;
+     
        
     public newsProcessingWindow(java.awt.Frame parent, boolean modal, String titre,javax.swing.JLabel affcompteur) { 
         super(parent, modal);
@@ -73,7 +68,12 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         tmpCat = null;
         modif = false;
         _storeNewsListeners=new ArrayList<StoreNewsListener>();
-        _newsCounterListeners=new ArrayList<NewsCounterListener>();
+        _newsListe=new ArrayList<News>();
+        _newsListe=mw2.listeNews;
+        GestProp = new PropertyChangeSupport(this);
+        NewsCounterBean compteurBean=new NewsCounterBean(mw2.getCompteur(),mw2);
+        addPropertyChangeListener(compteurBean);
+
         setAffCompteur2(affcompteur);
     }
     
@@ -87,7 +87,10 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         newsASuppr = n;
         jButtonAjouter.setText("Modifier");
         _storeNewsListeners=new ArrayList<StoreNewsListener>();
-        _newsCounterListeners=new ArrayList<NewsCounterListener>();
+        GestProp = new PropertyChangeSupport(this);
+        _newsListe=new ArrayList<>();
+        _newsListe=mw2.listeNews;
+        
         setAffCompteur2(affcompteur);
     }
 
@@ -309,6 +312,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
     private void jButtonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterActionPerformed
         // TODO add your handling code here:
 
+        int old= mw2.listeNews.size();
         
         if(modif)
         {
@@ -359,17 +363,12 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         }
         
         
+        GestProp.firePropertyChange("_newsListe", old, mw2.listeNews.size());
         
-        NewsCounterEvent comptNewsCounterEvent=new NewsCounterEvent();
-        comptNewsCounterEvent.setRefWindowCounter(mw2);
+        //NewsCounterBean compteurBean=new NewsCounterBean(mw2.getCompteur(),mw2);
+        //addPropertyChangeListener(compteurBean);
         
-        NewsCounterBean compteurBean=new NewsCounterBean(getAffCompteur2());
-        addNewsCounterListener(compteurBean);
-        
-        for(int i=0;i<getNewsCounterListener().size();i++)
-        {
-            getNewsCounterListener().get(i).ajoutCompteur(comptNewsCounterEvent);
-        }
+
         
         this.dispose();
 
@@ -391,6 +390,11 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         tmpCat = Categorie.RAGOT;
     }//GEN-LAST:event_jRadioRagotsActionPerformed
 
+     @Override
+    public void addPropertyChangeListener(PropertyChangeListener l)
+    {
+        GestProp.addPropertyChangeListener(l);
+    }
     /**
      * @param args the command line arguments
      */
