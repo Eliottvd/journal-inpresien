@@ -57,12 +57,12 @@
             <Property name="text" type="java.lang.String" value="Outils"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemImprimmer">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemImprimer">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Imprimmer"/>
+                <Property name="text" type="java.lang.String" value="Imprimer"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemImprimmerActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemImprimerActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

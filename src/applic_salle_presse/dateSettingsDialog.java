@@ -132,10 +132,9 @@ public class dateSettingsDialog extends javax.swing.JDialog {
 
     private void jButtonAppliquerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAppliquerActionPerformed
         // TODO add your handling code here:
-        Date maintenant = new Date();
-        int dfHeure = DateFormat.SHORT; 
-        int dfDate = DateFormat.FULL;
-        Locale pays = Locale.ITALY;
+        int dfHeure; 
+        int dfDate;
+        Locale pays;
         switch(jComboBoxPays.getSelectedIndex())
         {
             case 0 : pays = Locale.FRANCE;
@@ -148,6 +147,7 @@ public class dateSettingsDialog extends javax.swing.JDialog {
                      break;
             case 4 : pays = Locale.US;
                      break;
+            default : pays = Locale.FRANCE;
         }
         switch(jComboBoxFHeure.getSelectedIndex())
         {
@@ -157,6 +157,7 @@ public class dateSettingsDialog extends javax.swing.JDialog {
                      break;
             case 2 : dfHeure = DateFormat.FULL;
                      break;
+            default : dfHeure = DateFormat.MEDIUM;
         }
         switch(jComboBoxFDate.getSelectedIndex())
         {
@@ -166,9 +167,12 @@ public class dateSettingsDialog extends javax.swing.JDialog {
                      break;
             case 2 : dfDate = DateFormat.FULL;
                      break;
+            default: dfDate = DateFormat.MEDIUM;
         }
-        String maDate = DateFormat.getDateTimeInstance(dfDate, dfHeure, pays).format(maintenant);
-        mw.jlblDate2.setText(maDate);
+        
+        mw._threadDate.setFormatHeure(dfHeure);
+        mw._threadDate.setFormatDate(dfDate);
+        mw._threadDate.setPays(pays);
     }//GEN-LAST:event_jButtonAppliquerActionPerformed
 
     private void jComboBoxPaysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPaysActionPerformed

@@ -41,6 +41,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
     private DefaultListModel _modViePol; 
     private DefaultListModel _modInfosSports; 
     private DefaultListModel _modRagots;
+    protected DateThread _threadDate;
     public News tmpNewsEnvoye;
     private News Newstemp;
    // public NetworkBasicServer NBS;
@@ -80,6 +81,8 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         tmpNewsEnvoye1 =new News();
         //NBS=new NetworkBasicServer(60003, jCheckBoxMessageRecu);
         _messagerecu=new String();
+        _threadDate = new DateThread(this);
+        _threadDate.start();
         
        GestProp = new PropertyChangeSupport(this);
        NewsCounterBean compteurBean=new NewsCounterBean(jLabelCompteurNews,this);
@@ -207,7 +210,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         jMenu3 = new javax.swing.JMenu();
         jMenuItemRecherche = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItemImprimmer = new javax.swing.JMenuItem();
+        jMenuItemImprimer = new javax.swing.JMenuItem();
         jMenuAide = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -401,13 +404,13 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
 
         jMenu4.setText("Outils");
 
-        jMenuItemImprimmer.setText("Imprimmer");
-        jMenuItemImprimmer.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemImprimer.setText("Imprimer");
+        jMenuItemImprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemImprimmerActionPerformed(evt);
+                jMenuItemImprimerActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItemImprimmer);
+        jMenu4.add(jMenuItemImprimer);
 
         jMenuBar1.add(jMenu4);
 
@@ -947,10 +950,11 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         }
     }//GEN-LAST:event_jButtonEnvoyeMessageActionPerformed
 
-    private void jMenuItemImprimmerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemImprimmerActionPerformed
+    private void jMenuItemImprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemImprimerActionPerformed
         // TODO add your handling code here:
-            
-    }//GEN-LAST:event_jMenuItemImprimmerActionPerformed
+        Impression threadImp = new Impression(this);
+        threadImp.start();
+    }//GEN-LAST:event_jMenuItemImprimerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1083,7 +1087,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItemImprimmer;
+    private javax.swing.JMenuItem jMenuItemImprimer;
     private javax.swing.JMenuItem jMenuItemRecherche;
     private javax.swing.JMenuItem jMenuItemloginJournaliste;
     private javax.swing.JRadioButton jRadioInter;
