@@ -422,6 +422,11 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         });
 
         jMenuItem4.setText("Afficher le log");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenuAide.add(jMenuItem4);
 
         jMenuItem1.setText("Date");
@@ -955,6 +960,12 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         Impression threadImp = new Impression(this);
         threadImp.start();
     }//GEN-LAST:event_jMenuItemImprimerActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        AfficherLogDialog ald = new AfficherLogDialog(this, true);
+        ald.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
