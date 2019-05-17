@@ -95,6 +95,11 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         rep = System.getProperty("user.home");
         sep=System.getProperty("file.separator");
         cheminNews=rep+sep+"News.ser";
+        String imgUrl = "img\\ibra2.jpg";
+        ImageIcon icone = new ImageIcon(imgUrl);
+        this.setIconImage(new ImageIcon("img\\iconeJAVA.jpg").getImage());
+        jLabelImg.setIcon(icone);
+        jLabelImg.setSize(177, 149);
          try 
         {
             FileInputStream Fis=new  FileInputStream(cheminNews);
@@ -139,18 +144,12 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         }
         catch (EOFException e) 
         {
-            String imgUrl="img\\ibra2.jpg";
-            ImageIcon icone = new ImageIcon(imgUrl);
-            jLabelImg.setIcon(icone);
-            jLabelImg.setSize(177, 149);
+            
         }
         catch (FileNotFoundException e) 
         {
             JOptionPane.showMessageDialog(new JFrame(), "Pas de donnée à charger", "Bienvenue", JOptionPane.INFORMATION_MESSAGE);
-            String imgUrl="img\\ibra2.jpg";
-            ImageIcon icone = new ImageIcon(imgUrl);
-            jLabelImg.setIcon(icone);
-            jLabelImg.setSize(177, 149);
+
         }
 
         catch(IOException e)
