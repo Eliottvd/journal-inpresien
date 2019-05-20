@@ -21,6 +21,7 @@ import java.util.Properties;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -70,6 +71,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         _storeNewsListeners=new ArrayList<StoreNewsListener>();
         _newsListe=new ArrayList<News>();
         _newsListe=mw2.listeNews;
+        this.setIconImage(new ImageIcon("img\\icone.png").getImage());
         GestProp = new PropertyChangeSupport(this);
         NewsCounterBean compteurBean=new NewsCounterBean(mw2.getCompteur(),mw2);
         addPropertyChangeListener(compteurBean);

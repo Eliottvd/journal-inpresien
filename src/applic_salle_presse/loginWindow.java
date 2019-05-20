@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -27,6 +28,7 @@ public class loginWindow extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setTitle("Connexion");
+        this.setIconImage(new ImageIcon("img\\icone.png").getImage());
         repertoire = new Properties();
         repertoire.put("root","toor");
     }

@@ -97,7 +97,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         cheminNews=rep+sep+"News.ser";
         String imgUrl = "img\\ibra2.jpg";
         ImageIcon icone = new ImageIcon(imgUrl);
-        this.setIconImage(new ImageIcon("img\\iconeJAVA.jpg").getImage());
+        this.setIconImage(new ImageIcon("img\\icone.png").getImage());
         jLabelImg.setIcon(icone);
         jLabelImg.setSize(177, 149);
          try 
