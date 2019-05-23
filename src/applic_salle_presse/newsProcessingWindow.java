@@ -1,26 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package applic_salle_presse;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import java.util.Properties;
-import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 
@@ -70,7 +53,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         modif = false;
         _storeNewsListeners=new ArrayList<StoreNewsListener>();
         _newsListe=new ArrayList<News>();
-        _newsListe=mw2.listeNews;
+        _newsListe=mw2.getListNews();
         this.setIconImage(new ImageIcon("img\\icone.png").getImage());
         GestProp = new PropertyChangeSupport(this);
         NewsCounterBean compteurBean=new NewsCounterBean(mw2.getCompteur(),mw2);
@@ -91,7 +74,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         _storeNewsListeners=new ArrayList<StoreNewsListener>();
         GestProp = new PropertyChangeSupport(this);
         _newsListe=new ArrayList<>();
-        _newsListe=mw2.listeNews;
+        _newsListe=mw2.getListNews();
         
         setAffCompteur2(affcompteur);
     }
@@ -314,11 +297,11 @@ public class newsProcessingWindow extends javax.swing.JDialog {
     private void jButtonAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAjouterActionPerformed
         // TODO add your handling code here:
 
-        int old= mw2.listeNews.size();
+        int old= mw2.getListNews().size();
         
         if(modif)
         {
-            mw2.listeNews.remove(newsASuppr);
+            mw2.getListNews().remove(newsASuppr);
             switch(newsASuppr.getCat().toString())
             {
                 case "Internationnales" : mw2.getModInter().removeElement(newsASuppr.getTitre());
@@ -365,7 +348,7 @@ public class newsProcessingWindow extends javax.swing.JDialog {
         }
         
         
-        GestProp.firePropertyChange("_newsListe", old, mw2.listeNews.size());
+        GestProp.firePropertyChange("_newsListe", old, mw2.getListNews().size());
         
         //NewsCounterBean compteurBean=new NewsCounterBean(mw2.getCompteur(),mw2);
         //addPropertyChangeListener(compteurBean);

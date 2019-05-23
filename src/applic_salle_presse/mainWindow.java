@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package applic_salle_presse;
 
 import applic_points_presse.JournalisteWindows;
@@ -21,28 +16,22 @@ import java.io.*;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import network.NetworkBasicServer;
 /**
  *
  * @author Eliott
  */
 public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener{
 
-    /**
-     * Creates new form mainWindow
-     */
-    ArrayList<News> listeNews;
-   
-            
-    public mainWindow() {
-        initComponents();
-    }
+    private ArrayList<News> _listeNews; 
+    public void setListNews(ArrayList<News> ln){_listeNews = ln;}
+    public ArrayList<News> getListNews(){return _listeNews;}
     
     private DefaultListModel _modInter; 
     private DefaultListModel _modViePol; 
     private DefaultListModel _modInfosSports; 
     private DefaultListModel _modRagots;
-    private FichierLog _log;
+    
+
     protected DateThread _threadDate;
     public News tmpNewsEnvoye;
     private News Newstemp;
@@ -70,7 +59,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("Journal");
-        listeNews = new ArrayList<News>();
+        _listeNews = new ArrayList<News>();
         _storeNewsListeners=new ArrayList<StoreNewsListener>();
         jlblJournaliste.setText(nom);
         Date maintenant = new Date();
@@ -135,14 +124,14 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
             FileInputStream Fis=new  FileInputStream(cheminNews);
             ObjectInputStream ois= new ObjectInputStream(Fis);
 
-            listeNews=(ArrayList<News>)ois.readObject();
+            _listeNews=(ArrayList<News>)ois.readObject();
             
-            jLabelCompteurNews.setText(Integer.toString(listeNews.size()));
-            //System.out.println(listeNews.size());
+            jLabelCompteurNews.setText(Integer.toString(_listeNews.size()));
+            //System.out.println(_listeNews.size());
          //du ajouter throws ClassNotFoundException a la ligne 40
-            for(int i=0;i<listeNews.size();i++)
+            for(int i=0;i<_listeNews.size();i++)
             {
-                Newstemp=listeNews.get(i);
+                Newstemp=_listeNews.get(i);
                 switch(Newstemp.getCat().toString())
                 {
                     case "Internationnales" : this.getModInter().addElement(Newstemp.getTitre());
@@ -198,7 +187,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
     private void initComponents() {
 
         RadioButtonGroup = new javax.swing.ButtonGroup();
-        jlabel1 = new javax.swing.JLabel();
+        jlabelJournaliste = new javax.swing.JLabel();
         jlblNomJournaliste = new javax.swing.JLabel();
         jlblNewsRecues = new javax.swing.JLabel();
         jCBnews = new javax.swing.JComboBox<>();
@@ -233,17 +222,17 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         jLabelCompteurNews = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemLogout = new javax.swing.JMenuItem();
         jMenuItemloginJournaliste = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuRecherche = new javax.swing.JMenu();
         jMenuItemRecherche = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        jMenuOutil = new javax.swing.JMenu();
         jMenuItemImprimer = new javax.swing.JMenuItem();
         jMenuAide = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItemAffLog = new javax.swing.JMenuItem();
+        jMenuItemDateSetting = new javax.swing.JMenuItem();
+        jMenuItemApropos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -252,7 +241,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
             }
         });
 
-        jlabel1.setText("Journaliste :");
+        jlabelJournaliste.setText("Journaliste :");
 
         jlblNomJournaliste.setText(" ");
 
@@ -398,13 +387,13 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
 
         jMenu2.setText("Utilisateurs");
 
-        jMenuItem2.setText("Logout");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemLogout.setText("Logout");
+        jMenuItemLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuItemLogoutActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        jMenu2.add(jMenuItemLogout);
 
         jMenuItemloginJournaliste.setText("loginJournaliste");
         jMenuItemloginJournaliste.addActionListener(new java.awt.event.ActionListener() {
@@ -419,10 +408,10 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
-        jMenu3.setText("Recherche");
-        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuRecherche.setText("Recherche");
+        jMenuRecherche.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu3ActionPerformed(evt);
+                jMenuRechercheActionPerformed(evt);
             }
         });
 
@@ -432,11 +421,11 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
                 jMenuItemRechercheActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItemRecherche);
+        jMenuRecherche.add(jMenuItemRecherche);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMenuRecherche);
 
-        jMenu4.setText("Outils");
+        jMenuOutil.setText("Outils");
 
         jMenuItemImprimer.setText("Imprimer");
         jMenuItemImprimer.addActionListener(new java.awt.event.ActionListener() {
@@ -444,9 +433,9 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
                 jMenuItemImprimerActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItemImprimer);
+        jMenuOutil.add(jMenuItemImprimer);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(jMenuOutil);
 
         jMenuAide.setText("Aide");
         jMenuAide.addActionListener(new java.awt.event.ActionListener() {
@@ -455,29 +444,29 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
             }
         });
 
-        jMenuItem4.setText("Afficher le log");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemAffLog.setText("Afficher le log");
+        jMenuItemAffLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMenuItemAffLogActionPerformed(evt);
             }
         });
-        jMenuAide.add(jMenuItem4);
+        jMenuAide.add(jMenuItemAffLog);
 
-        jMenuItem1.setText("Date");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemDateSetting.setText("Date");
+        jMenuItemDateSetting.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemDateSettingActionPerformed(evt);
             }
         });
-        jMenuAide.add(jMenuItem1);
+        jMenuAide.add(jMenuItemDateSetting);
 
-        jMenuItem5.setText("A propos");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemApropos.setText("A propos");
+        jMenuItemApropos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                jMenuItemAproposActionPerformed(evt);
             }
         });
-        jMenuAide.add(jMenuItem5);
+        jMenuAide.add(jMenuItemApropos);
 
         jMenuBar1.add(jMenuAide);
 
@@ -523,7 +512,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jlblAddNews, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlblNewsRecues, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jlabelJournaliste, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldAjouterNews)
@@ -574,7 +563,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlblDate2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jlabel1)
+                        .addComponent(jlabelJournaliste)
                         .addComponent(jlblNomJournaliste)
                         .addComponent(jlblDate)
                         .addComponent(jlblJournaliste)))
@@ -731,20 +720,20 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         
     }//GEN-LAST:event_jMenuAideActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void jMenuItemAproposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAproposActionPerformed
         // TODO add your handling code here:
         AProposDialog APDialog = new AProposDialog(this, true);
         APDialog.setVisible(true);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_jMenuItemAproposActionPerformed
 
-    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+    private void jMenuRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRechercheActionPerformed
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_jMenu3ActionPerformed
+    }//GEN-LAST:event_jMenuRechercheActionPerformed
 
     private void jMenuItemRechercheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRechercheActionPerformed
         // TODO add your handling code here:
-        rechercherDialog rDialog = new rechercherDialog(this, true, listeNews);
+        rechercherDialog rDialog = new rechercherDialog(this, true, _listeNews);
         rDialog.setVisible(true);
     }//GEN-LAST:event_jMenuItemRechercheActionPerformed
 
@@ -773,7 +762,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
                         "Information manquante", JOptionPane.ERROR_MESSAGE);
             else 
             {
-                listeNews.forEach((ntmp)->{
+                _listeNews.forEach((ntmp)->{
                 if(ntmp.getTitre().equals(jListInter.getSelectedValue()))
                 {
                     newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp,jLabelCompteurNews);
@@ -795,7 +784,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
                         "Information manquante", JOptionPane.ERROR_MESSAGE);
             else 
             {
-                listeNews.forEach((ntmp)->{
+                _listeNews.forEach((ntmp)->{
                 if(ntmp.getTitre().equals(jListViePol.getSelectedValue()))
                 {
                     newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp,jLabelCompteurNews);
@@ -819,7 +808,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
                         "Information manquante", JOptionPane.ERROR_MESSAGE);
             else 
             {
-                listeNews.forEach((ntmp)->{
+                _listeNews.forEach((ntmp)->{
                 if(ntmp.getTitre().equals(jListInfosSports.getSelectedValue()))
                 {
                     newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp,jLabelCompteurNews);
@@ -843,7 +832,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
                         "Information manquante", JOptionPane.ERROR_MESSAGE);
             else 
             {
-                listeNews.forEach((ntmp)->{
+                _listeNews.forEach((ntmp)->{
                 if(ntmp.getTitre().equals(jListRagots.getSelectedValue()))
                 {
                     newsProcessingWindow npWin = new newsProcessingWindow(this, false, ntmp,jLabelCompteurNews);
@@ -888,18 +877,18 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         jListRagots.setBackground(Color.lightGray);
     }//GEN-LAST:event_jRadioRagotsActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuItemLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLogoutActionPerformed
         // TODO add your handling code here:
         this.dispose();
         loginWindow logWin = new loginWindow();
         logWin.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jMenuItemLogoutActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItemDateSettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDateSettingActionPerformed
         // TODO add your handling code here:
         dateSettingsDialog dateDialog = new dateSettingsDialog(this, true);
         dateDialog.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItemDateSettingActionPerformed
 
     private void jlblDate2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlblDate2MouseClicked
         // TODO add your handling code here:
@@ -943,7 +932,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         {
             News stockernews=new News();
             stockernews=tmpNewsEnvoye1;
-            int old = listeNews.size();
+            int old = _listeNews.size();
            // System.out.println(stockernews.getTitre());
             StoreNewsEvent storeNewsEvent =new StoreNewsEvent();
             storeNewsEvent.setStoreNews(stockernews);
@@ -958,7 +947,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
             }
 
 
-            GestProp.firePropertyChange("listeNews", old, listeNews.size());
+            GestProp.firePropertyChange("listeNews", old, _listeNews.size());
 
            // NewsCounterBean compteurBean=new NewsCounterBean(getCompteur(),this);
             //addPropertyChangeListener(compteurBean);
@@ -995,11 +984,11 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         threadImp.start();
     }//GEN-LAST:event_jMenuItemImprimerActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jMenuItemAffLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAffLogActionPerformed
         // TODO add your handling code here:
         AfficherLogDialog ald = new AfficherLogDialog(this, true);
         ald.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_jMenuItemAffLogActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
@@ -1051,7 +1040,11 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new mainWindow().setVisible(true);
+                try {
+                    new mainWindow("Dev").setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -1144,17 +1137,17 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
     protected javax.swing.JList<String> jListViePol;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenuAide;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItemAffLog;
+    private javax.swing.JMenuItem jMenuItemApropos;
+    private javax.swing.JMenuItem jMenuItemDateSetting;
     private javax.swing.JMenuItem jMenuItemImprimer;
+    private javax.swing.JMenuItem jMenuItemLogout;
     private javax.swing.JMenuItem jMenuItemRecherche;
     private javax.swing.JMenuItem jMenuItemloginJournaliste;
+    private javax.swing.JMenu jMenuOutil;
+    private javax.swing.JMenu jMenuRecherche;
     private javax.swing.JRadioButton jRadioInter;
     private javax.swing.JRadioButton jRadioPolitique;
     private javax.swing.JRadioButton jRadioRagots;
@@ -1166,7 +1159,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
     private javax.swing.JTextField jTextFieldAjouterNews;
     private javax.swing.JTextField jTextFieldTitrenotif;
     private javax.swing.JToggleButton jToggleButtonEditer;
-    private javax.swing.JLabel jlabel1;
+    private javax.swing.JLabel jlabelJournaliste;
     private javax.swing.JLabel jlblAddNews;
     private javax.swing.JLabel jlblDate;
     protected javax.swing.JLabel jlblDate2;

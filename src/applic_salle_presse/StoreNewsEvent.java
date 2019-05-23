@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package applic_salle_presse;
-import java.util.ArrayList;
 
 /**
  *
@@ -19,12 +13,8 @@ public class StoreNewsEvent {
     public void setRefWindow(mainWindow m){_refWindow=m;}
     public mainWindow getRefWindow(){return _refWindow;}
    
-     
     public StoreNewsEvent()
     {
         _storeNews=new News();
-     
     }
-    
-    
 }

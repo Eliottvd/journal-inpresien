@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package applic_salle_presse;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -17,20 +11,16 @@ import javax.swing.ImageIcon;
  * @author Eliott
  */
 public class loginWindow extends javax.swing.JFrame {
-
-    /**
-     * Creates new form loginWindow
-     */
-    private final Properties repertoire;
+    private final Properties _repertoire;
     
     public loginWindow() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setTitle("Connexion");
-        this.setIconImage(new ImageIcon("img\\icone.png").getImage());
-        repertoire = new Properties();
-        repertoire.put("root","toor");
+        this.setIconImage(new ImageIcon("img" + System.getProperty("file.separator")+ "icone.png").getImage());
+        _repertoire = new Properties();
+        _repertoire.put("root","toor");
     }
 
     /**
@@ -42,9 +32,9 @@ public class loginWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelBienvenue = new javax.swing.JLabel();
+        jLabelIdentifiant = new javax.swing.JLabel();
+        jLabelMdp = new javax.swing.JLabel();
         jPassword = new javax.swing.JPasswordField();
         jTextIdentifiant = new javax.swing.JTextField();
         jButtonValider = new javax.swing.JButton();
@@ -52,12 +42,12 @@ public class loginWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel1.setText("Bienvenue !");
+        jLabelBienvenue.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabelBienvenue.setText("Bienvenue !");
 
-        jLabel2.setText("Identifiant");
+        jLabelIdentifiant.setText("Identifiant");
 
-        jLabel3.setText("Mot de passe");
+        jLabelMdp.setText("Mot de passe");
 
         jPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,8 +89,8 @@ public class loginWindow extends javax.swing.JFrame {
                         .addGap(13, 13, 13))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabelMdp)
+                            .addComponent(jLabelIdentifiant))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextIdentifiant)
@@ -108,21 +98,21 @@ public class loginWindow extends javax.swing.JFrame {
                 .addGap(99, 99, 99))
             .addGroup(layout.createSequentialGroup()
                 .addGap(149, 149, 149)
-                .addComponent(jLabel1)
+                .addComponent(jLabelBienvenue)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addComponent(jLabel1)
+                .addComponent(jLabelBienvenue)
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelIdentifiant)
                     .addComponent(jTextIdentifiant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelMdp)
                     .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -142,7 +132,7 @@ public class loginWindow extends javax.swing.JFrame {
         } 
         catch (ExceptionLogin el) 
         {
-            JOptionPane.showMessageDialog(new JFrame(), el.getMessage(), "Imposteur !", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, el.getMessage(), "Imposteur !", JOptionPane.ERROR_MESSAGE);
         } 
         catch (ClassNotFoundException ex) 
         {
@@ -156,9 +146,9 @@ public class loginWindow extends javax.swing.JFrame {
     private void Login() throws ExceptionLogin, ClassNotFoundException{
         String id = jTextIdentifiant.getText();
         String pass = String.valueOf(jPassword.getPassword()); //getPassword() retourne un char[] 
-        if(repertoire.containsKey(id))
+        if(_repertoire.containsKey(id))
         {
-            if(pass.equals((String)repertoire.get(id)))
+            if(pass.equals(_repertoire.get(id)))
             {
                 mainWindow myWindow = new mainWindow(id);
                 myWindow.setVisible(true);
@@ -183,7 +173,8 @@ public class loginWindow extends javax.swing.JFrame {
 
     private void jTextIdentifiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextIdentifiantActionPerformed
         // TODO add your handling code here:
-        jButtonValiderActionPerformed(evt); //On effectue la meme fonction que si on appuyait sur le bouton valider 
+        jButtonValiderActionPerformed(evt); //On effectue la meme fonction que si on appuyait 
+                                            //sur le bouton valider quand on appuie sur enter
     }//GEN-LAST:event_jTextIdentifiantActionPerformed
 
     private void jPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordActionPerformed
@@ -230,9 +221,9 @@ public class loginWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAnnuler;
     private javax.swing.JButton jButtonValider;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelBienvenue;
+    private javax.swing.JLabel jLabelIdentifiant;
+    private javax.swing.JLabel jLabelMdp;
     private javax.swing.JPasswordField jPassword;
     private javax.swing.JTextField jTextIdentifiant;
     // End of variables declaration//GEN-END:variables

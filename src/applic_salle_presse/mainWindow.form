@@ -11,12 +11,12 @@
             <Property name="text" type="java.lang.String" value="Utilisateurs"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemLogout">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Logout"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemLogoutActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemloginJournaliste">
@@ -34,12 +34,12 @@
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu3">
+        <Menu class="javax.swing.JMenu" name="jMenuRecherche">
           <Properties>
             <Property name="text" type="java.lang.String" value="Recherche"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuRechercheActionPerformed"/>
           </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemRecherche">
@@ -52,7 +52,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu4">
+        <Menu class="javax.swing.JMenu" name="jMenuOutil">
           <Properties>
             <Property name="text" type="java.lang.String" value="Outils"/>
           </Properties>
@@ -75,28 +75,28 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuAideActionPerformed"/>
           </Events>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAffLog">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Afficher le log"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAffLogActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemDateSetting">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Date"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemDateSettingActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemApropos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="A propos"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemAproposActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -177,7 +177,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jlblAddNews" max="32767" attributes="0"/>
                           <Component id="jlblNewsRecues" max="32767" attributes="0"/>
-                          <Component id="jlabel1" max="32767" attributes="0"/>
+                          <Component id="jlabelJournaliste" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -246,7 +246,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jlblDate2" alignment="1" min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jlabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlabelJournaliste" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jlblNomJournaliste" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jlblDate" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jlblJournaliste" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -313,7 +313,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jlabel1">
+    <Component class="javax.swing.JLabel" name="jlabelJournaliste">
       <Properties>
         <Property name="text" type="java.lang.String" value="Journaliste :"/>
       </Properties>
