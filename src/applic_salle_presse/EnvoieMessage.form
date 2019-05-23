@@ -39,7 +39,7 @@
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelTitreNews" min="-2" pref="133" max="-2" attributes="0"/>
-                          <Component id="jTextFieldAnnuler" min="-2" pref="116" max="-2" attributes="0"/>
+                          <Component id="jTextFieldEnvoyer" min="-2" pref="116" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -58,7 +58,7 @@
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelReponse" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldAnnuler" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldEnvoyer" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="41" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -86,9 +86,9 @@
         <Property name="text" type="java.lang.String" value="Reponse:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldAnnuler">
+    <Component class="javax.swing.JTextField" name="jTextFieldEnvoyer">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldAnnulerActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldEnvoyerActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonEnvoyer">

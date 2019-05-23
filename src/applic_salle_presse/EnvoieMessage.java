@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package applic_salle_presse;
 
 import applic_points_presse.JournalisteWindows;
@@ -16,31 +11,32 @@ import java.util.*;
  */
 public class EnvoieMessage extends javax.swing.JFrame {
 
-    /**
-     * Creates new form EnvoieMessage
-     */
-  
     RecuMessageEvent event;
     private ArrayList<RecevoirMsgListener> _listMsg;
-    public void setlistMsg(ArrayList<RecevoirMsgListener> m)
-    {
-        _listMsg=(m);
-    }
-    public void addListenerlistMsg(RecevoirMsgListener k)
-    {
-        getlistMsg().add(k);
-    }
-    public ArrayList<RecevoirMsgListener> getlistMsg(){return _listMsg;}
-    public JournalisteWindows refj ;
-    public EnvoieMessage(JournalisteWindows ws, String s)
+    private final JournalisteWindows _refj ;
+    
+    public EnvoieMessage(JournalisteWindows jw, String titre)
     {
         initComponents();
-        refj = ws;
-        jLabelTitreNews.setText(s);
+        _refj = jw;
+        jLabelTitreNews.setText(titre);
         _listMsg=new ArrayList<RecevoirMsgListener>();
-        
     }
-
+    
+    public ArrayList<RecevoirMsgListener> getlistMsg()
+    {
+        return _listMsg;
+    }
+    
+    public void setlistMsg(ArrayList<RecevoirMsgListener> m)
+    {
+        _listMsg = m;
+    }
+    
+    public void addListenerlistMsg(RecevoirMsgListener rml)
+    {
+        getlistMsg().add(rml);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,7 +49,7 @@ public class EnvoieMessage extends javax.swing.JFrame {
         jLabelNews = new javax.swing.JLabel();
         jLabelTitreNews = new javax.swing.JLabel();
         jLabelReponse = new javax.swing.JLabel();
-        jTextFieldAnnuler = new javax.swing.JTextField();
+        jTextFieldEnvoyer = new javax.swing.JTextField();
         jButtonEnvoyer = new javax.swing.JButton();
         jButtonAnnuler = new javax.swing.JButton();
 
@@ -65,9 +61,9 @@ public class EnvoieMessage extends javax.swing.JFrame {
 
         jLabelReponse.setText("Reponse:");
 
-        jTextFieldAnnuler.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldEnvoyer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldAnnulerActionPerformed(evt);
+                jTextFieldEnvoyerActionPerformed(evt);
             }
         });
 
@@ -98,7 +94,7 @@ public class EnvoieMessage extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelTitreNews, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldAnnuler, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextFieldEnvoyer, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(116, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -111,7 +107,7 @@ public class EnvoieMessage extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelReponse)
-                    .addComponent(jTextFieldAnnuler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldEnvoyer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonEnvoyer)
@@ -122,16 +118,16 @@ public class EnvoieMessage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAnnulerActionPerformed
+    private void jTextFieldEnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEnvoyerActionPerformed
         
             this.dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldAnnulerActionPerformed
+    }//GEN-LAST:event_jTextFieldEnvoyerActionPerformed
 
     private void jButtonEnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoyerActionPerformed
-        String s = jTextFieldAnnuler.getText();
-        event =new RecuMessageEvent();
-        event.setMsg(s);
-        addListenerlistMsg(refj);
+        String eventMsg = jTextFieldEnvoyer.getText();
+        event = new RecuMessageEvent();
+        event.setMsg(eventMsg);
+        addListenerlistMsg(_refj);
                     
         for(int i=0;i<getlistMsg().size();i++)
              getlistMsg().get(i).actionliremessage(event);
@@ -182,6 +178,6 @@ public class EnvoieMessage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNews;
     private javax.swing.JLabel jLabelReponse;
     private javax.swing.JLabel jLabelTitreNews;
-    private javax.swing.JTextField jTextFieldAnnuler;
+    private javax.swing.JTextField jTextFieldEnvoyer;
     // End of variables declaration//GEN-END:variables
 }

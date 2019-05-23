@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package applic_salle_presse;
 
 import java.io.BufferedReader;
@@ -21,7 +16,7 @@ import java.util.Locale;
  */
 public class FichierLog {
     
-    public final static String nomFichierLog = "fichierlog.txt";
+    public final static String NOMFICHIERLOG = "fichierlog.txt";
     
     public void addLog(String ligneLog)
     {
@@ -29,12 +24,13 @@ public class FichierLog {
             Date mtn = new Date();
             String maDate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM,Locale.FRANCE).format(mtn);
             ligneLog = maDate.concat(" > " + ligneLog);
-            FileWriter fw = new FileWriter(System.getProperty("user.dir") + System.getProperty("file.separator") + nomFichierLog, true);
+            FileWriter fw = new FileWriter(System.getProperty("user.dir") + System.getProperty("file.separator") + NOMFICHIERLOG, true);
             fw.write(ligneLog);
             fw.write(System.getProperty("line.separator"));
             System.out.println("Ecriture d'un log ("+ligneLog+")");
             fw.close();
-        } catch (IOException ex) {
+        } 
+        catch (IOException ex) {
             java.util.logging.Logger.getLogger(FichierLog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
@@ -42,16 +38,16 @@ public class FichierLog {
     public String getAllLog()
     {
         try{
-            String fichierDeLog = new String();
-            FileReader fr = new FileReader(System.getProperty("user.dir") + System.getProperty("file.separator") + nomFichierLog);
+            String AllLog = new String();
+            FileReader fr = new FileReader(System.getProperty("user.dir") + System.getProperty("file.separator") + NOMFICHIERLOG);
             BufferedReader br = new BufferedReader(fr);
             String line;
             while((line=br.readLine())!=null)
             {
                 System.out.println("Lecture d'un log");
-                fichierDeLog=fichierDeLog + line + System.getProperty("line.separator");
+                AllLog=AllLog + line + System.getProperty("line.separator");
             }
-            return fichierDeLog;
+            return AllLog;
         } 
         catch (FileNotFoundException ex) 
         {
@@ -67,7 +63,7 @@ public class FichierLog {
     
     public void resetLog()
     {
-        File fichier = new File(System.getProperty("user.dir") + System.getProperty("file.separator") + nomFichierLog);
+        File fichier = new File(System.getProperty("user.dir") + System.getProperty("file.separator") + NOMFICHIERLOG);
         fichier.delete();
         this.addLog("Suppressions de tous les logs");
     }

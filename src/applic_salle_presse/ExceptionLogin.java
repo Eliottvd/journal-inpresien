@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package applic_salle_presse;
 
 /**
@@ -27,8 +22,7 @@ public class ExceptionLogin extends Exception {
         }
     }
     
-    @Override
-    public String getMessage(){
+    @Override public String getMessage(){
         return _msgErr;
     }
     @Override public String toString(){
