@@ -30,12 +30,10 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
     private DefaultListModel _modViePol; 
     private DefaultListModel _modInfosSports; 
     private DefaultListModel _modRagots;
-    
 
     protected DateThread _threadDate;
     public News tmpNewsEnvoye;
     private News Newstemp;
-   // public NetworkBasicServer NBS;
     private JournalisteWindows Jw;
     public JournalisteWindows getRefjournaliste(){return Jw;}
     private String _messagerecu;
@@ -45,16 +43,14 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
     protected PropertyChangeSupport GestProp; 
     
     private ArrayList<StoreNewsListener> _storeNewsListeners;
-    public void setStoreNewsListener(ArrayList<StoreNewsListener> m)
-    {
-       _storeNewsListeners=(m);
-    }
-    public void addStoreNewsListener(StoreNewsListener k)
-    {
-        getStoreNewsListener().add(k);
-    }
+    public void setStoreNewsListener(ArrayList<StoreNewsListener> m){ _storeNewsListeners=(m);}
+    public void addStoreNewsListener(StoreNewsListener k){ getStoreNewsListener().add(k); }
     public ArrayList<StoreNewsListener> getStoreNewsListener(){return _storeNewsListeners;}
 
+    
+    
+    
+    
     public mainWindow(String nom) throws ClassNotFoundException{
         initComponents();
         this.setLocationRelativeTo(null);
@@ -62,15 +58,11 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         _listeNews = new ArrayList<News>();
         _storeNewsListeners=new ArrayList<StoreNewsListener>();
         jlblJournaliste.setText(nom);
-        Date maintenant = new Date();
-        String maDate = DateFormat.getDateTimeInstance(DateFormat.DATE_FIELD,DateFormat.LONG, Locale.FRANCE).format(maintenant);
-        jlblDate2.setText(maDate);
         setModInter(new DefaultListModel());
         setModViePol(new DefaultListModel());
         setModInfosSports(new DefaultListModel());
         setModRagots(new DefaultListModel());
         tmpNewsEnvoye1 =new News();
-        //NBS=new NetworkBasicServer(60003, jCheckBoxMessageRecu);
         _messagerecu=new String();
         _threadDate = new DateThread(this);
 

@@ -11,7 +11,7 @@ public class Impression extends Thread{
     
     public Impression(mainWindow mw)
     {
-        _listNews = mw.listeNews;
+        _listNews = mw.getListNews();
     }
     
     public void run()
