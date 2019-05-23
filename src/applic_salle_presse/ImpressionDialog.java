@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package applic_salle_presse;
 
 import javax.swing.ImageIcon;
@@ -13,21 +8,16 @@ import javax.swing.ImageIcon;
  */
 public class ImpressionDialog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form ImpressionDialog
-     */
     public ImpressionDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         DateThread threadDate  = new DateThread(this);
         threadDate.start();
-        String imgUrl="img\\imprimante.png";
-        ImageIcon icone = new ImageIcon(imgUrl);
+        ImageIcon icone = new ImageIcon("img" + System.getProperty("file.separator") + "imprimante.png");
         jLabelImg.setIcon(icone);
         jLabelImg.setSize(177, 149);
         this.setTitle("Impression");
         this.setLocationRelativeTo(null);
-        
     }
 
     /**
@@ -39,19 +29,19 @@ public class ImpressionDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelInf1 = new javax.swing.JLabel();
+        jLabelInfo1 = new javax.swing.JLabel();
         jLabelInfo2 = new javax.swing.JLabel();
         jLabelDate = new javax.swing.JLabel();
-        jLabelNewsImprimées = new javax.swing.JLabel();
+        jLabelNewsFinies = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaNewsFinies = new javax.swing.JTextArea();
         jLabelImg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabelInf1.setText("J'imprime les news");
+        jLabelInfo1.setText("J'imprime les news");
 
-        jLabelNewsImprimées.setText("News finies :");
+        jLabelNewsFinies.setText("News finies :");
 
         jTextAreaNewsFinies.setEditable(false);
         jTextAreaNewsFinies.setColumns(20);
@@ -66,7 +56,7 @@ public class ImpressionDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabelInfo2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelInf1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                    .addComponent(jLabelInfo1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                     .addComponent(jLabelImg, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,7 +65,7 @@ public class ImpressionDialog extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabelNewsImprimées))
+                            .addComponent(jLabelNewsFinies))
                         .addGap(0, 76, Short.MAX_VALUE))
                     .addComponent(jLabelDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -85,14 +75,14 @@ public class ImpressionDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelInf1)
+                    .addComponent(jLabelInfo1)
                     .addComponent(jLabelDate, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelInfo2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelNewsImprimées)
+                        .addComponent(jLabelNewsFinies)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2))
                     .addGroup(layout.createSequentialGroup()
@@ -149,9 +139,9 @@ public class ImpressionDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JLabel jLabelDate;
     private javax.swing.JLabel jLabelImg;
-    javax.swing.JLabel jLabelInf1;
+    javax.swing.JLabel jLabelInfo1;
     javax.swing.JLabel jLabelInfo2;
-    private javax.swing.JLabel jLabelNewsImprimées;
+    private javax.swing.JLabel jLabelNewsFinies;
     private javax.swing.JScrollPane jScrollPane2;
     javax.swing.JTextArea jTextAreaNewsFinies;
     // End of variables declaration//GEN-END:variables

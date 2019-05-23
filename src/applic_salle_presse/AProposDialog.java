@@ -17,7 +17,7 @@ public class AProposDialog extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.setTitle("Eliott > Ibra");
         this.setResizable(false);
-        ImageIcon icone = new ImageIcon("img\\ibra.jpg");
+        ImageIcon icone = new ImageIcon("img" + System.getProperty("file.separator") + "ibra.jpg");
         jLabelImage.setIcon(icone);
         jLabelImage.setSize(350, 300);
     }
