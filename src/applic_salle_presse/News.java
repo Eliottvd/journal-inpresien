@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package applic_salle_presse;
 import java.util.*;
 import java.io.*;
@@ -10,10 +5,6 @@ import java.io.*;
 /**
  *
  * @author Eliott
- * la classe News représente une information (son titre, son texte, sa catégorie, son
-identifiant, sa source, la référence du journaliste qui l'a produite, sa date, le fait d'être
-important ou pas, un container (Vector, ArrayList, etc) de ses mots-clé, …) 
-
  */
 public class News implements Identifiable,Serializable{
     private int _idNews;
@@ -32,20 +23,20 @@ public class News implements Identifiable,Serializable{
     
     public void setId(int i){_idNews = i;}
     public int getId(){ return _idNews;}
-    public void setTitre(String s){_titre = s;}
+    public void setTitre(String ttr){_titre = ttr;}
     public String getTitre(){return _titre;}
-    public void setTexte(String s){_texte = s;}
+    public void setTexte(String txt){_texte = txt;}
     public String getTexte(){return _texte;}
-    public void setCat(Categorie c){_cat = c;}
+    public void setCat(Categorie cat){_cat = cat;}
     public Categorie getCat(){return _cat;}
-    public void setSource(String s){_source = s;}
+    public void setSource(String src){_source = src;}
     public String getSource(){return _source;}
-    public void setRefj(int r){_refJournaliste = r;}
+    public void setRefj(int ref){_refJournaliste = ref;}
     public int getRefj(){return _refJournaliste;}
-    public void setImportance(boolean i){_important = i;}
+    public void setImportance(boolean imp){_important = imp;}
     public boolean getImportance(){return _important;}
-    public void addMotcle(String m){_motcles.add(m);}
-    public void removeMotcle(String m){_motcles.remove(m);}
+    public void addMotcle(String mot){_motcles.add(mot);}
+    public void removeMotcle(String mot){_motcles.remove(mot);}
     public ArrayList<String> getMotcles(){return _motcles;}
     public String getMotCles1String(){
         String s = "";              // String s = new String(""); MAUVAISE FORMULATION 
@@ -59,7 +50,5 @@ public class News implements Identifiable,Serializable{
     
     @Override public String toString(){
         return "\nId = " + _idNews + "\nTitre = " + _titre + "\nCat = " + _cat;
-    }
-    
-    
+    }   
 }

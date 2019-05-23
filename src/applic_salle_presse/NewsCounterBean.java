@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package applic_salle_presse;
 
 import java.beans.PropertyChangeEvent;
@@ -18,7 +13,7 @@ public class NewsCounterBean implements PropertyChangeListener{
     public javax.swing.JLabel getAffCompteur(){return _affcompteur;}
     public void setAffCompteur (javax.swing.JLabel aff){_affcompteur=aff;}
     private mainWindow _ref;
-    public void setRef(mainWindow m){_ref=m;}
+    public void setRef(mainWindow mw){_ref=mw;}
     public mainWindow getRef (){return _ref;}
     
     public NewsCounterBean(javax.swing.JLabel affcompteur,mainWindow ref)
