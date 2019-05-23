@@ -41,9 +41,9 @@ public class ReceivingBean implements Notifmessage{
     
     public ReceivingBean(javax.swing.JCheckBox jCheckBox1)//le parametre c'est ajoute pq ??
     {
-         NBS=new NetworkBasicServer(60001, jCheckBox1);
-         
-          _listenewlistener=new  ArrayList<NewsListener>();
+        
+        NBS=new NetworkBasicServer(60001, jCheckBox1); 
+        _listenewlistener=new  ArrayList<NewsListener>();
          
     }
     

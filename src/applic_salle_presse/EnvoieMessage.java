@@ -8,7 +8,6 @@ package applic_salle_presse;
 import applic_points_presse.JournalisteWindows;
 import applic_points_presse.RecevoirMsgListener;
 import applic_points_presse.RecuMessageEvent;
-import network.NetworkBasicClient;
 import java.util.*;
 
 /**
@@ -51,20 +50,20 @@ public class EnvoieMessage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLabelNews = new javax.swing.JLabel();
         jLabelTitreNews = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelReponse = new javax.swing.JLabel();
         jTextFieldAnnuler = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonEnvoyer = new javax.swing.JButton();
+        jButtonAnnuler = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("News:");
+        jLabelNews.setText("News:");
 
         jLabelTitreNews.setText("TitreNews");
 
-        jLabel3.setText("Reponse:");
+        jLabelReponse.setText("Reponse:");
 
         jTextFieldAnnuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,14 +71,14 @@ public class EnvoieMessage extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Envoyer");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEnvoyer.setText("Envoyer");
+        jButtonEnvoyer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonEnvoyerActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Annuler");
+        jButtonAnnuler.setText("Annuler");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,13 +88,13 @@ public class EnvoieMessage extends javax.swing.JFrame {
                 .addGap(89, 89, 89)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jButtonEnvoyer)
                         .addGap(36, 36, 36)
-                        .addComponent(jButton2))
+                        .addComponent(jButtonAnnuler))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabelNews)
+                            .addComponent(jLabelReponse))
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelTitreNews, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -107,16 +106,16 @@ public class EnvoieMessage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelNews)
                     .addComponent(jLabelTitreNews))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelReponse)
                     .addComponent(jTextFieldAnnuler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonEnvoyer)
+                    .addComponent(jButtonAnnuler))
                 .addContainerGap())
         );
 
@@ -128,7 +127,7 @@ public class EnvoieMessage extends javax.swing.JFrame {
             this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldAnnulerActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonEnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoyerActionPerformed
         String s = jTextFieldAnnuler.getText();
         event =new RecuMessageEvent();
         event.setMsg(s);
@@ -140,7 +139,7 @@ public class EnvoieMessage extends javax.swing.JFrame {
         
         
         this.dispose();         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonEnvoyerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,10 +177,10 @@ public class EnvoieMessage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jButtonAnnuler;
+    private javax.swing.JButton jButtonEnvoyer;
+    private javax.swing.JLabel jLabelNews;
+    private javax.swing.JLabel jLabelReponse;
     private javax.swing.JLabel jLabelTitreNews;
     private javax.swing.JTextField jTextFieldAnnuler;
     // End of variables declaration//GEN-END:variables

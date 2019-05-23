@@ -6,11 +6,7 @@
  */
 package applic_salle_presse;
 
-import java.awt.Color;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 /**
  *
@@ -27,11 +23,9 @@ public class AProposDialog extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.setTitle("Eliott > Ibra");
         this.setResizable(false);
-        //URL de l'image
-        String imgUrl="img\\ibra.jpg";
-        ImageIcon icone = new ImageIcon(imgUrl);
-        jLabel3.setIcon(icone);
-        jLabel3.setSize(350, 300);
+        ImageIcon icone = new ImageIcon("img\\ibra.jpg");
+        jLabelImage.setIcon(icone);
+        jLabelImage.setSize(350, 300);
     }
 
     /**
@@ -43,26 +37,26 @@ public class AProposDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelTitre = new javax.swing.JLabel();
+        jLabelNotePhoto = new javax.swing.JLabel();
+        jLabelImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Crée par Eliott van der Straten-Waillet");
+        jLabelTitre.setText("Crée par Eliott van der Straten-Waillet");
 
-        jLabel2.setText("(et Ibrahim Tahiri-Alaoui)");
-        jLabel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        jLabelNotePhoto.setText("(et Ibrahim Tahiri-Alaoui)");
+        jLabelNotePhoto.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
-                jLabel2MouseDragged(evt);
+                jLabelNotePhotoMouseDragged(evt);
             }
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jLabel2MouseMoved(evt);
+                jLabelNotePhotoMouseMoved(evt);
             }
         });
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelNotePhoto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
+                jLabelNotePhotoMouseClicked(evt);
             }
         });
 
@@ -72,43 +66,43 @@ public class AProposDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabelTitre)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(jLabelNotePhoto)
                 .addGap(115, 115, 115))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabelTitre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(jLabelNotePhoto)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseDragged
+    private void jLabelNotePhotoMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNotePhotoMouseDragged
         // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MouseDragged
+    }//GEN-LAST:event_jLabelNotePhotoMouseDragged
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+    private void jLabelNotePhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNotePhotoMouseClicked
 
-    }//GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_jLabelNotePhotoMouseClicked
 
-    private void jLabel2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseMoved
+    private void jLabelNotePhotoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelNotePhotoMouseMoved
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jLabel2MouseMoved
+    }//GEN-LAST:event_jLabelNotePhotoMouseMoved
 
     /**
      * @param args the command line arguments
@@ -154,8 +148,8 @@ public class AProposDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelImage;
+    private javax.swing.JLabel jLabelNotePhoto;
+    private javax.swing.JLabel jLabelTitre;
     // End of variables declaration//GEN-END:variables
 }

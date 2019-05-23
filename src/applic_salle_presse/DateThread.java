@@ -8,9 +8,7 @@ package applic_salle_presse;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,7 +46,7 @@ public class DateThread extends Thread{
         return _pays;
     }
     
-    public String getFormatDateString(){
+    public String getFormatDateString(){ 
         return _formatHeure +"-"+ _formatDate + "-" + _pays;
     }
     public void setFormatHeure(int format)

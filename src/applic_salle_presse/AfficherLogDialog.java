@@ -18,8 +18,9 @@ public class AfficherLogDialog extends javax.swing.JDialog {
     public AfficherLogDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        FichierLog fl = new FichierLog();
         this.setLocationRelativeTo(null);
+        
+        FichierLog fl = new FichierLog();
         fl.addLog("Demande de lecture des logs");
         jTextAreaLog.setText(fl.getAllLog());
     }
