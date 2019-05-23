@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.*;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import network.NetworkBasicServer;
@@ -41,6 +42,7 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
     private DefaultListModel _modViePol; 
     private DefaultListModel _modInfosSports; 
     private DefaultListModel _modRagots;
+    private FichierLog _log;
     protected DateThread _threadDate;
     public News tmpNewsEnvoye;
     private News Newstemp;
@@ -82,7 +84,35 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         //NBS=new NetworkBasicServer(60003, jCheckBoxMessageRecu);
         _messagerecu=new String();
         _threadDate = new DateThread(this);
+
+        InputStream input;
+        try {
+            input = new FileInputStream("fileProp.properties");
+        
+            Properties proper = new Properties();
+
+            proper.load(input);
+            String[] strformat = proper.getProperty("formatdate").split("-");
+            Locale formatpays;
+            switch(strformat[2])
+            {
+                case "fr_FR" :  formatpays = Locale.FRANCE;
+                case "de_DE" :  formatpays = Locale.GERMANY;
+                case "en_GB" :  formatpays = Locale.UK;
+                case "it_IT" :  formatpays = Locale.ITALY;
+                case "en_US" :  formatpays = Locale.US;
+                default : formatpays = Locale.FRANCE;
+                              break;
+            }
+            _threadDate.setFormatHeure(Integer.parseInt(strformat[0]));
+            _threadDate.setFormatDate(Integer.parseInt(strformat[1]));
+            _threadDate.setPays(formatpays);
+        } catch (IOException ex) {
+            Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         _threadDate.start();
+        
         
        GestProp = new PropertyChangeSupport(this);
        NewsCounterBean compteurBean=new NewsCounterBean(jLabelCompteurNews,this);
@@ -216,6 +246,11 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jlabel1.setText("Journaliste :");
 
@@ -965,6 +1000,26 @@ public class mainWindow extends javax.swing.JFrame implements NotifyNewsListener
         AfficherLogDialog ald = new AfficherLogDialog(this, true);
         ald.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        Properties fileProp = new Properties();
+        
+        fileProp.setProperty("fichiernews", "News.ser");
+        fileProp.setProperty("fichierlog", "fichierlog.txt");
+        //fileProp.setProperty("Charleroi", "50002");
+        //fileProp.setProperty("Liège", "50003");
+        fileProp.setProperty("formatdate", _threadDate.getFormatDateString());
+        
+        try {
+            fileProp.store(new FileOutputStream("fileProp.properties"),null);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

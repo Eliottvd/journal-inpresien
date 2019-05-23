@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class DateThread extends Thread{
 
-    private JLabel _jLabelDate;
+    private final JLabel _jLabelDate;
     private int _formatHeure;
     private int _formatDate;
     private Locale _pays;
@@ -37,6 +37,20 @@ public class DateThread extends Thread{
         _pays = Locale.FRANCE;
     }
     
+    public int getFormatHeure(){
+        return _formatHeure;
+    }
+    
+    public int getFormatDate(){
+        return _formatDate;
+    }
+    public Locale getFormatPays(){
+        return _pays;
+    }
+    
+    public String getFormatDateString(){
+        return _formatHeure +"-"+ _formatDate + "-" + _pays;
+    }
     public void setFormatHeure(int format)
     {
         _formatHeure = format;

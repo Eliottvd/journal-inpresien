@@ -19,7 +19,9 @@ public class Applic_Salle_Presse {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println("applic_salle_presse.Applic_Salle_Presse.main()");
         FichierLog fl = new FichierLog();
+        
         fl.addLog("--Nouvelle Session--");
         loginWindow lw = new loginWindow();
         lw.setVisible(true);

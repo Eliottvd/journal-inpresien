@@ -10,3 +10,16 @@ Demande de lecture des logs
 16/05/2019 19:27:07 > Suppressions de tous les logs
 17/05/2019 12:19:07 > --Nouvelle Session--
 17/05/2019 18:21:47 > --Nouvelle Session--
+20/05/2019 16:22:45 > --Nouvelle Session--
+20/05/2019 16:23:19 > --Nouvelle Session--
+21/05/2019 13:13:57 > --Nouvelle Session--
+23/05/2019 12:34:04 > --Nouvelle Session--
+23/05/2019 12:35:03 > --Nouvelle Session--
+23/05/2019 12:36:39 > --Nouvelle Session--
+23/05/2019 12:38:21 > --Nouvelle Session--
+23/05/2019 12:55:35 > --Nouvelle Session--
+23/05/2019 12:59:43 > --Nouvelle Session--
+23/05/2019 13:01:54 > --Nouvelle Session--
+23/05/2019 13:03:35 > --Nouvelle Session--
+23/05/2019 13:06:13 > --Nouvelle Session--
+23/05/2019 13:06:35 > --Nouvelle Session--
