@@ -530,8 +530,13 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                NotifyNewsListener nodefaut=new mainWindow();
+                NotifyNewsListener nodefaut;
+                try {
+                    nodefaut = new mainWindow("dev");
                 new JournalisteWindows(nodefaut).setVisible(true);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(JournalisteWindows.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

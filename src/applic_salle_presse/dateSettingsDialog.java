@@ -156,9 +156,9 @@ public class dateSettingsDialog extends javax.swing.JDialog {
             default: dfDate = DateFormat.MEDIUM;
         }
         
-        mw._threadDate.setFormatHeure(dfHeure);
-        mw._threadDate.setFormatDate(dfDate);
-        mw._threadDate.setPays(pays);
+        mw.getThreadDate().setFormatHeure(dfHeure);
+        mw.getThreadDate().setFormatDate(dfDate);
+        mw.getThreadDate().setPays(pays);
     }//GEN-LAST:event_jButtonAppliquerActionPerformed
 
     private void jComboBoxPaysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPaysActionPerformed
