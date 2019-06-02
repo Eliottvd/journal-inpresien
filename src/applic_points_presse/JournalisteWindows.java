@@ -26,39 +26,43 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
      * Creates new form JournalisteWindows
      */
     public Categorie tmpCategorie;
-    public ArrayList<News> listeJournalisteNews;
-    public NetworkBasicClient NBC;
-    private ArrayList<Notifmessage> _framePrincipale;
-    public void setPrincipale(ArrayList<Notifmessage> m)
-    {
-        _framePrincipale=(m);
-    }
-    public void addListener(Notifmessage k)
-    {
-        getPrincipale().add(k);
-    }
-    public ArrayList<Notifmessage> getPrincipale(){return _framePrincipale;}
     
-     private NotifyNewsListener _mainPrincipale;
+    private ArrayList<News> _listeJournalisteNews;
+    public ArrayList<News> getListeJournalisteNews(){return _listeJournalisteNews;}
+    public void setListeJournalisteNews(ArrayList<News> l){_listeJournalisteNews=l;}
+    //public ArrayList<News> listeJournalisteNews;
+    private NetworkBasicClient NBC;
+    private ArrayList<Notifmessage> _listeImplNotifmessages;
+    public void setImplNotifmessage(ArrayList<Notifmessage> m)
+    {
+        _listeImplNotifmessages=(m);
+    }
+    public void addListenerNotifMessage(Notifmessage k)
+    {
+        getImplNotifmessages().add(k);
+    }
+    public ArrayList<Notifmessage> getImplNotifmessages(){return _listeImplNotifmessages;}
+    
+     private NotifyNewsListener _mainWindow;
      
-     public void setMainPrincipale(NotifyNewsListener n){_mainPrincipale=n;}
+     public void setMainWindow(NotifyNewsListener n){_mainWindow=n;}
      
-     public NotifyNewsListener getMainPrincipale(){return _mainPrincipale;}
+     public NotifyNewsListener getMainWindow(){return _mainWindow;}
      
     
-    public NetworkBasicServer NBS;
+    // public NetworkBasicServer NBS;
     
     private String _reponseRecu;
     public void setReponseRecu(String x){_reponseRecu=x;}
     public String getReponseRecu(){return _reponseRecu;}
    
     
-    public JournalisteWindows(NotifyNewsListener no) {
+    public JournalisteWindows(NotifyNewsListener firstWindow) {
         initComponents();
-        _framePrincipale=new ArrayList<Notifmessage>();
-        listeJournalisteNews=new ArrayList<News>();
+        _listeImplNotifmessages=new ArrayList<Notifmessage>();
+        _listeJournalisteNews=new ArrayList<News>();
         
-        setMainPrincipale(no);
+        setMainWindow(firstWindow);
         
         
         
@@ -74,9 +78,9 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelJournaliste = new javax.swing.JLabel();
         jTextFieldJournaliste = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelTitre = new javax.swing.JLabel();
         jTextFieldTitre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldTexte = new javax.swing.JTextField();
@@ -89,24 +93,24 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
         jButtonEnvoyer = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableNews = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelLogEvenement = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextAreaLogEvenement = new javax.swing.JTextArea();
         jLabelCompteurNews = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel5 = new javax.swing.JLabel();
+        jCheckBoxNewsenvoye = new javax.swing.JCheckBox();
+        jLabelReponseRecu = new javax.swing.JLabel();
         jLabelReponse = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelNombreNews = new javax.swing.JLabel();
         jButtonEnregistrer = new javax.swing.JButton();
         javax.swing.JButton jButtonLireNews = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuConnexion = new javax.swing.JMenu();
+        jMenuItemDemarrerReception = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nouvelle News");
 
-        jLabel1.setText("Journaliste:");
+        jLabelJournaliste.setText("Journaliste:");
 
         jTextFieldJournaliste.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +118,7 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
             }
         });
 
-        jLabel2.setText("Titre:");
+        jLabelTitre.setText("Titre:");
 
         jLabel3.setText("Texte:");
 
@@ -182,26 +186,26 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
         });
         jScrollPane1.setViewportView(jTableNews);
 
-        jLabel4.setText("Log des evenements :");
+        jLabelLogEvenement.setText("Log des evenements :");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        jTextAreaLogEvenement.setColumns(20);
+        jTextAreaLogEvenement.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaLogEvenement);
 
         jLabelCompteurNews.setText("0");
 
-        jCheckBox1.setText("News envoyé");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        jCheckBoxNewsenvoye.setText("News envoyé");
+        jCheckBoxNewsenvoye.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                jCheckBoxNewsenvoyeActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("Reponse:");
+        jLabelReponseRecu.setText("Reponse:");
 
         jLabelReponse.setText("_");
 
-        jLabel6.setText("Nombre de News envoyes durant cette session :");
+        jLabelNombreNews.setText("Nombre de News envoyes durant cette session :");
 
         jButtonEnregistrer.setText("Enregister");
         jButtonEnregistrer.addActionListener(new java.awt.event.ActionListener() {
@@ -217,17 +221,17 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
             }
         });
 
-        jMenu1.setText("Connexion");
+        jMenuConnexion.setText("Connexion");
 
-        jMenuItem1.setText("Demarrer reception");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemDemarrerReception.setText("Demarrer reception");
+        jMenuItemDemarrerReception.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemDemarrerReceptionActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenuConnexion.add(jMenuItemDemarrerReception);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenuConnexion);
 
         setJMenuBar(jMenuBar1);
 
@@ -250,12 +254,12 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
+                                        .addComponent(jLabelReponseRecu)
                                         .addGap(31, 31, 31))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabelReponse, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(9, 9, 9)))
-                                .addComponent(jCheckBox1))
+                                .addComponent(jCheckBoxNewsenvoye))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButtonEnvoyer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -265,18 +269,18 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
                                 .addGap(53, 53, 53)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(jLabelNombreNews)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabelCompteurNews, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                                .addComponent(jLabel4)
+                                .addComponent(jLabelLogEvenement)
                                 .addComponent(jScrollPane2)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
+                            .addComponent(jLabelJournaliste)
+                            .addComponent(jLabelTitre)
                             .addComponent(jLabel3))
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,18 +295,18 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(jLabelNombreNews)
                     .addComponent(jLabelCompteurNews, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
+                            .addComponent(jLabelJournaliste)
                             .addComponent(jTextFieldJournaliste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
+                            .addComponent(jLabelTitre)
                             .addComponent(jTextFieldTitre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -322,10 +326,10 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
                         .addGap(2, 2, 2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                                .addComponent(jLabelReponseRecu)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelReponse))
-                            .addComponent(jCheckBox1))
+                            .addComponent(jCheckBoxNewsenvoye))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -336,7 +340,7 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
                 .addComponent(jButtonLireNews)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(jLabelLogEvenement)
                     .addComponent(jButtonAnnuler))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -381,7 +385,7 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
     }//GEN-LAST:event_jTextFieldJournalisteActionPerformed
 
     private void jButtonEnvoyerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEnvoyerActionPerformed
-       News tmps=new News();
+       News NewsEnregistree=new News();
        String Envoye =new String();
        
        
@@ -394,8 +398,8 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
                 
   
            }
-           tmps= listeJournalisteNews.get(i);
-           Envoye=tmps.getTitre()+"/"+tmps.getTexte()+"/"+tmps.getSource()+"/"+tmps.getCat().toString()+"/"+tmps.getImportance();
+           NewsEnregistree= getListeJournalisteNews().get(i);
+           Envoye=NewsEnregistree.getTitre()+"/"+NewsEnregistree.getTexte()+"/"+NewsEnregistree.getSource()+"/"+NewsEnregistree.getCat().toString()+"/"+NewsEnregistree.getImportance();
            
            System.out.println(Envoye);
            
@@ -408,7 +412,7 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
            EvNews1.setMessageTraite(Envoye);
            EvNews1.setLocalite("Charleroi");
            
-           EvNews1.setMainPrincipale(getMainPrincipale());
+           EvNews1.setMainPrincipale(getMainWindow());
            
            NBC.sendStringWithoutWaiting(Envoye);
            
@@ -421,8 +425,8 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
                 Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-           for(i=0;i<getPrincipale().size();i++)
-               getPrincipale().get(i).ActionReceive(EvNews1);
+           for(i=0;i<getImplNotifmessages().size();i++)
+               getImplNotifmessages().get(i).ActionReceive(EvNews1);
 
 
            // NBC.setEndSending();
@@ -443,17 +447,17 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
         newsJournaliste.setImportance(jCheckBoxImportant.isSelected());
         newsJournaliste.setTexte(jTextFieldTexte.getText());
         newsJournaliste.setSource(jTextFieldJournaliste.getText());
-        NBC=new NetworkBasicClient("localhost", 60001);
         
-        listeJournalisteNews.add(newsJournaliste);
+        
+        getListeJournalisteNews().add(newsJournaliste);
         int i;
-        for( i=0;i<listeJournalisteNews.size();i++)
+        for( i=0;i<getListeJournalisteNews().size();i++)
         {
-            News tmps;
-            tmps= listeJournalisteNews.get(i);
-             jTableNews.getModel().setValueAt(tmps.getTitre(), i, 0);
-             jTableNews.getModel().setValueAt(tmps.getCat(), i, 1);
-             if(tmps.getImportance())
+            News Newspossedee;
+            Newspossedee= getListeJournalisteNews().get(i);
+             jTableNews.getModel().setValueAt(Newspossedee.getTitre(), i, 0);
+             jTableNews.getModel().setValueAt(Newspossedee.getCat(), i, 1);
+             if(Newspossedee.getImportance())
              {
                  jTableNews.getModel().setValueAt("Y", i, 2);
              }
@@ -462,7 +466,7 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
                  jTableNews.getModel().setValueAt("N", i, 2);
              }
              
-             jTableNews.getModel().setValueAt(tmps.getSource(), i, 3);
+             jTableNews.getModel().setValueAt(Newspossedee.getSource(), i, 3);
 
                  
         }
@@ -474,30 +478,40 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
         calendar.setTime(date);
         String sep=System.getProperty("line.separator");
         
-        jTextArea1.append("["+ calendar.get(Calendar.HOUR_OF_DAY)+":"+calendar.get(Calendar.MINUTE)+"]"+"Une news enregistree avec succes("+newsJournaliste.getSource()+")-"+newsJournaliste.getTitre()+sep);
+        jTextAreaLogEvenement.append("["+ calendar.get(Calendar.HOUR_OF_DAY)+":"+calendar.get(Calendar.MINUTE)+"]"+"Une news enregistree avec succes("+newsJournaliste.getSource()+")-"+newsJournaliste.getTitre()+sep);
         
        
-        NBS=new NetworkBasicServer(60002, jCheckBoxImportant);
+        //NBS=new NetworkBasicServer(60002, jCheckBoxImportant);
         
         
         
         //newsJournaliste.sets
     }//GEN-LAST:event_jButtonEnregistrerActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void jCheckBoxNewsenvoyeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxNewsenvoyeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_jCheckBoxNewsenvoyeActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-               Destinataire=new ReceivingBean(jCheckBox1);
-                addListener(Destinataire);// TODO add your handling code here:
+    private void jMenuItemDemarrerReceptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDemarrerReceptionActionPerformed
                 
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+                
+            Destinataire=new ReceivingBean(jCheckBoxNewsenvoye);
+            addListenerNotifMessage(Destinataire);// TODO add your handling code here:
+            try 
+            {
+                Thread.sleep(1000, 0);
+            } catch (InterruptedException ex) 
+            {
+                Logger.getLogger(mainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            NBC=new NetworkBasicClient("localhost", 60001);
+                
+    }//GEN-LAST:event_jMenuItemDemarrerReceptionActionPerformed
 
     private void jButtonLireNewsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLireNewsActionPerformed
         
-        setReponseRecu(NBS.getMessage());
-        jLabelReponse.setText(getReponseRecu());        // TODO add your handling code here:
+        //setReponseRecu(NBS.getMessage());
+        //jLabelReponse.setText(getReponseRecu());        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonLireNewsActionPerformed
 
     /**
@@ -554,19 +568,19 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
     private javax.swing.JButton jButtonAnnuler;
     private javax.swing.JButton jButtonEnregistrer;
     private javax.swing.JButton jButtonEnvoyer;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBoxImportant;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JCheckBox jCheckBoxNewsenvoye;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelCompteurNews;
+    private javax.swing.JLabel jLabelJournaliste;
+    private javax.swing.JLabel jLabelLogEvenement;
+    private javax.swing.JLabel jLabelNombreNews;
     private javax.swing.JLabel jLabelReponse;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JLabel jLabelReponseRecu;
+    private javax.swing.JLabel jLabelTitre;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenu jMenuConnexion;
+    private javax.swing.JMenuItem jMenuItemDemarrerReception;
     private javax.swing.JRadioButton jRadioButtonInternational;
     private javax.swing.JRadioButton jRadioButtonPolitique;
     private javax.swing.JRadioButton jRadioButtonRagotPotin;
@@ -574,7 +588,7 @@ public class JournalisteWindows extends javax.swing.JFrame implements RecevoirMs
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableNews;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextAreaLogEvenement;
     private javax.swing.JTextField jTextFieldJournaliste;
     private javax.swing.JTextField jTextFieldTexte;
     private javax.swing.JTextField jTextFieldTitre;
